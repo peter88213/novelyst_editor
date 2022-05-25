@@ -1,6 +1,6 @@
 """A scene editor plugin for novelyst.
 
-Compatibility: novelyst v0.14.0 API 
+Compatibility: novelyst v0.14.1 API 
 Requires Python 3.6+
 Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/novelyst
@@ -46,7 +46,7 @@ class Plugin:
 
         try:
             nodeId = self._ui.tv.tree.selection()[0]
-            if nodeId.startswith(self._ui.tv._SC):
+            if nodeId.startswith(self._ui.tv.SCENE_PREFIX):
                 # A scene is selected
                 scId = nodeId[2:]
                 if scId in self.sceneEditors and self.sceneEditors[scId].isOpen:
