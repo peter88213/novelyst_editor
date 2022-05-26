@@ -1,4 +1,4 @@
-The [novelyst](https://peter88213.github.io/novelyst/) Python program provides a tree view with parts, chapters and scenes for [yWriter](http://spacejock.com/yWriter7.html) projects. I wrote it for my own use to work on my novels in combination with OpenOffice/LibreOffice. 
+The [novelyst](https://peter88213.github.io/novelyst/) Python program provides a tree view with parts, chapters and scenes for [yWriter](http://spacejock.com/yWriter7.html) projects. 
 
 *novelyst_editor* is a plugin providing a scene editor. 
 
