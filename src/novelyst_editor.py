@@ -3,7 +3,7 @@
 Compatibility: novelyst v0.14.1 API 
 Requires Python 3.6+
 Copyright (c) 2022 Peter Triesberger
-For further information see https://github.com/peter88213/novelyst
+For further information see https://github.com/peter88213/novelyst_editor
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import tkinter as tk
