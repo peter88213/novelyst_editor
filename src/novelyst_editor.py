@@ -1,4 +1,4 @@
-"""A scene editor plugin for novelyst.
+"""A multi-scene editor plugin for novelyst.
 
 Compatibility: novelyst v0.14.1 API 
 Requires Python 3.6+
@@ -18,7 +18,7 @@ KEY_APPLY_CHANGES = ('<Control-s>', 'Ctrl-S')
 
 
 class Plugin:
-    """novelyst scene editor plugin class.
+    """novelyst multi-scene editor plugin class.
     
     Public methods:
         on_quit() -- apply changes before closing the editor windows.       
