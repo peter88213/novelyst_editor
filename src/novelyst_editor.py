@@ -96,7 +96,7 @@ class SceneEditor:
 
         # Load the scene content into the text editor.
         if self._ui.ywPrj.scenes[scId].sceneContent:
-            self._sceneEditor.insert(tk.END, self._scene.sceneContent)
+            self._sceneEditor.set_text(self._scene.sceneContent)
 
         # Event bindings.
         self._editWindow.bind(KEY_APPLY_CHANGES[0], self._apply_changes)
@@ -111,7 +111,7 @@ class SceneEditor:
 
     def _apply_changes(self, event=None):
         """Write the editor content to the project, if possible."""
-        sceneText = self._sceneEditor.get('1.0', tk.END).strip(' \n')
+        sceneText = self._sceneEditor.get_text()
         if sceneText or self._scene.sceneContent:
             if self._scene.sceneContent != sceneText:
                 if self._ui.isLocked:
@@ -123,7 +123,7 @@ class SceneEditor:
 
     def on_quit(self, event=None):
         """Exit the editor. Apply changes, if possible."""
-        sceneText = self._sceneEditor.get('1.0', tk.END).strip(' \n')
+        sceneText = self._sceneEditor.get_text()
         if sceneText or self._scene.sceneContent:
             if self._scene.sceneContent != sceneText:
                 if self._ui.ask_yes_no('Apply scene changes?'):
@@ -145,3 +145,12 @@ class SceneEditor:
 
 class TextBox(scrolledtext.ScrolledText):
     """If a more sophisticated text box is needed, create it here."""
+
+    def get_text(self):
+        text = self.get('1.0', tk.END).strip(' \n')
+        # convert text to yWriter markup, if applicable.
+        return text
+
+    def set_text(self, text):
+        # convert text from yWriter markup, if applicable.
+        self.insert(tk.END, text)
