@@ -4,7 +4,7 @@
 
 ## Changelog
 
-v0.2.2 Update setup script
+### v0.2.2 Update setup script
 
 - Change the working dir to the script dir on startup in order to avoid "file not found" error.
 
