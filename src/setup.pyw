@@ -8,6 +8,7 @@ For further information see https://github.com/peter88213/aeon2yw
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import os
+import sys
 from shutil import copyfile
 from pathlib import Path
 try:
@@ -30,6 +31,9 @@ def output(text):
 
 
 if __name__ == '__main__':
+    scriptPath = os.path.abspath(sys.argv[0])
+    scriptDir = os.path.dirname(scriptPath)
+    os.chdir(scriptDir)
 
     # Open a tk window.
     root.geometry("600x150")

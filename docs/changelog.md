@@ -4,6 +4,12 @@
 
 ## Changelog
 
+v0.2.2 Update setup script
+
+- Change the working dir to the script dir on startup in order to avoid "file not found" error.
+
+Compatibility: novelyst v0.14.1 API
+
 ### v0.2.1 Alpha release
 
 Refactor in order to allow text conversion when editing scenes.
