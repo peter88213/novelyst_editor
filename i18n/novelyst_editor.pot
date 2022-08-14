@@ -1,0 +1,45 @@
+# novelyst_editor Dictionary
+# Copyright (C) 2022 Peter Triesberger
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: unknown\n"
+"POT-Creation-Date: 2022-08-14 22:56:10\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: LANGUAGE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: PyWriter pgettext.py 0.3\n"
+
+
+msgid "Apply changes"
+msgstr ""
+
+msgid "Apply scene changes?"
+msgstr ""
+
+msgid "Cannot apply scene changes, because the project is locked."
+msgstr ""
+
+msgid "Cannot apply scene changes, because the project is locked.\nUnlock and apply changes?"
+msgstr ""
+
+msgid "Cannot edit scenes, because the project is locked."
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Scene"
+msgstr ""
+
+msgid "Scene Editor"
+msgstr ""

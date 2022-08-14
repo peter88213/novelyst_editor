@@ -6,11 +6,26 @@ Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/novelyst_editor
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
+import os
+import sys
 import tkinter as tk
+import locale
+import gettext
 from tkinter import scrolledtext
 from tkinter import messagebox
 
-APPLICATION = 'Scene Editor'
+# Initialize localization.
+LOCALE_PATH = f'{os.path.dirname(sys.argv[0])}/locale/'
+CURRENT_LANGUAGE = locale.getdefaultlocale()[0][:2]
+try:
+    t = gettext.translation('novelyst_editor', LOCALE_PATH, languages=[CURRENT_LANGUAGE])
+    _ = t.gettext
+except:
+
+    def _(message):
+        return message
+
+APPLICATION = _('Scene Editor')
 PLUGIN = f'{APPLICATION} plugin v@release'
 
 KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
@@ -34,14 +49,14 @@ class Plugin:
 
         # Add the "Edit" command to novelyst's "Scene" menu.
         self._ui.sceneMenu.add_separator()
-        self._ui.sceneMenu.add_command(label='Edit', underline=0, command=self._edit_scene)
+        self._ui.sceneMenu.add_command(label=_('Edit'), underline=0, command=self._edit_scene)
         self._ui.tv.tree.bind('<Double-1>', self._edit_scene)
         self.sceneEditors = {}
 
     def _edit_scene(self, event=None):
         """Create a scene editor window with a menu bar, a text box, and a status bar."""
         if self._ui.isLocked:
-            messagebox.showinfo(PLUGIN, 'Cannot edit scenes, because the project is locked.')
+            messagebox.showinfo(PLUGIN, _('Cannot edit scenes, because the project is locked.'))
             return
 
         try:
@@ -74,20 +89,20 @@ class SceneEditor:
 
         # Create an independent editor window.
         self._editWindow = tk.Toplevel()
-        self._editWindow.title(f'{self._ui.ywPrj.title} - Scene ID {scId} ({self._scene.title})')
+        self._editWindow.title(f'{self._ui.ywPrj.title} - {_("Scene")} ID {scId} ({self._scene.title})')
 
         # Add a main menu bar to the editor window.
         self._mainMenu = tk.Menu(self._editWindow)
 
         # Add a "File" Submenu to the editor window.
-        self._fileMenu = tk.Menu(self._mainMenu, title='my title', tearoff=0)
-        self._mainMenu.add_cascade(label='File', underline=0, menu=self._fileMenu)
-        self._fileMenu.add_command(label='Apply changes', underline=0, accelerator=KEY_APPLY_CHANGES[1], command=self._apply_changes)
-        self._fileMenu.add_command(label='Exit', underline=1, accelerator=KEY_QUIT_PROGRAM[1], command=self.on_quit)
+        self._fileMenu = tk.Menu(self._mainMenu, tearoff=0)
+        self._mainMenu.add_cascade(label=_('File'), underline=0, menu=self._fileMenu)
+        self._fileMenu.add_command(label=_('Apply changes'), underline=0, accelerator=KEY_APPLY_CHANGES[1], command=self._apply_changes)
+        self._fileMenu.add_command(label=_('Exit'), underline=1, accelerator=KEY_QUIT_PROGRAM[1], command=self.on_quit)
         self._editWindow.config(menu=self._mainMenu)
 
         # Add a text editor with scrollbar to the editor window.
-        self._sceneEditor = TextBox(self._editWindow, wrap='word', undo=True, autoseparators=True, maxundo=-1, height=25, width=60, padx=5, pady=5)
+        self._sceneEditor = TextBox(self._editWindow, wrap='word', undo=True, autoseparators=True, spacing1=15, spacing2=5, maxundo=-1, height=25, width=60, padx=5, pady=5)
         self._sceneEditor.pack(expand=True, fill=tk.BOTH)
 
         # Add a status bar to the editor window.
@@ -115,7 +130,7 @@ class SceneEditor:
         if sceneText or self._scene.sceneContent:
             if self._scene.sceneContent != sceneText:
                 if self._ui.isLocked:
-                    messagebox.showinfo(PLUGIN, 'Cannot apply scene changes, because the project is locked.')
+                    messagebox.showinfo(PLUGIN, _('Cannot apply scene changes, because the project is locked.'))
                     return
 
                 self._scene.sceneContent = sceneText
@@ -126,9 +141,9 @@ class SceneEditor:
         sceneText = self._sceneEditor.get_text()
         if sceneText or self._scene.sceneContent:
             if self._scene.sceneContent != sceneText:
-                if self._ui.ask_yes_no('Apply scene changes?'):
+                if self._ui.ask_yes_no(_('Apply scene changes?')):
                     if self._ui.isLocked:
-                        if self._ui.ask_yes_no('Cannot apply scene changes, because the project is locked.\nUnlock and apply changes?'):
+                        if self._ui.ask_yes_no(_('Cannot apply scene changes, because the project is locked.\nUnlock and apply changes?')):
                             self._ui.unlock()
                             self._scene.sceneContent = sceneText
                             self._ui.isModified = True

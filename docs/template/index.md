@@ -10,6 +10,7 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program provides a
 - Multiple scene editor windows.
 - A simple text editor box without rich text display and search capability.
 - Undo/Redo is provided.
+- The application is ready for internationalization with GNU gettext. A German localization is provided. 
 
 ## Requirements
 

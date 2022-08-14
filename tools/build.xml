@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="novelyst_editor" basedir=".">
-	<property name="version" value="0.2.2" />
+	<property name="version" value="0.4.0" />
 	<property name="plugin" value="novelyst_editor" />
 	
 	<property name="source-path" location="../src" />
@@ -8,6 +8,7 @@
 	<property name="build-path" location="../build" />
 	<property name="dist-path" location="../dist" />
 	<property name="docs-path" location="../docs" />
+	<property name="i18n-path" location="../i18n" />
 	<property name="application" value="${ant.project.name}" />
 	<property name="release" value="${application}_v${version}" />
 
@@ -29,6 +30,10 @@
 		
 		<fixcrlf encoding="utf-8" eol="lf" srcdir="${build-path}/${release}" includes="**/*.*" />
 				
+		<copy todir="${build-path}/${release}/locale"> 
+			<fileset dir="${i18n-path}/locale" />
+		</copy>
+		
 		<zip destfile="${dist-path}/${release}.zip" basedir="${build-path}/${release}" />
 		
 		<copy file="${docs-path}/template/index.md" overwrite="True" todir="${docs-path}" />

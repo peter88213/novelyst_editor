@@ -9,6 +9,7 @@ Published under the MIT License (https://opensource.org/licenses/mit-license.php
 """
 import os
 import sys
+from shutil import copytree
 from shutil import copyfile
 from pathlib import Path
 try:
@@ -55,6 +56,10 @@ if __name__ == '__main__':
             output(f'Sucessfully installed "{PLUGIN}" at "{os.path.normpath(pluginDir)}"')
         else:
             output(f'ERROR: file "{PLUGIN}" not found.')
+
+        # Install the localization files.
+        copytree('locale', f'{novelystDir}/locale', dirs_exist_ok=True)
+        output(f'Copying "locale"')
     else:
         output(f'ERROR: Cannot find a novelyst installation at "{novelystDir}"')
 
