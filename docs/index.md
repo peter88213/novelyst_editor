@@ -20,9 +20,9 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program provides a
 
 ## Download and install
 
-[Download the latest release (version 0.4.0)](https://raw.githubusercontent.com/peter88213/novelyst/main/dist/novelyst_editor_v0.4.0.zip)
+[Download the latest release (version 0.5.0)](https://raw.githubusercontent.com/peter88213/novelyst/main/dist/novelyst_editor_v0.5.0.zip)
 
-- Unzip the downloaded zipfile "novelyst_editor_v0.4.0.zip" into a new folder.
+- Unzip the downloaded zipfile "novelyst_editor_v0.5.0.zip" into a new folder.
 - Move into this new folder and launch **setup.pyw**. This installs the application for the local user.
 - Open "README.md" for usage instructions.
 

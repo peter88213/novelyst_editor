@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: unknown\n"
-"POT-Creation-Date: 2022-08-14 22:43:08\n"
+"POT-Creation-Date: 2022-09-16 11:50:54\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -29,7 +29,13 @@ msgstr ""
 msgid "Cannot edit scenes, because the project is locked."
 msgstr ""
 
+msgid "Disable live update"
+msgstr ""
+
 msgid "Edit"
+msgstr ""
+
+msgid "Enable live update"
 msgstr ""
 
 msgid "Exit"
@@ -39,4 +45,19 @@ msgid "File"
 msgstr ""
 
 msgid "Scene"
+msgstr ""
+
+msgid "Scene Editor"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Word count"
+msgstr ""
+
+msgid "new"
+msgstr ""
+
+msgid "words"
 msgstr ""

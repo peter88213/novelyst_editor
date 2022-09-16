@@ -7,10 +7,12 @@ For further information see https://github.com/peter88213/novelyst_editor
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import os
+import re
 import sys
 import tkinter as tk
 import locale
 import gettext
+from tkinter import ttk
 from tkinter import scrolledtext
 from tkinter import messagebox
 
@@ -30,6 +32,7 @@ PLUGIN = f'{APPLICATION} plugin v@release'
 
 KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
 KEY_APPLY_CHANGES = ('<Control-s>', 'Ctrl-S')
+KEY_UPDATE_WORDCOUNT = ('<F5>', 'F5')
 
 
 class Plugin:
@@ -96,10 +99,17 @@ class SceneEditor:
 
         # Add a "File" Submenu to the editor window.
         self._fileMenu = tk.Menu(self._mainMenu, tearoff=0)
-        self._mainMenu.add_cascade(label=_('File'), underline=0, menu=self._fileMenu)
-        self._fileMenu.add_command(label=_('Apply changes'), underline=0, accelerator=KEY_APPLY_CHANGES[1], command=self._apply_changes)
-        self._fileMenu.add_command(label=_('Exit'), underline=1, accelerator=KEY_QUIT_PROGRAM[1], command=self.on_quit)
+        self._mainMenu.add_cascade(label=_('File'), menu=self._fileMenu)
+        self._fileMenu.add_command(label=_('Apply changes'), accelerator=KEY_APPLY_CHANGES[1], command=self._apply_changes)
+        self._fileMenu.add_command(label=_('Exit'), accelerator=KEY_QUIT_PROGRAM[1], command=self.on_quit)
         self._editWindow.config(menu=self._mainMenu)
+
+        # Add a "Word count" Submenu to the editor window.
+        self._wcMenu = tk.Menu(self._mainMenu, tearoff=0)
+        self._mainMenu.add_cascade(label=_('Word count'), menu=self._wcMenu)
+        self._wcMenu.add_command(label=_('Update'), accelerator=KEY_UPDATE_WORDCOUNT[1], command=self.show_wordcount)
+        self._wcMenu.add_command(label=_('Enable live update'), command=self._live_wc_on)
+        self._wcMenu.add_command(label=_('Disable live update'), command=self._live_wc_off)
 
         # Add a text editor with scrollbar to the editor window.
         self._sceneEditor = TextBox(self._editWindow, wrap='word', undo=True, autoseparators=True, spacing1=15, spacing2=5, maxundo=-1, height=25, width=60, padx=5, pady=5)
@@ -112,17 +122,38 @@ class SceneEditor:
         # Load the scene content into the text editor.
         if self._ui.ywPrj.scenes[scId].sceneContent:
             self._sceneEditor.set_text(self._scene.sceneContent)
+        self._initialWc = self._sceneEditor.count_words()
+        self.show_wordcount()
 
         # Event bindings.
         self._editWindow.bind(KEY_APPLY_CHANGES[0], self._apply_changes)
         self._editWindow.bind(KEY_QUIT_PROGRAM[0], self.on_quit)
+        self._editWindow.bind(KEY_UPDATE_WORDCOUNT[0], self.show_wordcount)
         self._editWindow.protocol("WM_DELETE_WINDOW", self.on_quit)
 
         self.isOpen = True
+        self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
+
+    def _live_wc_on(self, event=None):
+        self._editWindow.bind('<KeyRelease>', self.show_wordcount)
+        self._wcMenu.entryconfig(_('Enable live update'), state='disabled')
+        self._wcMenu.entryconfig(_('Disable live update'), state='normal')
+        self.show_wordcount()
+
+    def _live_wc_off(self, event=None):
+        self._editWindow.unbind('<KeyRelease>')
+        self._wcMenu.entryconfig(_('Enable live update'), state='normal')
+        self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
 
     def show_status(self, message=None):
         """Display a message on the status bar."""
         self._statusBar.config(text=message)
+
+    def show_wordcount(self, event=None):
+        """Display a message on the status bar."""
+        wc = self._sceneEditor.count_words()
+        diff = wc - self._initialWc
+        self._statusBar.config(text=f'{wc} {_("words")} ({diff} {_("new")})')
 
     def _apply_changes(self, event=None):
         """Write the editor content to the project, if possible."""
@@ -169,3 +200,11 @@ class TextBox(scrolledtext.ScrolledText):
     def set_text(self, text):
         # convert text from yWriter markup, if applicable.
         self.insert(tk.END, text)
+
+    def count_words(self):
+        text = re.sub('--|—|–|…', ' ', self.get('1.0', tk.END))
+        # Make dashes separate words
+        text = re.sub('\[.+?\]|\/\*.+?\*\/|\.|\,|-', '', text)
+        # Remove comments and yWriter raw markup for word count; make hyphens join words
+        wordList = text.split()
+        return len(wordList)

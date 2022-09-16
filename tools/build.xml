@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="novelyst_editor" basedir=".">
-	<property name="version" value="0.4.0" />
+	<property name="version" value="0.5.0" />
 	<property name="plugin" value="novelyst_editor" />
 	
 	<property name="source-path" location="../src" />
@@ -11,6 +11,17 @@
 	<property name="i18n-path" location="../i18n" />
 	<property name="application" value="${ant.project.name}" />
 	<property name="release" value="${application}_v${version}" />
+
+	<target name="build" description="inline all library modules">
+		<exec executable="python" failonerror="true">
+		    <arg value="${source-path}/make_pot.py"/>
+		    <arg value="${version}"/>
+		</exec>
+		<exec executable="python" failonerror="true">
+		    <arg value="${source-path}/translate_de.py"/>
+		    <arg value="${version}"/>
+		</exec>
+	</target>
 
 	<target name="dist" description="generate the distribution">		
 		<delete dir="${build-path}" />
