@@ -9,6 +9,7 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program provides a
 - Open a scene editor window by double-clicking on the scene or by selecting "Edit" in the "Scene" menu.
 - Multiple scene editor windows.
 - A simple text editor box without rich text display and search capability.
+- Word count is displayed and updated either live or on demand.
 - Undo/Redo is provided.
 - The application is ready for internationalization with GNU gettext. A German localization is provided. 
 
@@ -20,9 +21,9 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program provides a
 
 ## Download and install
 
-[Download the latest release (version 0.5.0)](https://raw.githubusercontent.com/peter88213/novelyst/main/dist/novelyst_editor_v0.5.0.zip)
+[Download the latest release (version 0.6.0)](https://raw.githubusercontent.com/peter88213/novelyst/main/dist/novelyst_editor_v0.6.0.zip)
 
-- Unzip the downloaded zipfile "novelyst_editor_v0.5.0.zip" into a new folder.
+- Unzip the downloaded zipfile "novelyst_editor_v0.6.0.zip" into a new folder.
 - Move into this new folder and launch **setup.pyw**. This installs the application for the local user.
 - Open "README.md" for usage instructions.
 

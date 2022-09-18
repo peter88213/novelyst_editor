@@ -92,7 +92,7 @@ class SceneEditor:
 
         # Create an independent editor window.
         self._editWindow = tk.Toplevel()
-        self._editWindow.title(f'{self._ui.ywPrj.title} - {_("Scene")} ID {scId} ({self._scene.title})')
+        self._editWindow.title(f'{self._scene.title} - {self._ui.ywPrj.title}, {_("Scene")} ID {scId}')
 
         # Add a main menu bar to the editor window.
         self._mainMenu = tk.Menu(self._editWindow)
@@ -131,6 +131,7 @@ class SceneEditor:
         self._editWindow.bind(KEY_UPDATE_WORDCOUNT[0], self.show_wordcount)
         self._editWindow.protocol("WM_DELETE_WINDOW", self.on_quit)
 
+        self._editWindow.focus()
         self.isOpen = True
         self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
 
@@ -185,8 +186,9 @@ class SceneEditor:
         self.isOpen = False
 
     def lift(self):
-        """Bring window to the foreground"""
+        """Bring window to the foreground and give it the focus."""
         self._editWindow.lift()
+        self._editWindow.focus()
 
 
 class TextBox(scrolledtext.ScrolledText):
@@ -200,6 +202,8 @@ class TextBox(scrolledtext.ScrolledText):
     def set_text(self, text):
         # convert text from yWriter markup, if applicable.
         self.insert(tk.END, text)
+        self.edit_reset()
+        # this is to prevent the user from clearing the box with Ctrl-Z
 
     def count_words(self):
         text = re.sub('--|—|–|…', ' ', self.get('1.0', tk.END))

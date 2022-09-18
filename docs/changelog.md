@@ -4,6 +4,17 @@
 
 ## Changelog
 
+### v0.6.0 Word count
+
+- Show word count at the status bar.
+- Update word count via menu or key.
+- Activate/deactivate live word count.
+- Modify the window title: Scene title first.
+- Give editor windows the focus on opening.
+- Clear the undo/redo stack on loading text.
+
+Compatibility: novelyst v0.14.1 API
+
 ### v0.4.0 Internationalization
 
 - Adjust editor line spacing.
