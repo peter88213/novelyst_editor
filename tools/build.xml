@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="novelyst_editor" basedir=".">
-	<property name="version" value="0.6.0" />
+	<property name="version" value="0.6.1" />
 	<property name="plugin" value="novelyst_editor" />
 	
 	<property name="source-path" location="../src" />
@@ -43,6 +43,10 @@
 				
 		<copy todir="${build-path}/${release}/locale"> 
 			<fileset dir="${i18n-path}/locale" />
+		</copy>
+		
+		<copy todir="${build-path}/${release}/icons"> 
+			<fileset dir="../icons" />
 		</copy>
 		
 		<zip destfile="${dist-path}/${release}.zip" basedir="${build-path}/${release}" />

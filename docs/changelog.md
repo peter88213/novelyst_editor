@@ -4,6 +4,10 @@
 
 ## Changelog
 
+### v0.6.1 "Scene" icon
+
+- Assign the editor window its own icon.
+
 ### v0.6.0 Word count
 
 - Show word count at the status bar.

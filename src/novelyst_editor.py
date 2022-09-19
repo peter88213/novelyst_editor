@@ -29,6 +29,7 @@ except:
 
 APPLICATION = _('Scene Editor')
 PLUGIN = f'{APPLICATION} plugin v@release'
+ICON = 'sLogo32'
 
 KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
 KEY_APPLY_CHANGES = ('<Control-s>', 'Ctrl-S')
@@ -55,6 +56,13 @@ class Plugin:
         self._ui.sceneMenu.add_command(label=_('Edit'), underline=0, command=self._edit_scene)
         self._ui.tv.tree.bind('<Double-1>', self._edit_scene)
         self.sceneEditors = {}
+        try:
+            path = os.path.dirname(sys.argv[0])
+            if not path:
+                path = '.'
+            self._icon = tk.PhotoImage(file=f'{path}/icons/{ICON}.png')
+        except:
+            self._icon = None
 
     def _edit_scene(self, event=None):
         """Create a scene editor window with a menu bar, a text box, and a status bar."""
@@ -71,7 +79,7 @@ class Plugin:
                     self.sceneEditors[scId].lift()
                     return
 
-                self.sceneEditors[scId] = SceneEditor(self._ui, scId)
+                self.sceneEditors[scId] = SceneEditor(self._ui, scId, icon=self._icon)
         except IndexError:
             # Nothing selected
             pass
@@ -86,13 +94,15 @@ class Plugin:
 class SceneEditor:
     """A separate scene editor window with a menu bar, a text box, and a status bar."""
 
-    def __init__(self, ui, scId):
+    def __init__(self, ui, scId, icon=None):
         self._ui = ui
         self._scene = self._ui.ywPrj.scenes[scId]
 
         # Create an independent editor window.
         self._editWindow = tk.Toplevel()
         self._editWindow.title(f'{self._scene.title} - {self._ui.ywPrj.title}, {_("Scene")} ID {scId}')
+        if icon:
+            self._editWindow.iconphoto(False, icon)
 
         # Add a main menu bar to the editor window.
         self._mainMenu = tk.Menu(self._editWindow)
