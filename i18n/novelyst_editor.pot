@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.6.1\n"
-"POT-Creation-Date: 2022-09-19 21:19:32\n"
+"Project-Id-Version: 0.7.0\n"
+"POT-Creation-Date: 2022-09-24 22:13:43\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -44,10 +44,16 @@ msgstr ""
 msgid "File"
 msgstr ""
 
+msgid "Move the text from the cursor position to the end into a new scene"
+msgstr ""
+
 msgid "Scene"
 msgstr ""
 
 msgid "Scene Editor"
+msgstr ""
+
+msgid "Split at cursor position"
 msgstr ""
 
 msgid "Update"

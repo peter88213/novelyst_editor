@@ -1,6 +1,6 @@
 """A multi-scene editor plugin for novelyst.
 
-Compatibility: novelyst v0.14.1 API 
+Compatibility: novelyst v0.42 API 
 Requires Python 3.6+
 Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/novelyst_editor
@@ -12,7 +12,6 @@ import sys
 import tkinter as tk
 import locale
 import gettext
-from tkinter import ttk
 from tkinter import scrolledtext
 from tkinter import messagebox
 
@@ -34,6 +33,7 @@ ICON = 'sLogo32'
 KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
 KEY_APPLY_CHANGES = ('<Control-s>', 'Ctrl-S')
 KEY_UPDATE_WORDCOUNT = ('<F5>', 'F5')
+KEY_SPLIT_SCENE = ('<Control-n>', 'Ctrl-N')
 
 
 class Plugin:
@@ -97,6 +97,7 @@ class SceneEditor:
     def __init__(self, ui, scId, icon=None):
         self._ui = ui
         self._scene = self._ui.ywPrj.scenes[scId]
+        self._scId = scId
 
         # Create an independent editor window.
         self._editWindow = tk.Toplevel()
@@ -110,6 +111,8 @@ class SceneEditor:
         # Add a "File" Submenu to the editor window.
         self._fileMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('File'), menu=self._fileMenu)
+        self._fileMenu.add_command(label=_('Split at cursor position'), accelerator=KEY_SPLIT_SCENE[1], command=self._split_scene)
+        self._fileMenu.add_separator()
         self._fileMenu.add_command(label=_('Apply changes'), accelerator=KEY_APPLY_CHANGES[1], command=self._apply_changes)
         self._fileMenu.add_command(label=_('Exit'), accelerator=KEY_QUIT_PROGRAM[1], command=self.on_quit)
         self._editWindow.config(menu=self._mainMenu)
@@ -139,6 +142,7 @@ class SceneEditor:
         self._editWindow.bind(KEY_APPLY_CHANGES[0], self._apply_changes)
         self._editWindow.bind(KEY_QUIT_PROGRAM[0], self.on_quit)
         self._editWindow.bind(KEY_UPDATE_WORDCOUNT[0], self.show_wordcount)
+        self._editWindow.bind(KEY_SPLIT_SCENE[0], self._split_scene)
         self._editWindow.protocol("WM_DELETE_WINDOW", self.on_quit)
 
         self._editWindow.focus()
@@ -199,6 +203,39 @@ class SceneEditor:
         """Bring window to the foreground and give it the focus."""
         self._editWindow.lift()
         self._editWindow.focus()
+
+    def _split_scene(self, event=None):
+        """Split a scene at the cursor position."""
+        if not self._ui.ask_yes_no(f'{_("Move the text from the cursor position to the end into a new scene")}?'):
+            return
+
+        # Add a new scene.
+        thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
+        newId = self._ui.tv.add_scene(selection=thisNode)
+        if newId:
+            # Cut the actual scene's content from the cursor position to the end.
+            newContent = self._sceneEditor.get(tk.INSERT, tk.END).strip(' \n')
+            self._sceneEditor.delete(tk.INSERT, tk.END)
+            self._apply_changes()
+
+            # Copy the scene content to the new scene.
+            self._ui.ywPrj.scenes[newId].sceneContent = newContent
+
+            # Append the new scene to the previous scene.
+            self._ui.ywPrj.scenes[newId].appendToPrev = True
+
+            # Copy the scene status.
+            status = self._ui.ywPrj.scenes[self._scId].status
+            self._ui.ywPrj.scenes[newId].status = status
+
+            # Copy the scene type.
+            scType = self._ui.ywPrj.scenes[self._scId].scType
+            self._ui.ywPrj.scenes[newId].scType = scType
+
+            # Copy the viewpoint character.
+            if self._ui.ywPrj.scenes[self._scId].characters:
+                viewpoint = self._ui.ywPrj.scenes[self._scId].characters[0]
+                self._ui.ywPrj.scenes[newId].characters = [viewpoint]
 
 
 class TextBox(scrolledtext.ScrolledText):
