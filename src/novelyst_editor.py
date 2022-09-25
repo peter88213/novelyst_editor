@@ -91,7 +91,7 @@ class Plugin:
                 self.sceneEditors[scId].on_quit()
 
 
-class SceneEditor:
+class SceneEditor(tk.Toplevel):
     """A separate scene editor window with a menu bar, a text box, and a status bar."""
 
     def __init__(self, ui, scId, icon=None):
@@ -100,13 +100,13 @@ class SceneEditor:
         self._scId = scId
 
         # Create an independent editor window.
-        self._editWindow = tk.Toplevel()
-        self._editWindow.title(f'{self._scene.title} - {self._ui.ywPrj.title}, {_("Scene")} ID {scId}')
+        super().__init__()
+        self.title(f'{self._scene.title} - {self._ui.ywPrj.title}, {_("Scene")} ID {scId}')
         if icon:
-            self._editWindow.iconphoto(False, icon)
+            self.iconphoto(False, icon)
 
         # Add a main menu bar to the editor window.
-        self._mainMenu = tk.Menu(self._editWindow)
+        self._mainMenu = tk.Menu(self)
 
         # Add a "File" Submenu to the editor window.
         self._fileMenu = tk.Menu(self._mainMenu, tearoff=0)
@@ -115,7 +115,7 @@ class SceneEditor:
         self._fileMenu.add_separator()
         self._fileMenu.add_command(label=_('Apply changes'), accelerator=KEY_APPLY_CHANGES[1], command=self._apply_changes)
         self._fileMenu.add_command(label=_('Exit'), accelerator=KEY_QUIT_PROGRAM[1], command=self.on_quit)
-        self._editWindow.config(menu=self._mainMenu)
+        self.config(menu=self._mainMenu)
 
         # Add a "Word count" Submenu to the editor window.
         self._wcMenu = tk.Menu(self._mainMenu, tearoff=0)
@@ -125,11 +125,11 @@ class SceneEditor:
         self._wcMenu.add_command(label=_('Disable live update'), command=self._live_wc_off)
 
         # Add a text editor with scrollbar to the editor window.
-        self._sceneEditor = TextBox(self._editWindow, wrap='word', undo=True, autoseparators=True, spacing1=15, spacing2=5, maxundo=-1, height=25, width=60, padx=5, pady=5)
+        self._sceneEditor = TextBox(self, wrap='word', undo=True, autoseparators=True, spacing1=15, spacing2=5, maxundo=-1, height=25, width=60, padx=5, pady=5)
         self._sceneEditor.pack(expand=True, fill=tk.BOTH)
 
         # Add a status bar to the editor window.
-        self._statusBar = tk.Label(self._editWindow, text='', anchor='w', padx=5, pady=2)
+        self._statusBar = tk.Label(self, text='', anchor='w', padx=5, pady=2)
         self._statusBar.pack(expand=False, fill='both')
 
         # Load the scene content into the text editor.
@@ -139,24 +139,24 @@ class SceneEditor:
         self.show_wordcount()
 
         # Event bindings.
-        self._editWindow.bind(KEY_APPLY_CHANGES[0], self._apply_changes)
-        self._editWindow.bind(KEY_QUIT_PROGRAM[0], self.on_quit)
-        self._editWindow.bind(KEY_UPDATE_WORDCOUNT[0], self.show_wordcount)
-        self._editWindow.bind(KEY_SPLIT_SCENE[0], self._split_scene)
-        self._editWindow.protocol("WM_DELETE_WINDOW", self.on_quit)
+        self.bind(KEY_APPLY_CHANGES[0], self._apply_changes)
+        self.bind(KEY_QUIT_PROGRAM[0], self.on_quit)
+        self.bind(KEY_UPDATE_WORDCOUNT[0], self.show_wordcount)
+        self.bind(KEY_SPLIT_SCENE[0], self._split_scene)
+        self.protocol("WM_DELETE_WINDOW", self.on_quit)
 
-        self._editWindow.focus()
+        self.focus()
         self.isOpen = True
         self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
 
     def _live_wc_on(self, event=None):
-        self._editWindow.bind('<KeyRelease>', self.show_wordcount)
+        self.bind('<KeyRelease>', self.show_wordcount)
         self._wcMenu.entryconfig(_('Enable live update'), state='disabled')
         self._wcMenu.entryconfig(_('Disable live update'), state='normal')
         self.show_wordcount()
 
     def _live_wc_off(self, event=None):
-        self._editWindow.unbind('<KeyRelease>')
+        self.unbind('<KeyRelease>')
         self._wcMenu.entryconfig(_('Enable live update'), state='normal')
         self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
 
@@ -196,13 +196,16 @@ class SceneEditor:
                     else:
                         self._scene.sceneContent = sceneText
                         self._ui.isModified = True
-        self._editWindow.destroy()
+        self.destroy()
         self.isOpen = False
 
     def lift(self):
-        """Bring window to the foreground and give it the focus."""
-        self._editWindow.lift()
-        self._editWindow.focus()
+        """Bring window to the foreground and give it the focus.
+        
+        Extends the superclass method.
+        """
+        super().lift()
+        self.focus()
 
     def _split_scene(self, event=None):
         """Split a scene at the cursor position."""
