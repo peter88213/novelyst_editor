@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v0.8.0 "Split scene" feature
+
+- Add a "Split scene at cursor position" feature.
+- Refactor the code for better maintainability.
+
+Compatibility: novelyst v0.42 API
+
 ### v0.6.1 "Scene" icon
 
 - Assign the editor window its own icon.

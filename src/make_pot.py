@@ -9,14 +9,17 @@ Published under the MIT License (https://opensource.org/licenses/mit-license.php
 import os
 import sys
 sys.path.insert(0, f'{os.getcwd()}/../../PyWriter/src')
+from build_novelyst_editor import main
+from build_novelyst_editor import TARGET_FILE
 import pgettext
 
 APP = 'novelyst_editor'
 POT_FILE = f'../i18n/{APP}.pot'
-APP_FILE = f'../src/{APP}.py'
 
 
 def make_pot(version='unknown'):
+    # Generate a complete script.
+    main()
 
     # Generate a pot file from the script.
     if os.path.isfile(POT_FILE):
@@ -24,10 +27,10 @@ def make_pot(version='unknown'):
         backedUp = True
     else:
         backedUp = False
-    pot = pgettext.PotFile(POT_FILE, app=APP, appVersion=version)
-    pot.scan_file(APP_FILE)
-    print(f'Writing "{pot.filePath}"...\n')
     try:
+        pot = pgettext.PotFile(POT_FILE, app=APP, appVersion=version)
+        pot.scan_file(TARGET_FILE)
+        print(f'Writing "{pot.filePath}"...\n')
         pot.write_pot()
         return True
 

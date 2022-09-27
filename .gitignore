@@ -1,3 +1,4 @@
 /build/
 *.pyc
 *.bak
+/test/novelyst_editor.py
