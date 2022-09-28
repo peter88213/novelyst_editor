@@ -34,10 +34,11 @@ The plugin adds an "Edit" entry to the *novelyst* "Scene" menu.
 
 ### Format text
 
-- **Ctrl-I** places yWriter "Italic" tags around the selected text or around the cursor.
-- **Ctrl-B** places yWriter "Bold" tags around the selected text or around the cursor.
+- **Ctrl-I** places "Italic" markup around the selected text or at the cursor. If the selection is already italic, remove markup.
+- **Ctrl-B** places "Bold" markup around the selected text or at the cursor. If the selection is already bold, remove markup.
+- **Ctrl-M** removes "Bold" and "Italic" markup from the selection.
 
-*Be sure not to nest yWriter tags by accident.*
+*The operations described above do not take effect on markup outsides the selection. Be sure not to nest markup by accident.*
 
 ### Undo/Redo
 

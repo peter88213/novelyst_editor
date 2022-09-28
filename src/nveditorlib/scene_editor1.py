@@ -5,9 +5,9 @@ For further information see https://github.com/peter88213/novelyst_editor
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import tkinter as tk
-from tkinter import messagebox
 from nveditorlib.nv_editor_globals import *
-from nveditorlib.text_box import TextBox
+from nveditorlib.rich_text_box import RichTextBox
+from tkinter import messagebox
 
 KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
 KEY_APPLY_CHANGES = ('<Control-s>', 'Ctrl-S')
@@ -15,7 +15,6 @@ KEY_UPDATE_WORDCOUNT = ('<F5>', 'F5')
 KEY_SPLIT_SCENE = ('<Control-n>', 'Ctrl-N')
 KEY_ITALIC = ('<Control-i>', 'Ctrl-I')
 KEY_BOLD = ('<Control-b>', 'Ctrl-B')
-KEY_PLAIN = ('<Control-m>', 'Ctrl-M')
 
 
 class SceneEditor(tk.Toplevel):
@@ -57,7 +56,7 @@ class SceneEditor(tk.Toplevel):
         self._buttonBar.pack(expand=False, fill=tk.BOTH)
 
         # Add a text editor with scrollbar to the editor window.
-        self._sceneEditor = TextBox(self, wrap='word', undo=True, autoseparators=True, spacing1=15, spacing2=5, maxundo=-1, height=25, width=60, padx=5, pady=5)
+        self._sceneEditor = RichTextBox(self, wrap='word', undo=True, autoseparators=True, spacing1=15, spacing2=5, maxundo=-1, height=25, width=60, padx=5, pady=5)
         self._sceneEditor.pack(expand=True, fill=tk.BOTH)
         self._sceneEditor.pack_propagate(0)
 
@@ -76,9 +75,8 @@ class SceneEditor(tk.Toplevel):
         self.bind_class('Text', KEY_QUIT_PROGRAM[0], self.on_quit)
         self.bind_class('Text', KEY_UPDATE_WORDCOUNT[0], self.show_wordcount)
         self.bind_class('Text', KEY_SPLIT_SCENE[0], self._split_scene)
-        self.bind_class('Text', KEY_ITALIC[0], self._sceneEditor.italic)
-        self.bind_class('Text', KEY_BOLD[0], self._sceneEditor.bold)
-        self.bind_class('Text', KEY_PLAIN[0], self._sceneEditor.plain)
+        self.bind_class('Text', KEY_ITALIC[0], self._italic)
+        self.bind_class('Text', KEY_BOLD[0], self._bold)
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
 
         self.focus()
@@ -175,4 +173,24 @@ class SceneEditor(tk.Toplevel):
             if self._ui.ywPrj.scenes[self._scId].characters:
                 viewpoint = self._ui.ywPrj.scenes[self._scId].characters[0]
                 self._ui.ywPrj.scenes[newId].characters = [viewpoint]
+
+    def _italic(self, event=None):
+        """Make the selection italic."""
+        self._insert_tags(tag='i')
+
+    def _bold(self, event=None):
+        """Make the selection bold."""
+        self._insert_tags(tag='b')
+
+    def _insert_tags(self, event=None, tag=None):
+        """Embrace the selected text with tags."""
+        if tag:
+            if self._sceneEditor.tag_ranges(tk.SEL):
+                self._sceneEditor.insert(tk.SEL_LAST, f'[/{tag}]')
+                self._sceneEditor.insert(tk.SEL_FIRST, f'[{tag}]')
+            else:
+                self._sceneEditor.insert(tk.INSERT, f'[{tag}]')
+                endTag = f'[/{tag}]'
+                self._sceneEditor.insert(tk.INSERT, endTag)
+                self._sceneEditor.mark_set(tk.INSERT, f'{tk.INSERT}-{len(endTag)}c')
 

@@ -4,6 +4,14 @@
 
 ## Changelog
 
+### v0.12.0
+
+- Provide a key shortcut for plain formatting.
+- Try to avoid nesting when formatting selections.
+- Toggle formatting.
+
+Compatibility: novelyst v0.42 API
+
 ### v0.10.0
 
 - Provide key shortcuts for bold and italic formatting.
