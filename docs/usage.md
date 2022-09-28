@@ -14,9 +14,40 @@ The plugin adds an "Edit" entry to the *novelyst* "Scene" menu.
 
 ### Launch the scene editor
 
-- Open a scene editor window by double-clicking on a scene or via the **Scene > Edit** menu entry when a scene is selected.
+- Open a scene editor window by double-clicking on a scene or via the **Scene > Edit** menu entry when a scene is selected, or by hitting the *Enter* key.
 - If the project is locked, editor windows cannot be opened.
-- If you double-click on a scene already open, the window will be brought to the foreground.
+- If you choose a scene already open, the window will be brought to the foreground.
+
+### Select text
+
+- Select a word via double-clicking.
+- Select a paragraph via triple-clicking.
+- Extend the selection via **Shift-Arrow**.
+- Extend the selection to the next word via **Ctrl-Shift-Arrow**.
+- **Ctrl-A** selects the whole text.
+
+### Copy/Paste text
+
+- **Ctrl-C** copies the selected text to the clipboard.
+- **Ctrl-X** cuts the selected text and moves it to the clipboard.
+- **Ctrl-V** pastes the clipboard text content to the cursor position.
+
+### Undo/Redo
+
+- **Ctrl-Z** undoes the last editing. Multiple undo is possible.
+- **Ctrl-Y** redoes the last undo. Multiple redo is possible.
+
+### Split a scene
+
+Via **File > Split at cursor position** or **Ctrl-N** you can split the scene at the cursor position. 
+
+- All the text from the cursor position is cut and pasted into a newly created scene. 
+- The new scene is placed after the currently edited scene.
+- The new scene is appended to the currently edited scene.
+- The new scene has the same status as the currently edited scene.  
+- The new scene is of the same type as the currently edited scene.  
+- The new scene has the same viewpoint character as the currently edited scene.  
+
 
 ### Word count
 
@@ -28,7 +59,6 @@ The plugin adds an "Edit" entry to the *novelyst* "Scene" menu.
 **Please note**
 
 *Live updating the word count is resource intensive and may slow down the program when editing big scenes. This is why it's disabled by default.*
-
 
 ### Apply changes
 

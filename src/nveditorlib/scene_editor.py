@@ -18,7 +18,7 @@ KEY_SPLIT_SCENE = ('<Control-n>', 'Ctrl-N')
 class SceneEditor(tk.Toplevel):
     """A separate scene editor window with a menu bar, a text box, and a status bar."""
 
-    def __init__(self, ui, scId, icon=None):
+    def __init__(self, ui, scId, size, icon=None):
         self._ui = ui
         self._scene = self._ui.ywPrj.scenes[scId]
         self._scId = scId
@@ -26,6 +26,7 @@ class SceneEditor(tk.Toplevel):
         # Create an independent editor window.
         super().__init__()
         self.title(f'{self._scene.title} - {self._ui.ywPrj.title}, {_("Scene")} ID {scId}')
+        self.geometry(size)
         if icon:
             self.iconphoto(False, icon)
 
@@ -51,6 +52,7 @@ class SceneEditor(tk.Toplevel):
         # Add a text editor with scrollbar to the editor window.
         self._sceneEditor = TextBox(self, wrap='word', undo=True, autoseparators=True, spacing1=15, spacing2=5, maxundo=-1, height=25, width=60, padx=5, pady=5)
         self._sceneEditor.pack(expand=True, fill=tk.BOTH)
+        self._sceneEditor.pack_propagate(0)
 
         # Add a status bar to the editor window.
         self._statusBar = tk.Label(self, text='', anchor='w', padx=5, pady=2)

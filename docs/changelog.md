@@ -4,6 +4,14 @@
 
 ## Changelog
 
+### v0.8.1
+
+- Bind the "Enter" key to the editor.
+- Change icon ("E" for editor).
+- Fix a bug where the status bar becomes invisible when the editor window is resized.
+
+Compatibility: novelyst v0.42 API
+
 ### v0.8.0 "Split scene" feature
 
 - Add a "Split scene at cursor position" feature.

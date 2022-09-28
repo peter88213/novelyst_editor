@@ -33,6 +33,7 @@ class Plugin:
         self._ui.sceneMenu.add_separator()
         self._ui.sceneMenu.add_command(label=_('Edit'), underline=0, command=self._edit_scene)
         self._ui.tv.tree.bind('<Double-1>', self._edit_scene)
+        self._ui.tv.tree.bind('<Return>', self._edit_scene)
         self.sceneEditors = {}
         try:
             path = os.path.dirname(sys.argv[0])
@@ -57,7 +58,7 @@ class Plugin:
                     self.sceneEditors[scId].lift()
                     return
 
-                self.sceneEditors[scId] = SceneEditor(self._ui, scId, icon=self._icon)
+                self.sceneEditors[scId] = SceneEditor(self._ui, scId, WINDOW_SIZE, icon=self._icon)
         except IndexError:
             # Nothing selected
             pass
