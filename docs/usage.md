@@ -32,6 +32,13 @@ The plugin adds an "Edit" entry to the *novelyst* "Scene" menu.
 - **Ctrl-X** cuts the selected text and moves it to the clipboard.
 - **Ctrl-V** pastes the clipboard text content to the cursor position.
 
+### Format text
+
+- **Ctrl-I** places yWriter "Italic" tags around the selected text or around the cursor.
+- **Ctrl-B** places yWriter "Bold" tags around the selected text or around the cursor.
+
+*Be sure not to nest yWriter tags by accident.*
+
 ### Undo/Redo
 
 - **Ctrl-Z** undoes the last editing. Multiple undo is possible.

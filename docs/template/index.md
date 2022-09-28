@@ -7,6 +7,7 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program provides a
 ## Features
 
 - A simple text editor box without rich text display and search capability.
+- Text is edited at the "raw markup" level. Markup tags are displayed as stored in the *yw7* file. Formatting tags are similar to those of HTML, but square brackets are used instead of pointed brackets.
 - Multiple scene editor windows.
 - Word count is displayed and updated either live or on demand.
 - The application is ready for internationalization with GNU gettext. A German localization is provided. 
@@ -14,6 +15,7 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program provides a
     - Text selection
     - Copy/Cut/Paste to/from the clipboard
     - Undo/Redo
+    - Key shortcuts for bold and italic formatting
 
 ## Requirements
 

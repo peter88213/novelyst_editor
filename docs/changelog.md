@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v0.10.0
+
+- Provide key shortcuts for bold and italic formatting.
+
+Compatibility: novelyst v0.42 API
+
 ### v0.8.1
 
 - Bind the "Enter" key to the editor.
