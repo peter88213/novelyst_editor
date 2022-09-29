@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v0.14.1
+
+- Rewrite the tex box widget for a better look under Linux.
+
+Compatibility: novelyst v0.42 API
+
 ### v0.14.0 User interface enhancements
 
 - Change the hotkey for scene splitting to **Ctrl-Alt-S**
