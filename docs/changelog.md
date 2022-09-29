@@ -4,7 +4,15 @@
 
 ## Changelog
 
-### v0.12.0
+### v0.14.0 User interface enhancements
+
+- Change the hotkey for scene splitting to **Ctrl-Alt-S**
+- Add an **Edit** menu.
+- Add a **Format** menu.
+
+Compatibility: novelyst v0.42 API
+
+### v0.12.0 Formatting improvements
 
 - Provide a key shortcut for plain formatting.
 - Try to avoid nesting when formatting selections.
@@ -12,7 +20,7 @@
 
 Compatibility: novelyst v0.42 API
 
-### v0.10.0
+### v0.10.0 Formatting improvements
 
 - Provide key shortcuts for bold and italic formatting.
 

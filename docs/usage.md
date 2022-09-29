@@ -47,7 +47,7 @@ The plugin adds an "Edit" entry to the *novelyst* "Scene" menu.
 
 ### Split a scene
 
-Via **File > Split at cursor position** or **Ctrl-N** you can split the scene at the cursor position. 
+Via **File > Split at cursor position** or **Ctrl-Alt-S** you can split the scene at the cursor position. 
 
 - All the text from the cursor position is cut and pasted into a newly created scene. 
 - The new scene is placed after the currently edited scene.

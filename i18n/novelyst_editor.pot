@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.12.0\n"
-"POT-Creation-Date: 2022-09-28 22:56:04\n"
+"Project-Id-Version: 0.14.0\n"
+"POT-Creation-Date: 2022-09-29 12:35:53\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -20,6 +20,9 @@ msgstr ""
 msgid "Apply scene changes?"
 msgstr ""
 
+msgid "Bold"
+msgstr ""
+
 msgid "Cannot apply scene changes, because the project is locked."
 msgstr ""
 
@@ -27,6 +30,12 @@ msgid "Cannot apply scene changes, because the project is locked.\nUnlock and ap
 msgstr ""
 
 msgid "Cannot edit scenes, because the project is locked."
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Cut"
 msgstr ""
 
 msgid "Disable live update"
@@ -44,7 +53,19 @@ msgstr ""
 msgid "File"
 msgstr ""
 
+msgid "Format"
+msgstr ""
+
+msgid "Italic"
+msgstr ""
+
 msgid "Move the text from the cursor position to the end into a new scene"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "Plain"
 msgstr ""
 
 msgid "Scene"
