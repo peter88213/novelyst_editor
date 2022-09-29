@@ -1,4 +1,4 @@
-"""Provide a text editor widget for the novelyst editor plugin.
+"""Provide a rich text editor widget for the novelyst editor plugin.
 
 Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/
@@ -23,13 +23,11 @@ class RichTextBox(scrolledtext.ScrolledText):
 
     Kudos to Bryan Oakley
     https://stackoverflow.com/questions/63099026/fomatted-text-in-tkinter
-    https://stackoverflow.com/questions/61661490/how-do-you-get-the-tags-from-text-in-a-tkinter-text-widget
-    and user "j_4321"
-    https://stackoverflow.com/questions/15724936/copying-formatted-text-from-text-widget-in-tkinter
     """
     ITALIC_TAG = 'italic'
     BOLD_TAG = 'bold'
 
+    YW_TAGS = ['i', '/i', 'b', '/b']
     TAGS = {'b': 'bold',
             'i': 'italic',
             }
@@ -55,7 +53,6 @@ class RichTextBox(scrolledtext.ScrolledText):
 
     def set_text(self, text):
         """Convert text from yWriter markup and load it into the editor area."""
-        ywTags = ['i', '/i', 'b', '/b']
         taggedText = []
         tag = ''
         tagStack = ['']
@@ -66,7 +63,7 @@ class RichTextBox(scrolledtext.ScrolledText):
                 tagEndPos = text.find(']')
                 if tagEndPos >= 0:
                     ywTag = text[tagStartPos + 1:tagEndPos]
-                    if ywTag in ywTags:
+                    if ywTag in self.YW_TAGS:
                         chunk = text[0:tagStartPos]
                         text = text[tagEndPos + 1:]
                         tag = self.TAGS.get(ywTag, '')
@@ -93,7 +90,11 @@ class RichTextBox(scrolledtext.ScrolledText):
         # this is to prevent the user from clearing the box with Ctrl-Z
 
     def get_text(self):
-        """Retreive tagged text from the editor area and convert it to yWriter markup."""
+        """Retrieve tagged text from the editor area and convert it to yWriter markup.
+        
+        Kudos to Stackoverflow user "j_4321"
+        https://stackoverflow.com/questions/15724936/copying-formatted-text-from-text-widget-in-tkinter
+        """
         taggedText = self.dump('1.0', tk.END, tag=True, text=True)
         textParts = []
         for key, value, __ in taggedText:
@@ -143,6 +144,11 @@ class RichTextBox(scrolledtext.ScrolledText):
         self.tag_add(tk.SEL, selFirst, selLast)
 
     def _get_tags(self, start, end):
+        """Get a set of tags between the start and end text mark.     
+        
+        Kudos to Bryan Oakley
+        https://stackoverflow.com/questions/61661490/how-do-you-get-the-tags-from-text-in-a-tkinter-text-widget
+        """
         index = start
         tags = []
         while self.compare(index, '<=', end):
