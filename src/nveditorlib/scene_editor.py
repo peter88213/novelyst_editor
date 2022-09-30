@@ -4,11 +4,13 @@ Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/novelyst_editor
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
+import webbrowser
 import tkinter as tk
 from tkinter import messagebox
 from nveditorlib.nv_editor_globals import *
 from nveditorlib.text_box import TextBox
 
+HELP_URL = 'https://peter88213.github.io/novelyst_editor/usage'
 KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
 KEY_APPLY_CHANGES = ('<Control-s>', 'Ctrl-S')
 KEY_UPDATE_WORDCOUNT = ('<F5>', 'F5')
@@ -97,6 +99,11 @@ class SceneEditor(tk.Toplevel):
         self._wcMenu.add_command(label=_('Update'), accelerator=KEY_UPDATE_WORDCOUNT[1], command=self.show_wordcount)
         self._wcMenu.add_command(label=_('Enable live update'), command=self._live_wc_on)
         self._wcMenu.add_command(label=_('Disable live update'), command=self._live_wc_off)
+
+        # Help
+        self.helpMenu = tk.Menu(self._mainMenu, tearoff=0)
+        self._mainMenu.add_cascade(label=_('Help'), menu=self.helpMenu)
+        self.helpMenu.add_command(label=_('Online help'), command=lambda: webbrowser.open(HELP_URL))
 
         # Event bindings.
         self.bind_class('Text', KEY_APPLY_CHANGES[0], self._apply_changes)

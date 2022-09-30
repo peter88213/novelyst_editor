@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v0.16.0
+
+- Provide online help.
+
+Compatibility: novelyst v0.42 API
+
 ### v0.14.2
 
 - Refactor the code and update documentation.

@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.14.2\n"
-"POT-Creation-Date: 2022-09-30 10:50:01\n"
-"PO-Revision-Date: 2022-09-30 10:50:01\n"
+"Project-Id-Version: 0.16.0\n"
+"POT-Creation-Date: 2022-09-30 11:35:00\n"
+"PO-Revision-Date: 2022-09-30 11:35:00\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -55,11 +55,17 @@ msgstr "Datei"
 msgid "Format"
 msgstr "Format"
 
+msgid "Help"
+msgstr "Hilfe"
+
 msgid "Italic"
 msgstr "Kursiv"
 
 msgid "Move the text from the cursor position to the end into a new scene"
 msgstr "Den Text von der Cursorposition bis zum Ende in einen neuen Abschnitt verschieben"
+
+msgid "Online help"
+msgstr "Online-Hilfe"
 
 msgid "Paste"
 msgstr "Einfügen"
