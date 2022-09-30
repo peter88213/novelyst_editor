@@ -3,7 +3,7 @@
 This script is for the Windows Explorer context menu
 as specified by the ".reg" file to generate. 
 
-For further information see https://github.com/peter88213/novelyst
+For further information see https://github.com/peter88213/novelyst_editor
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import os

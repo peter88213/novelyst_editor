@@ -180,7 +180,7 @@ class SceneEditor(tk.Toplevel):
         newId = self._ui.tv.add_scene(selection=thisNode)
         if newId:
             # Cut the actual scene's content from the cursor position to the end.
-            newContent = self._sceneEditor.get(tk.INSERT, tk.END).strip(' \n')
+            newContent = self._sceneEditor.get_text(tk.INSERT, tk.END).strip(' \n')
             self._sceneEditor.delete(tk.INSERT, tk.END)
             self._apply_changes()
 

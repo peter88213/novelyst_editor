@@ -4,7 +4,7 @@
 Version @release
 
 Copyright (c) 2022 Peter Triesberger
-For further information see https://github.com/peter88213/aeon2yw
+For further information see https://github.com/peter88213/novelyst_editor
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import os

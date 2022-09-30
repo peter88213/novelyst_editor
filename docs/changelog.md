@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v0.14.2
+
+- Refactor the code and update documentation.
+
+Compatibility: novelyst v0.42 API
+
 ### v0.14.1
 
 - Rewrite the tex box widget for a better look under Linux.
