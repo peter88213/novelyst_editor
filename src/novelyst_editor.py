@@ -20,6 +20,9 @@ class Plugin:
     Public methods:
         on_quit() -- apply changes before closing the editor windows.       
     """
+    VERSION = '@release'
+    DESCRIPTION = 'A multi-scene "plain text" editor'
+    URL = 'https://peter88213.github.io/novelyst_editor'
 
     def __init__(self, ui):
         """Add a submenu to the main menu.

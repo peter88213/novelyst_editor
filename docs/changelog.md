@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v0.18.0
+
+- Provide information for the novelyst v0.50+ Plugin Manager.
+
+Compatibility: novelyst v0.42 API
+
 ### v0.16.0
 
 - Provide online help.
