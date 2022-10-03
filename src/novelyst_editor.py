@@ -21,7 +21,7 @@ class Plugin:
         on_quit() -- apply changes before closing the editor windows.       
     """
     VERSION = '@release'
-    NOVELYST_API = '1.0'
+    NOVELYST_API = '0.51'
     DESCRIPTION = 'A multi-scene "plain text" editor'
     URL = 'https://peter88213.github.io/novelyst_editor'
 
