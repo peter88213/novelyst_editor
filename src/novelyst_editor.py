@@ -21,10 +21,11 @@ class Plugin:
         on_quit() -- apply changes before closing the editor windows.       
     """
     VERSION = '@release'
+    NOVELYST_API = '1.0'
     DESCRIPTION = 'A multi-scene "plain text" editor'
     URL = 'https://peter88213.github.io/novelyst_editor'
 
-    def __init__(self, ui):
+    def install(self, ui):
         """Add a submenu to the main menu.
         
         Positional arguments:
