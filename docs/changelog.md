@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v0.20.0
+
+- Release under the GPLv3 license.
+
+Compatibility: novelyst v1.0.0 API
+
 ### v0.18.0
 
 - Provide information for the novelyst v0.50+ Plugin Manager.
