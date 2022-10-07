@@ -14,10 +14,11 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program helps auth
 - Word count is displayed and updated either live or on demand.
 - The application is ready for internationalization with GNU gettext. A German localization is provided. 
 - Editor features:
-    - Text selection
-    - Copy/Cut/Paste to/from the clipboard
-    - Undo/Redo
-    - Key shortcuts for bold and italic formatting
+    - Text selection.
+    - Copy/Cut/Paste to/from the clipboard.
+    - Undo/Redo.
+    - Key shortcuts for bold and italic formatting.
+    - Split the scene at the cursor position.
     
 *Note:* If you rather have a "rich text" scene editor, you might wish to try the [novelyst_rich_editor](https://peter88213.github.io/novelyst_rich_editor) plugin.
 
