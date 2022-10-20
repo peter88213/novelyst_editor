@@ -8,6 +8,16 @@ import re
 import tkinter as tk
 from tkinter import ttk
 
+#--- Regular expressions for counting words and characters like in LibreOffice.
+# See: https://help.libreoffice.org/latest/en-GB/text/swriter/guide/words_count.html
+
+ADDITIONAL_WORD_LIMITS = re.compile('--|—|–')
+# this is to be replaced by spaces, thus making dashes and dash replacements word limits
+
+NO_WORD_LIMITS = re.compile('\[.+?\]|\/\*.+?\*\/|-|\.|^\>', re.MULTILINE)
+# this is to be replaced by empty strings, thus excluding markup and comments from
+# word counting, and making hyphens join words
+
 
 class TextBox(tk.Text):
     """A text editor widget for yWriter raw markup.
@@ -60,10 +70,8 @@ class TextBox(tk.Text):
 
     def count_words(self):
         """Return the word count."""
-        text = re.sub('--|—|–|…', ' ', self.get('1.0', tk.END))
-        # Make dashes separate words
-        text = re.sub('\[.+?\]|\/\*.+?\*\/|\.|\,|-', '', text)
-        # Remove comments and yWriter raw markup for word count; make hyphens join words
+        text = ADDITIONAL_WORD_LIMITS.sub(' ', self.get('1.0', tk.END))
+        text = NO_WORD_LIMITS.sub('', text)
         wordList = text.split()
         return len(wordList)
 

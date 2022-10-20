@@ -22,6 +22,7 @@ KEY_PLAIN = ('<Control-m>', 'Ctrl-M')
 
 class SceneEditor(tk.Toplevel):
     """A separate scene editor window with a menu bar, a text box, and a status bar."""
+    liveWordCount = False
 
     def __init__(self, ui, scId, size, icon=None):
         self._ui = ui
@@ -117,18 +118,24 @@ class SceneEditor(tk.Toplevel):
 
         self.focus()
         self.isOpen = True
-        self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
+
+        if SceneEditor.liveWordCount:
+            self._live_wc_on()
+        else:
+            self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
 
     def _live_wc_on(self, event=None):
         self.bind('<KeyRelease>', self.show_wordcount)
         self._wcMenu.entryconfig(_('Enable live update'), state='disabled')
         self._wcMenu.entryconfig(_('Disable live update'), state='normal')
         self.show_wordcount()
+        SceneEditor.liveWordCount = True
 
     def _live_wc_off(self, event=None):
         self.unbind('<KeyRelease>')
         self._wcMenu.entryconfig(_('Enable live update'), state='normal')
         self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
+        SceneEditor.liveWordCount = False
 
     def show_status(self, message=None):
         """Display a message on the status bar."""
