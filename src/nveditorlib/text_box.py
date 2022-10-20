@@ -14,7 +14,7 @@ from tkinter import ttk
 ADDITIONAL_WORD_LIMITS = re.compile('--|—|–')
 # this is to be replaced by spaces, thus making dashes and dash replacements word limits
 
-NO_WORD_LIMITS = re.compile('\[.+?\]|\/\*.+?\*\/|-|\.|^\>', re.MULTILINE)
+NO_WORD_LIMITS = re.compile('\[.+?\]|\/\*.+?\*\/|-|^\>', re.MULTILINE)
 # this is to be replaced by empty strings, thus excluding markup and comments from
 # word counting, and making hyphens join words
 

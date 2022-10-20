@@ -4,7 +4,7 @@
 
 ## Changelog
 
-### v0.21.0
+### v0.21.1
 
 - Apply the live word count status to all new editor instances.
 - Count words like in LibreOffice. See: https://help.libreoffice.org/latest/en-GB/text/swriter/guide/words_count.html
