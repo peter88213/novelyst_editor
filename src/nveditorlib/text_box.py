@@ -72,8 +72,7 @@ class TextBox(tk.Text):
         """Return the word count."""
         text = ADDITIONAL_WORD_LIMITS.sub(' ', self.get('1.0', tk.END))
         text = NO_WORD_LIMITS.sub('', text)
-        wordList = text.split()
-        return len(wordList)
+        return len(text.split())
 
     def italic(self, event=None):
         """Make the selection italic, or begin with italic input."""
