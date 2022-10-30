@@ -24,13 +24,13 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program helps auth
 
 ## Requirements
 
-- [novelyst](https://peter88213.github.io/novelyst/) version 1.0.0+
+- [novelyst](https://peter88213.github.io/novelyst/) version 2.0.0+
 
 ## Download and install
 
-[Download the latest release (version 0.21.1)](https://github.com/peter88213/novelyst_editor/raw/main/dist/novelyst_editor_v0.21.1.zip)
+[Download the latest release (version 2.0.0)](https://github.com/peter88213/novelyst_editor/raw/main/dist/novelyst_editor_v2.0.0.zip)
 
-- Unzip the downloaded zipfile "novelyst_editor_v0.21.1.zip" into a new folder.
+- Unzip the downloaded zipfile "novelyst_editor_v2.0.0.zip" into a new folder.
 - Move into this new folder and launch **setup.pyw**. This installs the application for the local user.
 - Open "README.md" for usage instructions.
 
