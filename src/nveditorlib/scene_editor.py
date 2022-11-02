@@ -47,7 +47,17 @@ class SceneEditor(tk.Toplevel):
         '''
 
         # Add a text editor with scrollbar to the editor window.
-        self._sceneEditor = TextBox(self, wrap='word', undo=True, autoseparators=True, spacing1=15, spacing2=5, maxundo=-1, height=25, width=60, padx=5, pady=5)
+        self._sceneEditor = TextBox(self, wrap='word',
+                                    undo=True,
+                                    autoseparators=True,
+                                    spacing1=15,
+                                    spacing2=5,
+                                    maxundo=-1,
+                                    height=25,
+                                    width=60,
+                                    padx=40,
+                                    pady=20,
+                                    )
         self._sceneEditor.pack(expand=True, fill=tk.BOTH)
         self._sceneEditor.pack_propagate(0)
 

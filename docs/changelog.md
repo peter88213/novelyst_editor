@@ -4,8 +4,9 @@
 
 ## Changelog
 
-### v2.0.0
+### v2.0.1
 
+- Widen text box margins.
 - API upgrade.
 
 Compatibility: novelyst v2.0.0 API
