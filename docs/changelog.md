@@ -4,9 +4,10 @@
 
 ## Changelog
 
-### v2.0.1
+### v2.0.2
 
 - Widen text box margins.
+- When opening a SceneEditor, set the focus to its text box.
 - API upgrade.
 
 Compatibility: novelyst v2.0.0 API

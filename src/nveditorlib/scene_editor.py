@@ -126,7 +126,7 @@ class SceneEditor(tk.Toplevel):
         self.bind_class('Text', KEY_PLAIN[0], self._sceneEditor.plain)
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
 
-        self.focus()
+        self.lift()
         self.isOpen = True
 
         if SceneEditor.liveWordCount:
@@ -187,12 +187,12 @@ class SceneEditor(tk.Toplevel):
         self.isOpen = False
 
     def lift(self):
-        """Bring window to the foreground and give it the focus.
+        """Bring window to the foreground and set the focus to the editor box.
         
         Extends the superclass method.
         """
         super().lift()
-        self.focus()
+        self._sceneEditor.focus()
 
     def _split_scene(self, event=None):
         """Split a scene at the cursor position."""
