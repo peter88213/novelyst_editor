@@ -12,7 +12,7 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program helps auth
 - Text is edited at the "raw markup" level. Markup tags are displayed as stored in the *yw7* file. Formatting tags are similar to those of HTML, but square brackets are used instead of pointed brackets.
 - Multiple scene editor windows.
 - Word count is displayed and updated either live or on demand.
-- The application is ready for internationalization with GNU gettext. A German localization is provided. 
+- The plugin is ready for internationalization with GNU gettext. A German localization is provided. 
 - Editor features:
     - Text selection.
     - Copy/Cut/Paste to/from the clipboard.
@@ -31,7 +31,7 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program helps auth
 [Download the latest release (version 2.0.2)](https://github.com/peter88213/novelyst_editor/raw/main/dist/novelyst_editor_v2.0.2.zip)
 
 - Unzip the downloaded zipfile "novelyst_editor_v2.0.2.zip" into a new folder.
-- Move into this new folder and launch **setup.pyw**. This installs the application for the local user.
+- Move into this new folder and launch **setup.pyw**. This installs the plugin for the local user.
 - Open "README.md" for usage instructions.
 
 ### Note for Linux users
