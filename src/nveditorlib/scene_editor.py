@@ -26,12 +26,12 @@ class SceneEditor(tk.Toplevel):
 
     def __init__(self, ui, scId, size, icon=None):
         self._ui = ui
-        self._scene = self._ui.ywPrj.scenes[scId]
+        self._scene = self._ui.novel.scenes[scId]
         self._scId = scId
 
         # Create an independent editor window.
         super().__init__()
-        self.title(f'{self._scene.title} - {self._ui.ywPrj.title}, {_("Scene")} ID {scId}')
+        self.title(f'{self._scene.title} - {self._ui.novel.title}, {_("Scene")} ID {scId}')
         self.geometry(size)
         if icon:
             self.iconphoto(False, icon)
@@ -66,7 +66,7 @@ class SceneEditor(tk.Toplevel):
         self._statusBar.pack(expand=False, fill=tk.BOTH)
 
         # Load the scene content into the text editor.
-        if self._ui.ywPrj.scenes[scId].sceneContent:
+        if self._ui.novel.scenes[scId].sceneContent:
             self._sceneEditor.set_text(self._scene.sceneContent)
         self._initialWc = self._sceneEditor.count_words()
         self.show_wordcount()
@@ -209,21 +209,21 @@ class SceneEditor(tk.Toplevel):
             self._apply_changes()
 
             # Copy the scene content to the new scene.
-            self._ui.ywPrj.scenes[newId].sceneContent = newContent
+            self._ui.novel.scenes[newId].sceneContent = newContent
 
             # Append the new scene to the previous scene.
-            self._ui.ywPrj.scenes[newId].appendToPrev = True
+            self._ui.novel.scenes[newId].appendToPrev = True
 
             # Copy the scene status.
-            status = self._ui.ywPrj.scenes[self._scId].status
-            self._ui.ywPrj.scenes[newId].status = status
+            status = self._ui.novel.scenes[self._scId].status
+            self._ui.novel.scenes[newId].status = status
 
             # Copy the scene type.
-            scType = self._ui.ywPrj.scenes[self._scId].scType
-            self._ui.ywPrj.scenes[newId].scType = scType
+            scType = self._ui.novel.scenes[self._scId].scType
+            self._ui.novel.scenes[newId].scType = scType
 
             # Copy the viewpoint character.
-            if self._ui.ywPrj.scenes[self._scId].characters:
-                viewpoint = self._ui.ywPrj.scenes[self._scId].characters[0]
-                self._ui.ywPrj.scenes[newId].characters = [viewpoint]
+            if self._ui.novel.scenes[self._scId].characters:
+                viewpoint = self._ui.novel.scenes[self._scId].characters[0]
+                self._ui.novel.scenes[newId].characters = [viewpoint]
 
