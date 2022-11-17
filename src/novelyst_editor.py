@@ -1,6 +1,5 @@
 """A multi-scene editor plugin for novelyst.
 
-Compatibility: novelyst v2.0 API 
 Requires Python 3.6+
 Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/novelyst_editor
