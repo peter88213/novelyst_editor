@@ -4,26 +4,32 @@
 
 ## Changelog
 
+v3.0.0
+
+- Code optimization and library update. 
+
+Compatibility: novelyst v3.0 API
+
 ### v2.0.2
 
 - Widen text box margins.
 - When opening a SceneEditor, set the focus to its text box.
 - API upgrade.
 
-Compatibility: novelyst v2.0.0 API
+Compatibility: novelyst v2.0 API
 
 ### v0.21.1
 
 - Apply the live word count status to all new editor instances.
 - Count words like in LibreOffice. See: https://help.libreoffice.org/latest/en-GB/text/swriter/guide/words_count.html
 
-Compatibility: novelyst v1.0.0 API
+Compatibility: novelyst v1.0 API
 
 ### v0.20.0
 
 - Release under the GPLv3 license.
 
-Compatibility: novelyst v1.0.0 API
+Compatibility: novelyst v1.0 API
 
 ### v0.18.0
 
