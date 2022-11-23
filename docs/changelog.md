@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v3.0.2
+
+- Adjust the cursor color.
+
+Compatibility: novelyst v3.0 API
+
 ### v3.0.1
 
 - Change colors.

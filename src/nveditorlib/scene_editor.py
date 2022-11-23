@@ -61,6 +61,7 @@ class SceneEditor(tk.Toplevel):
                                     font=('Courier', 12),
                                     fg='light grey',
                                     bg='gray20',
+                                    insertbackground='light grey',
                                     )
         self._sceneEditor.pack(expand=True, fill=tk.BOTH)
         self._sceneEditor.pack_propagate(0)
