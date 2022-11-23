@@ -4,7 +4,14 @@
 
 ## Changelog
 
-v3.0.0
+### v3.0.1
+
+- Change colors.
+- Increase line spacing and font size.
+
+Compatibility: novelyst v3.0 API
+
+### v3.0.0
 
 - Code optimization and library update. 
 
