@@ -48,14 +48,14 @@ class Plugin:
 
     def _edit_scene(self, event=None):
         """Create a scene editor window with a menu bar, a text box, and a status bar."""
-        if self._ui.isLocked:
-            messagebox.showinfo(PLUGIN, _('Cannot edit scenes, because the project is locked.'))
-            return
-
         try:
             nodeId = self._ui.tv.tree.selection()[0]
             if nodeId.startswith(self._ui.tv.SCENE_PREFIX):
                 # A scene is selected
+                if self._ui.isLocked:
+                    messagebox.showinfo(PLUGIN, _('Cannot edit scenes, because the project is locked.'))
+                    return
+
                 scId = nodeId[2:]
                 if scId in self.sceneEditors and self.sceneEditors[scId].isOpen:
                     self.sceneEditors[scId].lift()

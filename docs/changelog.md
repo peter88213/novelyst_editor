@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v3.0.3
+
+- Do not respond on double-clicking non-scene nodes.
+
+Compatibility: novelyst v3.0 API
+
 ### v3.0.2
 
 - Adjust the cursor color.
