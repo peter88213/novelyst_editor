@@ -1,4 +1,4 @@
-"""A multi-scene editor plugin for novelyst.
+"""A multi-scene "plain text" editor plugin for novelyst.
 
 Requires Python 3.6+
 Copyright (c) 2022 Peter Triesberger
@@ -14,13 +14,14 @@ from nveditorlib.scene_editor import SceneEditor
 
 
 class Plugin:
-    """novelyst multi-scene editor plugin class.
+    """novelyst multi-scene "plain text" editor plugin class.
     
     Public methods:
-        on_quit() -- apply changes before closing the editor windows.       
+        on_close() -- Actions to be performed when a project is closed.       
+        on_quit() -- Actions to be performed when novelyst is closed.       
     """
     VERSION = '@release'
-    NOVELYST_API = '3.0'
+    NOVELYST_API = '4.0'
     DESCRIPTION = 'A multi-scene "plain text" editor'
     URL = 'https://peter88213.github.io/novelyst_editor'
 
@@ -66,9 +67,16 @@ class Plugin:
             # Nothing selected
             pass
 
-    def on_quit(self, event=None):
-        """Close all open scene editor windows."""
+    def on_close(self, event=None):
+        """Actions to be performed when a project is closed.
+        
+        Close all open scene editor windows. 
+        """
         for scId in self.sceneEditors:
             if self.sceneEditors[scId].isOpen:
                 self.sceneEditors[scId].on_quit()
+
+    def on_quit(self, event=None):
+        """Actions to be performed when novelyst is closed."""
+        self.on_close()
 
