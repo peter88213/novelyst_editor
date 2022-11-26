@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.3.2
+
+- Fix a regression from v4.3.0 where the scene content might be deleted on loading into the editor.
+
+Compatibility: novelyst v4.0 API
+
 ### v4.3.1
 
 - Enable scene navigation beyond chapter borders.

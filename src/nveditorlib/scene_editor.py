@@ -79,6 +79,9 @@ class SceneEditor(tk.Toplevel):
         ttk.Button(self, text=_('Next'), command=self._load_next).pack(side=tk.RIGHT)
         ttk.Button(self, text=_('Previous'), command=self._load_prev).pack(side=tk.RIGHT)
 
+        # Load the scene content into the text editor.
+        self._load_scene()
+
         #--- Configure the user interface.
         '''
         # Add buttons to the button bar.
@@ -148,8 +151,6 @@ class SceneEditor(tk.Toplevel):
         else:
             self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
 
-        # Load the scene content into the text editor.
-        self._load_scene()
         self.lift()
         self.isOpen = True
 
