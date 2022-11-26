@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.3.1
+
+- Enable scene navigation beyond chapter borders.
+
+Compatibility: novelyst v4.0 API
+
 ### v4.3.0
 
 - Add scene navigation to the editor window.
