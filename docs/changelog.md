@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.3.0
+
+- Add scene navigation to the editor window.
+
+Compatibility: novelyst v4.0 API
+
 ### v4.2.0
 
 - Extend the configuration and make it persistent.

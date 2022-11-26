@@ -6,6 +6,7 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import webbrowser
 import tkinter as tk
+from tkinter import ttk
 from tkinter import messagebox
 from nveditorlib.nv_editor_globals import *
 from nveditorlib.text_box import TextBox
@@ -40,7 +41,6 @@ class SceneEditor(tk.Toplevel):
 
         # Create an independent editor window.
         super().__init__()
-        self.title(f'{self._scene.title} - {self._ui.novel.title}, {_("Scene")} ID {scId}')
         self.geometry(size)
         if icon:
             self.iconphoto(False, icon)
@@ -73,16 +73,13 @@ class SceneEditor(tk.Toplevel):
 
         # Add a status bar to the editor window.
         self._statusBar = tk.Label(self, text='', anchor='w', padx=5, pady=2)
-        self._statusBar.pack(expand=False, fill=tk.BOTH)
+        self._statusBar.pack(expand=False, side=tk.LEFT)
 
-        # Load the scene content into the text editor.
-        if self._ui.novel.scenes[scId].sceneContent:
-            self._sceneEditor.set_text(self._scene.sceneContent)
-        self._initialWc = self._sceneEditor.count_words()
-        self.show_wordcount()
+        # Add navigation buttons to the bottom line.
+        ttk.Button(self, text=_('Next'), command=self._load_next).pack(side=tk.RIGHT)
+        ttk.Button(self, text=_('Previous'), command=self._load_prev).pack(side=tk.RIGHT)
 
         #--- Configure the user interface.
-
         '''
         # Add buttons to the button bar.
         tk.Button(self._buttonBar, text=_('Copy'), command=lambda: self._sceneEditor.event_generate("<<Copy>>")).pack(side=tk.LEFT)
@@ -95,6 +92,8 @@ class SceneEditor(tk.Toplevel):
         # Add a "File" Submenu to the editor window.
         self._fileMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('File'), menu=self._fileMenu)
+        self._fileMenu.add_command(label=_('Next'), command=self._load_next)
+        self._fileMenu.add_command(label=_('Previous'), command=self._load_prev)
         self._fileMenu.add_command(label=_('Apply changes'), accelerator=KEY_APPLY_CHANGES[1], command=self._apply_changes)
         self._fileMenu.add_command(label=_('Exit'), accelerator=KEY_QUIT_PROGRAM[1], command=self.on_quit)
 
@@ -144,13 +143,51 @@ class SceneEditor(tk.Toplevel):
         self.bind_class('Text', KEY_PLAIN[0], self._sceneEditor.plain)
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
 
-        self.lift()
-        self.isOpen = True
-
         if SceneEditor.liveWordCount:
             self._live_wc_on()
         else:
             self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
+
+        # Load the scene content into the text editor.
+        self._load_scene()
+        self.lift()
+        self.isOpen = True
+
+    def _load_scene(self):
+        """Load the scene content into the text editor."""
+        self.title(f'{self._scene.title} - {self._ui.novel.title}, {_("Scene")} ID {self._scId}')
+        if self._scene.sceneContent:
+            self._sceneEditor.set_text(self._scene.sceneContent)
+        self._initialWc = self._sceneEditor.count_words()
+        self.show_wordcount()
+
+    def _load_next(self, event=None):
+        if not self._apply_changes():
+            return
+
+        thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
+        nextNode = self._ui.tv.tree.next(thisNode)
+        if nextNode.startswith(self._ui.tv.SCENE_PREFIX):
+            self._ui.tv.tree.selection_set(nextNode)
+            scId = nextNode[2:]
+            self._scId = scId
+            self._scene = self._ui.novel.scenes[scId]
+            self._sceneEditor.clear()
+            self._load_scene()
+
+    def _load_prev(self, event=None):
+        if not self._apply_changes():
+            return
+
+        thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
+        prevNode = self._ui.tv.tree.prev(thisNode)
+        if prevNode.startswith(self._ui.tv.SCENE_PREFIX):
+            self._ui.tv.tree.selection_set(prevNode)
+            scId = prevNode[2:]
+            self._scId = scId
+            self._scene = self._ui.novel.scenes[scId]
+            self._sceneEditor.clear()
+            self._load_scene()
 
     def _live_wc_on(self, event=None):
         self.bind('<KeyRelease>', self.show_wordcount)
@@ -185,16 +222,20 @@ class SceneEditor(tk.Toplevel):
         self._statusBar.config(text=f'{wc} {_("words")} ({diff} {_("new")})')
 
     def _apply_changes(self, event=None):
-        """Write the editor content to the project, if possible."""
+        """Write the editor content to the project, if possible.
+        
+        On error, return False, otherwise return True. 
+        """
         sceneText = self._sceneEditor.get_text()
         if sceneText or self._scene.sceneContent:
             if self._scene.sceneContent != sceneText:
                 if self._ui.isLocked:
                     messagebox.showinfo(PLUGIN, _('Cannot apply scene changes, because the project is locked.'))
-                    return
+                    return False
 
                 self._scene.sceneContent = sceneText
                 self._ui.isModified = True
+        return True
 
     def on_quit(self, event=None):
         """Exit the editor. Apply changes, if possible."""
@@ -224,6 +265,10 @@ class SceneEditor(tk.Toplevel):
 
     def _split_scene(self, event=None):
         """Split a scene at the cursor position."""
+        if self._ui.isLocked:
+            messagebox.showinfo(PLUGIN, _('Cannot split the scene, because the project is locked.'))
+            return
+
         if not self._ui.ask_yes_no(f'{_("Move the text from the cursor position to the end into a new scene")}?'):
             return
 

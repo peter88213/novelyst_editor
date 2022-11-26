@@ -140,3 +140,6 @@ class TextBox(tk.Text):
                 else:
                     finished = True
             return text
+
+    def clear(self):
+        self.delete('1.0', tk.END)

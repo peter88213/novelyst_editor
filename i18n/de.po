@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.2.0\n"
-"POT-Creation-Date: 2022-11-26 16:20:14\n"
-"PO-Revision-Date: 2022-11-26 16:20:14\n"
+"Project-Id-Version: 4.3.0\n"
+"POT-Creation-Date: 2022-11-26 19:52:25\n"
+"PO-Revision-Date: 2022-11-26 19:52:25\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -33,6 +33,9 @@ msgstr "Das Projekt ist gesperrt.\nEntsperren und Änderungen übernehmen.?"
 
 msgid "Cannot edit scenes, because the project is locked."
 msgstr "Abschnitte können nicht bearbeitet werden werden, weil das Projekt gesperrt ist."
+
+msgid "Cannot split the scene, because the project is locked."
+msgstr "Abschnitte können nicht geteilt werden, weil das Projekt gesperrt ist."
 
 msgid "Copy"
 msgstr "Kopieren"
@@ -73,6 +76,9 @@ msgstr "Lichter Modus"
 msgid "Move the text from the cursor position to the end into a new scene"
 msgstr "Den Text von der Cursorposition bis zum Ende in einen neuen Abschnitt verschieben"
 
+msgid "Next"
+msgstr "Vor"
+
 msgid "Online help"
 msgstr "Online-Hilfe"
 
@@ -81,6 +87,9 @@ msgstr "Einfügen"
 
 msgid "Plain"
 msgstr "Unformatiert"
+
+msgid "Previous"
+msgstr "Zurück"
 
 msgid "Scene"
 msgstr "Abschnitt"
