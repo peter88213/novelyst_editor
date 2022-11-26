@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.2.0
+
+- Extend the configuration and make it persistent.
+
+Compatibility: novelyst v4.0 API
+
 ### v4.1.0
 
 - Add color modes. 

@@ -19,7 +19,6 @@ KEY_ITALIC = ('<Control-i>', 'Ctrl-I')
 KEY_BOLD = ('<Control-b>', 'Ctrl-B')
 KEY_PLAIN = ('<Control-m>', 'Ctrl-M')
 
-EDITOR_FONT = ('Courier', 12)
 COLOR_MODES = [
         (_('Bright mode'), 'black', 'white'),
         (_('Light mode'), 'black', 'antique white'),
@@ -33,8 +32,9 @@ class SceneEditor(tk.Toplevel):
     liveWordCount = False
     colorMode = 0
 
-    def __init__(self, ui, scId, size, icon=None):
+    def __init__(self, plugin, ui, scId, size, icon=None):
         self._ui = ui
+        self._plugin = plugin
         self._scene = self._ui.novel.scenes[scId]
         self._scId = scId
 
@@ -60,14 +60,12 @@ class SceneEditor(tk.Toplevel):
                                     wrap='word',
                                     undo=True,
                                     autoseparators=True,
-                                    spacing1=18,
-                                    spacing2=6,
+                                    spacing1=self._plugin.kwargs['paragraph_spacing'],
+                                    spacing2=self._plugin.kwargs['line_spacing'],
                                     maxundo=-1,
-                                    height=25,
-                                    width=60,
-                                    padx=40,
-                                    pady=20,
-                                    font=EDITOR_FONT,
+                                    padx=self._plugin.kwargs['margin_x'],
+                                    pady=self._plugin.kwargs['margin_y'],
+                                    font=(self._plugin.kwargs['font_family'], self._plugin.kwargs['font_size']),
                                     )
         self._sceneEditor.pack(expand=True, fill=tk.BOTH)
         self._sceneEditor.pack_propagate(0)
@@ -212,6 +210,7 @@ class SceneEditor(tk.Toplevel):
                     else:
                         self._scene.sceneContent = sceneText
                         self._ui.isModified = True
+        self._plugin.kwargs['window_geometry'] = self.winfo_geometry()
         self.destroy()
         self.isOpen = False
 

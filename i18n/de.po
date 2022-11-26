@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.1.0\n"
-"POT-Creation-Date: 2022-11-26 14:22:10\n"
-"PO-Revision-Date: 2022-11-26 14:22:11\n"
+"Project-Id-Version: 4.2.0\n"
+"POT-Creation-Date: 2022-11-26 16:20:14\n"
+"PO-Revision-Date: 2022-11-26 16:20:14\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgid "Bold"
 msgstr "Fett"
 
 msgid "Bright mode"
-msgstr "Hell"
+msgstr "Heller Modus"
 
 msgid "Cannot apply scene changes, because the project is locked."
 msgstr "Änderungen können nicht übernommen werden, weil das Projekt gesperrt ist."
@@ -41,7 +41,7 @@ msgid "Cut"
 msgstr "Ausschneiden"
 
 msgid "Dark mode"
-msgstr "Dunkel"
+msgstr "Dunkler Modus"
 
 msgid "Disable live update"
 msgstr "Laufende Aktualisierung ausschalten"
@@ -68,7 +68,7 @@ msgid "Italic"
 msgstr "Kursiv"
 
 msgid "Light mode"
-msgstr "Licht"
+msgstr "Lichter Modus"
 
 msgid "Move the text from the cursor position to the end into a new scene"
 msgstr "Den Text von der Cursorposition bis zum Ende in einen neuen Abschnitt verschieben"

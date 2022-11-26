@@ -23,6 +23,5 @@ except:
 APPLICATION = _('Scene Editor')
 PLUGIN = f'{APPLICATION} plugin v@release'
 ICON = 'eLogo32'
-WINDOW_SIZE = '600x800'
 
-__all__ = ['APPLICATION', 'PLUGIN', 'ICON', 'WINDOW_SIZE', '_']
+__all__ = ['APPLICATION', 'PLUGIN', 'ICON', '_']
