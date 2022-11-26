@@ -19,10 +19,19 @@ KEY_ITALIC = ('<Control-i>', 'Ctrl-I')
 KEY_BOLD = ('<Control-b>', 'Ctrl-B')
 KEY_PLAIN = ('<Control-m>', 'Ctrl-M')
 
+EDITOR_FONT = ('Courier', 12)
+COLOR_MODES = [
+        (_('Bright mode'), 'black', 'white'),
+        (_('Light mode'), 'black', 'antique white'),
+        (_('Dark mode'), 'light grey', 'gray20'),
+        ]
+# (name, foreground, background) tuples for color modes.
+
 
 class SceneEditor(tk.Toplevel):
     """A separate scene editor window with a menu bar, a text box, and a status bar."""
     liveWordCount = False
+    colorMode = 0
 
     def __init__(self, ui, scId, size, icon=None):
         self._ui = ui
@@ -58,13 +67,11 @@ class SceneEditor(tk.Toplevel):
                                     width=60,
                                     padx=40,
                                     pady=20,
-                                    font=('Courier', 12),
-                                    fg='light grey',
-                                    bg='gray20',
-                                    insertbackground='light grey',
+                                    font=EDITOR_FONT,
                                     )
         self._sceneEditor.pack(expand=True, fill=tk.BOTH)
         self._sceneEditor.pack_propagate(0)
+        self._set_editor_colors()
 
         # Add a status bar to the editor window.
         self._statusBar = tk.Label(self, text='', anchor='w', padx=5, pady=2)
@@ -92,6 +99,14 @@ class SceneEditor(tk.Toplevel):
         self._mainMenu.add_cascade(label=_('File'), menu=self._fileMenu)
         self._fileMenu.add_command(label=_('Apply changes'), accelerator=KEY_APPLY_CHANGES[1], command=self._apply_changes)
         self._fileMenu.add_command(label=_('Exit'), accelerator=KEY_QUIT_PROGRAM[1], command=self.on_quit)
+
+        # Add a "View" Submenu to the editor window.
+        self._viewMenu = tk.Menu(self._mainMenu, tearoff=0)
+        self._mainMenu.add_cascade(label=_('View'), menu=self._viewMenu)
+        self._viewMenu.add_command(label=COLOR_MODES[0][0], command=lambda: self._set_view_mode(mode=0))
+        self._viewMenu.add_command(label=COLOR_MODES[1][0], command=lambda: self._set_view_mode(mode=1))
+        self._viewMenu.add_command(label=COLOR_MODES[2][0], command=lambda: self._set_view_mode(mode=2))
+        # note: this can't be done with a loop because of the "lambda" evaluation at runtime
 
         # Add an "Edit" Submenu to the editor window.
         self._editMenu = tk.Menu(self._mainMenu, tearoff=0)
@@ -151,6 +166,15 @@ class SceneEditor(tk.Toplevel):
         self._wcMenu.entryconfig(_('Enable live update'), state='normal')
         self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
         SceneEditor.liveWordCount = False
+
+    def _set_view_mode(self, event=None, mode=0):
+        SceneEditor.colorMode = mode
+        self._set_editor_colors()
+
+    def _set_editor_colors(self):
+        self._sceneEditor['fg'] = COLOR_MODES[SceneEditor.colorMode][1]
+        self._sceneEditor['bg'] = COLOR_MODES[SceneEditor.colorMode][2]
+        self._sceneEditor['insertbackground'] = COLOR_MODES[SceneEditor.colorMode][1]
 
     def show_status(self, message=None):
         """Display a message on the status bar."""

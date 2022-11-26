@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.0.0\n"
-"POT-Creation-Date: 2022-11-25 15:00:46\n"
+"Project-Id-Version: 4.1.0\n"
+"POT-Creation-Date: 2022-11-26 14:22:10\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -23,6 +23,9 @@ msgstr ""
 msgid "Bold"
 msgstr ""
 
+msgid "Bright mode"
+msgstr ""
+
 msgid "Cannot apply scene changes, because the project is locked."
 msgstr ""
 
@@ -36,6 +39,9 @@ msgid "Copy"
 msgstr ""
 
 msgid "Cut"
+msgstr ""
+
+msgid "Dark mode"
 msgstr ""
 
 msgid "Disable live update"
@@ -62,6 +68,9 @@ msgstr ""
 msgid "Italic"
 msgstr ""
 
+msgid "Light mode"
+msgstr ""
+
 msgid "Move the text from the cursor position to the end into a new scene"
 msgstr ""
 
@@ -84,6 +93,9 @@ msgid "Split at cursor position"
 msgstr ""
 
 msgid "Update"
+msgstr ""
+
+msgid "View"
 msgstr ""
 
 msgid "Word count"

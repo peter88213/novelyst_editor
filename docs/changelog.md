@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.1.0
+
+- Add color modes. 
+
+Compatibility: novelyst v4.0 API
+
 ### v4.0.0
 
 - API update. 
