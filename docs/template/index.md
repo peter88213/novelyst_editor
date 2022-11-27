@@ -19,9 +19,8 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program helps auth
     - Undo/Redo.
     - Key shortcuts for bold and italic formatting.
     - Split the scene at the cursor position.
+    - Navigation to the next or previous scene.
     
-*Note:* If you rather have a "rich text" scene editor, you might wish to try the [novelyst_rich_editor](https://peter88213.github.io/novelyst_rich_editor) plugin.
-
 ## Requirements
 
 - [novelyst](https://peter88213.github.io/novelyst/) version 4.0+
