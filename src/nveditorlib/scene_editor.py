@@ -179,6 +179,9 @@ class SceneEditor(tk.Toplevel):
                     result, flag = search_tree(child, result, flag)
             return result, flag
 
+        if not self._apply_changes():
+            return
+
         thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
         nextNode, __ = search_tree(self._ui.tv.NV_ROOT, None, False)
         if nextNode:
@@ -207,6 +210,9 @@ class SceneEditor(tk.Toplevel):
                 else:
                     result, prevNode = search_tree(child, result, prevNode)
             return result, prevNode
+
+        if not self._apply_changes():
+            return
 
         thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
         prevNode, __ = search_tree(self._ui.tv.NV_ROOT, None, None)

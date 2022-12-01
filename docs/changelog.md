@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.3.3
+
+- Fix a critical bug where text is lost when changing scenes without saving.
+
+Compatibility: novelyst v4.0 API
+
 ### v4.3.2
 
 - Fix a regression from v4.3.0 where the scene content might be deleted on loading into the editor.
