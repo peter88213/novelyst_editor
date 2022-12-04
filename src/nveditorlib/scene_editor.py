@@ -190,6 +190,7 @@ class SceneEditor(tk.Toplevel):
             self._scene = self._ui.novel.scenes[scId]
             self._sceneEditor.clear()
             self._load_scene()
+        self.lift()
 
     def _load_prev(self, event=None):
 
@@ -218,6 +219,7 @@ class SceneEditor(tk.Toplevel):
             self._scene = self._ui.novel.scenes[scId]
             self._sceneEditor.clear()
             self._load_scene()
+        self.lift()
 
     def _live_wc_on(self, event=None):
         self.bind('<KeyRelease>', self.show_wordcount)
@@ -261,6 +263,7 @@ class SceneEditor(tk.Toplevel):
                 self._ui.unlock()
                 self._scene.sceneContent = sceneText
                 self._ui.isModified = True
+            self.lift()
         else:
             self._scene.sceneContent = sceneText
             self._ui.isModified = True
@@ -298,12 +301,15 @@ class SceneEditor(tk.Toplevel):
     def _split_scene(self, event=None):
         """Split a scene at the cursor position."""
         if self._ui.isLocked:
-            messagebox.showinfo(APPLICATION, _('Cannot split the scene, because the project is locked.'))
+            messagebox.showinfo(APPLICATION, _('Cannot split the scene, because the project is locked.'), parent=self)
+            self.lift()
             return
 
         if not messagebox.askyesno(APPLICATION, f'{_("Move the text from the cursor position to the end into a new scene")}?', parent=self):
+            self.lift()
             return
 
+        self.lift()
         # Add a new scene.
         thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
         newId = self._ui.tv.add_scene(selection=thisNode)

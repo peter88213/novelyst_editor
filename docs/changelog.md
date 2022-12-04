@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.4.2
+
+- Give the focus to the editor after changing scenes or closing popups.
+
+Compatibility: novelyst v4.0 API
+
 ### v4.4.1
 
 - Modify popup window titles.
