@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.4.1
+
+- Modify popup window titles.
+
+Compatibility: novelyst v4.0 API
+
 ### v4.4.0
 
 - Ask before applying modifications when changing the scene.

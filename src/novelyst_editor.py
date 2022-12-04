@@ -94,7 +94,7 @@ class Plugin:
             if nodeId.startswith(self._ui.tv.SCENE_PREFIX):
                 # A scene is selected
                 if self._ui.isLocked:
-                    messagebox.showinfo(PLUGIN, _('Cannot edit scenes, because the project is locked.'))
+                    messagebox.showinfo(APPLICATION, _('Cannot edit scenes, because the project is locked.'))
                     return
 
                 scId = nodeId[2:]

@@ -257,7 +257,7 @@ class SceneEditor(tk.Toplevel):
         On success, set the user interface's change flag. 
         """
         if self._ui.isLocked:
-            if messagebox.askyesno(PLUGIN, _('Cannot apply scene changes, because the project is locked.\nUnlock and apply changes?'), parent=self):
+            if messagebox.askyesno(APPLICATION, _('Cannot apply scene changes, because the project is locked.\nUnlock and apply changes?'), parent=self):
                 self._ui.unlock()
                 self._scene.sceneContent = sceneText
                 self._ui.isModified = True
@@ -277,7 +277,7 @@ class SceneEditor(tk.Toplevel):
         sceneText = self._sceneEditor.get_text()
         if sceneText or self._scene.sceneContent:
             if self._scene.sceneContent != sceneText:
-                if messagebox.askyesno(PLUGIN, _('Apply scene changes?'), parent=self):
+                if messagebox.askyesno(APPLICATION, _('Apply scene changes?'), parent=self):
                     self._transfer_text(sceneText)
 
     def on_quit(self, event=None):
@@ -298,10 +298,10 @@ class SceneEditor(tk.Toplevel):
     def _split_scene(self, event=None):
         """Split a scene at the cursor position."""
         if self._ui.isLocked:
-            messagebox.showinfo(PLUGIN, _('Cannot split the scene, because the project is locked.'))
+            messagebox.showinfo(APPLICATION, _('Cannot split the scene, because the project is locked.'))
             return
 
-        if not messagebox.askyesno(PLUGIN, f'{_("Move the text from the cursor position to the end into a new scene")}?', parent=self):
+        if not messagebox.askyesno(APPLICATION, f'{_("Move the text from the cursor position to the end into a new scene")}?', parent=self):
             return
 
         # Add a new scene.
