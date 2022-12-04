@@ -75,7 +75,8 @@ class SceneEditor(tk.Toplevel):
         self._statusBar = tk.Label(self, text='', anchor='w', padx=5, pady=2)
         self._statusBar.pack(expand=False, side=tk.LEFT)
 
-        # Add navigation buttons to the bottom line.
+        # Add buttons to the bottom line.
+        ttk.Button(self, text=_('Exit'), command=self.on_quit).pack(side=tk.RIGHT)
         ttk.Button(self, text=_('Next'), command=self._load_next).pack(side=tk.RIGHT)
         ttk.Button(self, text=_('Previous'), command=self._load_prev).pack(side=tk.RIGHT)
 
@@ -179,9 +180,7 @@ class SceneEditor(tk.Toplevel):
                     result, flag = search_tree(child, result, flag)
             return result, flag
 
-        if not self._apply_changes():
-            return
-
+        self._apply_changes_after_asking()
         thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
         nextNode, __ = search_tree(self._ui.tv.NV_ROOT, None, False)
         if nextNode:
@@ -193,8 +192,6 @@ class SceneEditor(tk.Toplevel):
             self._load_scene()
 
     def _load_prev(self, event=None):
-        if not self._apply_changes():
-            return
 
         def search_tree(parent, result, prevNode):
             """Search the tree for the scene node ID before thisNode."""
@@ -211,9 +208,7 @@ class SceneEditor(tk.Toplevel):
                     result, prevNode = search_tree(child, result, prevNode)
             return result, prevNode
 
-        if not self._apply_changes():
-            return
-
+        self._apply_changes_after_asking()
         thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
         prevNode, __ = search_tree(self._ui.tv.NV_ROOT, None, None)
         if prevNode:
@@ -256,36 +251,38 @@ class SceneEditor(tk.Toplevel):
         diff = wc - self._initialWc
         self._statusBar.config(text=f'{wc} {_("words")} ({diff} {_("new")})')
 
-    def _apply_changes(self, event=None):
-        """Write the editor content to the project, if possible.
+    def _transfer_text(self, sceneText):
+        """Transfer the changed editor content to the scene, if possible.
         
-        On error, return False, otherwise return True. 
+        On success, set the user interface's change flag. 
         """
+        if self._ui.isLocked:
+            if messagebox.askyesno(PLUGIN, _('Cannot apply scene changes, because the project is locked.\nUnlock and apply changes?'), parent=self):
+                self._ui.unlock()
+                self._scene.sceneContent = sceneText
+                self._ui.isModified = True
+        else:
+            self._scene.sceneContent = sceneText
+            self._ui.isModified = True
+
+    def _apply_changes(self, event=None):
+        """Transfer the editor content to the project, if modified."""
         sceneText = self._sceneEditor.get_text()
         if sceneText or self._scene.sceneContent:
             if self._scene.sceneContent != sceneText:
-                if self._ui.isLocked:
-                    messagebox.showinfo(PLUGIN, _('Cannot apply scene changes, because the project is locked.'))
-                    return False
+                self._transfer_text(sceneText)
 
-                self._scene.sceneContent = sceneText
-                self._ui.isModified = True
-        return True
+    def _apply_changes_after_asking(self, event=None):
+        """Transfer the editor content to the project, if modified. Ask first."""
+        sceneText = self._sceneEditor.get_text()
+        if sceneText or self._scene.sceneContent:
+            if self._scene.sceneContent != sceneText:
+                if messagebox.askyesno(PLUGIN, _('Apply scene changes?'), parent=self):
+                    self._transfer_text(sceneText)
 
     def on_quit(self, event=None):
         """Exit the editor. Apply changes, if possible."""
-        sceneText = self._sceneEditor.get_text()
-        if sceneText or self._scene.sceneContent:
-            if self._scene.sceneContent != sceneText:
-                if self._ui.ask_yes_no(_('Apply scene changes?')):
-                    if self._ui.isLocked:
-                        if self._ui.ask_yes_no(_('Cannot apply scene changes, because the project is locked.\nUnlock and apply changes?')):
-                            self._ui.unlock()
-                            self._scene.sceneContent = sceneText
-                            self._ui.isModified = True
-                    else:
-                        self._scene.sceneContent = sceneText
-                        self._ui.isModified = True
+        self._apply_changes_after_asking()
         self._plugin.kwargs['window_geometry'] = self.winfo_geometry()
         self.destroy()
         self.isOpen = False
@@ -304,7 +301,7 @@ class SceneEditor(tk.Toplevel):
             messagebox.showinfo(PLUGIN, _('Cannot split the scene, because the project is locked.'))
             return
 
-        if not self._ui.ask_yes_no(f'{_("Move the text from the cursor position to the end into a new scene")}?'):
+        if not messagebox.askyesno(PLUGIN, f'{_("Move the text from the cursor position to the end into a new scene")}?', parent=self):
             return
 
         # Add a new scene.
