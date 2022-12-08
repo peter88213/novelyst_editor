@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.4.3
+
+- Make the setup script run with Python 3.11 under Windows.
+
+Compatibility: novelyst v4.0 API
+
 ### v4.4.2
 
 - Give the focus to the editor after changing scenes or closing popups.
