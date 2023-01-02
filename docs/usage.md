@@ -4,11 +4,13 @@
 
 A simple [novelyst](https://peter88213.github.io/novelyst/) multi-scene editor plugin based on the *tkinter.scrolledtext* widget.
 
+---
+
 # Installation
 
 If [novelyst](https://peter88213.github.io/novelyst/) is installed, the setup script auto-installs the *novelyst_editor* plugin in the *novelyst* plugin directory.
 
-The plugin adds an "Edit" entry to the *novelyst* "Scene" menu. 
+The plugin adds an **Edit** entry to the *novelyst* **Scene** menu, and an **Editor plugin Online Help** entry to the **Help** menu.  
 
 ---
 
