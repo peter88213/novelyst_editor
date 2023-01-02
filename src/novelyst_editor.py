@@ -10,6 +10,7 @@ import sys
 import tkinter as tk
 from tkinter import messagebox
 from pathlib import Path
+import webbrowser
 from nveditorlib.nv_editor_globals import *
 from nveditorlib.scene_editor import SceneEditor
 from nveditorlib.configuration import Configuration
@@ -46,6 +47,7 @@ class Plugin:
     NOVELYST_API = '4.0'
     DESCRIPTION = 'A multi-scene "plain text" editor'
     URL = 'https://peter88213.github.io/novelyst_editor'
+    _HELP_URL = 'https://peter88213.github.io/novelyst_editor/usage'
 
     def install(self, ui):
         """Add a submenu to the main menu.
@@ -74,6 +76,10 @@ class Plugin:
         self._ui.tv.tree.bind('<Double-1>', self._edit_scene)
         self._ui.tv.tree.bind('<Return>', self._edit_scene)
 
+        # Add an entry to the Help menu.
+        self._ui.helpMenu.add_command(label=_('Editor plugin Online help'), command=lambda: webbrowser.open(self._HELP_URL))
+
+        # Set window icon.
         self.sceneEditors = {}
         try:
             path = os.path.dirname(sys.argv[0])
