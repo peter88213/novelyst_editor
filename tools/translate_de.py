@@ -24,7 +24,7 @@ MO_COPY = '../../novelyst/src/locale/de/LC_MESSAGES/novelyst_editor.mo'
 
 
 def main(version='unknown'):
-    if translations.main('de', app=APP_NAME, appVersion=version, potFile='novelyst_editor.pot'):
+    if translations.main('de', app=APP_NAME, appVersion=version, potFile='messages.pot'):
         print(f'Writing "{MO_PATH}" ...')
         msgfmt.make(PO_PATH, MO_PATH)
         copyfile(MO_PATH, MO_COPY)
