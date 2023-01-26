@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v4.6.0
+
+- Browse the whole tree for scene navigation. 
+- When loading a scene in a collapsed subtree, expand the subtree.
+
+Compatibility: novelyst v4.7 API
+
 ### v4.5.0
 
 - Provide online help.

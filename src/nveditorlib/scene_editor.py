@@ -1,6 +1,6 @@
 """Provide a scene editor class for the novelyst plugin.
 
-Copyright (c) 2022 Peter Triesberger
+Copyright (c) 2023 Peter Triesberger
 For further information see https://github.com/peter88213/novelyst_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
@@ -163,58 +163,30 @@ class SceneEditor(tk.Toplevel):
         self._initialWc = self._sceneEditor.count_words()
         self.show_wordcount()
 
-    def _load_next(self, event=None):
-
-        def search_tree(parent, result, flag):
-            """Search the tree for the scene parent ID after thisNode."""
-            for child in self._ui.tv.tree.get_children(parent):
-                if result:
-                    break
-                if child.startswith(self._ui.tv.SCENE_PREFIX):
-                    if flag:
-                        result = child
-                        break
-                    elif child == thisNode:
-                        flag = True
-                else:
-                    result, flag = search_tree(child, result, flag)
-            return result, flag
-
+    def _load_prev(self, event=None):
+        """Load the previous scene in the tree."""
         self._apply_changes_after_asking()
         thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
-        nextNode, __ = search_tree(self._ui.tv.NV_ROOT, None, False)
-        if nextNode:
-            self._ui.tv.tree.selection_set(nextNode)
-            scId = nextNode[2:]
+        prevNode = self._ui.tv.prev_node(thisNode, '')
+        if prevNode:
+            self._ui.tv.tree.see(prevNode)
+            self._ui.tv.tree.selection_set(prevNode)
+            scId = prevNode[2:]
             self._scId = scId
             self._scene = self._ui.novel.scenes[scId]
             self._sceneEditor.clear()
             self._load_scene()
         self.lift()
 
-    def _load_prev(self, event=None):
-
-        def search_tree(parent, result, prevNode):
-            """Search the tree for the scene node ID before thisNode."""
-            for child in self._ui.tv.tree.get_children(parent):
-                if result:
-                    break
-                if child.startswith(self._ui.tv.SCENE_PREFIX):
-                    if child == thisNode:
-                        result = prevNode
-                        break
-                    else:
-                        prevNode = child
-                else:
-                    result, prevNode = search_tree(child, result, prevNode)
-            return result, prevNode
-
+    def _load_next(self, event=None):
+        """Load the next scene in the tree."""
         self._apply_changes_after_asking()
         thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
-        prevNode, __ = search_tree(self._ui.tv.NV_ROOT, None, None)
-        if prevNode:
-            self._ui.tv.tree.selection_set(prevNode)
-            scId = prevNode[2:]
+        nextNode = self._ui.tv.next_node(thisNode, '')
+        if nextNode:
+            self._ui.tv.tree.see(nextNode)
+            self._ui.tv.tree.selection_set(nextNode)
+            scId = nextNode[2:]
             self._scId = scId
             self._scene = self._ui.novel.scenes[scId]
             self._sceneEditor.clear()

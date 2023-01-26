@@ -1,7 +1,7 @@
 """A multi-scene "plain text" editor plugin for novelyst.
 
 Requires Python 3.6+
-Copyright (c) 2022 Peter Triesberger
+Copyright (c) 2023 Peter Triesberger
 For further information see https://github.com/peter88213/novelyst_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
@@ -44,7 +44,7 @@ class Plugin:
         on_quit() -- Actions to be performed when novelyst is closed.       
     """
     VERSION = '@release'
-    NOVELYST_API = '4.0'
+    NOVELYST_API = '4.7'
     DESCRIPTION = 'A multi-scene "plain text" editor'
     URL = 'https://peter88213.github.io/novelyst_editor'
     _HELP_URL = 'https://peter88213.github.io/novelyst_editor/usage'
