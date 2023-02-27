@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.6.1
+
+- Reduce the memory use by discarding the docstrings on building.
+
+Compatibility: novelyst v4.7 API
+
 ### v4.6.0
 
 - Browse the whole tree for scene navigation. 
