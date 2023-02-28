@@ -85,6 +85,17 @@ An easy way may be to put a posting in the [novelyst forum](https://github.com/p
 - To enhance the editor's capabilities, modify the **TextBox** class.
 - An example for an enhanced text box can be found in the [novelyst_rich_editor](https://github.com/peter88213/novelyst_rich_editor) plugin.
 
+
+### Conventions
+
+See https://github.com/peter88213/PyWriter/blob/main/docs/conventions.md
+
+## Development tools
+
+- [Python](https://python.org) version 3.9.
+- [Eclipse IDE](https://eclipse.org) with [PyDev](https://pydev.org) and *EGit*.
+- *Apache Ant* is used for building the application.
+
 ## License
 
 This is Open Source software, and the *novelyst_editor* plugin is licensed under GPLv3. See the
