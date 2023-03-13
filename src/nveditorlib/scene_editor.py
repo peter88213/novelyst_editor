@@ -284,7 +284,11 @@ class SceneEditor(tk.Toplevel):
         self.lift()
         # Add a new scene.
         thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
-        newId = self._ui.tv.add_scene(selection=thisNode)
+        newId = self._ui.tv.add_scene(selection=thisNode,
+                                      appendToPrev=True,
+                                      scType=self._ui.novel.scenes[self._scId].scType,
+                                      status=self._ui.novel.scenes[self._scId].status
+                                      )
         if newId:
             # Cut the actual scene's content from the cursor position to the end.
             newContent = self._sceneEditor.get_text(tk.INSERT, tk.END).strip(' \n')
@@ -293,17 +297,6 @@ class SceneEditor(tk.Toplevel):
 
             # Copy the scene content to the new scene.
             self._ui.novel.scenes[newId].sceneContent = newContent
-
-            # Append the new scene to the previous scene.
-            self._ui.novel.scenes[newId].appendToPrev = True
-
-            # Copy the scene status.
-            status = self._ui.novel.scenes[self._scId].status
-            self._ui.novel.scenes[newId].status = status
-
-            # Copy the scene type.
-            scType = self._ui.novel.scenes[self._scId].scType
-            self._ui.novel.scenes[newId].scType = scType
 
             # Copy the viewpoint character.
             if self._ui.novel.scenes[self._scId].characters:

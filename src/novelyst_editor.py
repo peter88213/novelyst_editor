@@ -44,7 +44,7 @@ class Plugin:
         on_quit() -- Actions to be performed when novelyst is closed.       
     """
     VERSION = '@release'
-    NOVELYST_API = '4.7'
+    NOVELYST_API = '4.13'
     DESCRIPTION = 'A multi-scene "plain text" editor'
     URL = 'https://peter88213.github.io/novelyst_editor'
     _HELP_URL = 'https://peter88213.github.io/novelyst_editor/usage'
