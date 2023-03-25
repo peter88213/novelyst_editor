@@ -98,7 +98,7 @@ See https://github.com/peter88213/PyWriter/blob/main/docs/conventions.md
 
 ## Credits
 
-The icons are made using the free *Pusab* font by Ryoichi Tsunekawa, [Flat-it](http://flat-it.com/).
+- The icons are made using the free *Pusab* font by Ryoichi Tsunekawa, [Flat-it](http://flat-it.com/).
 
 ## License
 
