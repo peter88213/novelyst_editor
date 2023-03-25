@@ -41,6 +41,10 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program helps auth
 
 See the [instructions for use](usage)
 
+## Credits
+
+The icons are made using the free *Pusab* font by Ryoichi Tsunekawa, [Flat-it](http://flat-it.com/).
+
 ## License
 
 This is Open Source software, and the *novelyst_editor* plugin is licensed under GPLv3. See the

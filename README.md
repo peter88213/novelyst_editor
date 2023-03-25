@@ -96,6 +96,10 @@ See https://github.com/peter88213/PyWriter/blob/main/docs/conventions.md
 - [Eclipse IDE](https://eclipse.org) with [PyDev](https://pydev.org) and *EGit*.
 - *Apache Ant* is used for building the application.
 
+## Credits
+
+The icons are made using the free *Pusab* font by Ryoichi Tsunekawa, [Flat-it](http://flat-it.com/).
+
 ## License
 
 This is Open Source software, and the *novelyst_editor* plugin is licensed under GPLv3. See the

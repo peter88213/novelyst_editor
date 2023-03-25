@@ -25,6 +25,10 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program helps auth
 
 - [novelyst](https://peter88213.github.io/novelyst/) version 4.7+
 
+## Credits
+
+The icons are made using the free *Pusab* font by Ryoichi Tsunekawa, [Flat-it](http://flat-it.com/).
+
 ## Download and install
 
 [Download the latest release (version 4.6.1)](https://github.com/peter88213/novelyst_editor/raw/main/dist/novelyst_editor_v4.6.1.zip)
