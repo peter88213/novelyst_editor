@@ -14,7 +14,7 @@ from build_novelyst_editor import TARGET_FILE
 import pgettext
 
 APP = 'novelyst_editor'
-POT_FILE = f'../i18n/{APP}.pot'
+POT_FILE = f'../i18n/messages.pot'
 
 
 def make_pot(version='unknown'):

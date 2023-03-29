@@ -4,6 +4,14 @@
 
 ## Changelog
 
+### v4.7.0
+
+- Go to the new scene after splitting.
+- New command: Create scene.
+- Reposition navigation buttons.
+
+Compatibility: novelyst v4.7 API
+
 ### v4.6.1
 
 - Reduce the memory use by discarding the docstrings on building.

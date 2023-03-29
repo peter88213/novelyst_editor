@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.5.0\n"
-"POT-Creation-Date: 2023-01-05 13:13:47\n"
+"Project-Id-Version: 4.7.0\n"
+"POT-Creation-Date: 2023-03-29 16:16:08\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -29,6 +29,9 @@ msgstr ""
 msgid "Cannot apply scene changes, because the project is locked.\nUnlock and apply changes?"
 msgstr ""
 
+msgid "Cannot create scenes, because the project is locked."
+msgstr ""
+
 msgid "Cannot edit scenes, because the project is locked."
 msgstr ""
 
@@ -36,6 +39,9 @@ msgid "Cannot split the scene, because the project is locked."
 msgstr ""
 
 msgid "Copy"
+msgstr ""
+
+msgid "Create scene"
 msgstr ""
 
 msgid "Cut"

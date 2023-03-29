@@ -86,7 +86,17 @@ Via **File > Split at cursor position** or **Ctrl-Alt-S** you can split the scen
 - The new scene has the same status as the currently edited scene.  
 - The new scene is of the same type as the currently edited scene.  
 - The new scene has the same viewpoint character as the currently edited scene.  
+- The editor loads the newly created scene.
 
+---
+
+## Create a scene
+
+Via **File > Create scene** or **Ctrl-Alt-N** you can create a scene. 
+
+- The new scene is placed after the currently edited scene.
+- The new scene is of the same type as the currently edited scene.  
+- The editor loads the newly created scene.
 
 ---
 

@@ -17,14 +17,14 @@ sys.path.insert(0, f'{os.getcwd()}/../../PyWriter/src')
 import translations
 import msgfmt
 
-APP_NAME = 'novelyst'
+APP_NAME = 'novelyst_editor'
 PO_PATH = '../i18n/de.po'
 MO_PATH = '../i18n/locale/de/LC_MESSAGES/novelyst_editor.mo'
 MO_COPY = '../../novelyst/src/locale/de/LC_MESSAGES/novelyst_editor.mo'
 
 
 def main(version='unknown'):
-    if translations.main('de', app=APP_NAME, appVersion=version, potFile='messages.pot'):
+    if translations.main('de', app=APP_NAME, appVersion=version):
         print(f'Writing "{MO_PATH}" ...')
         msgfmt.make(PO_PATH, MO_PATH)
         copyfile(MO_PATH, MO_COPY)
