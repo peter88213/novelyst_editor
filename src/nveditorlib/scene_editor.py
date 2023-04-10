@@ -331,4 +331,5 @@ class SceneEditor(tk.Toplevel):
         else:
             self._scene.sceneContent = sceneText
             self._ui.isModified = True
+        self._ui.show_status()
 

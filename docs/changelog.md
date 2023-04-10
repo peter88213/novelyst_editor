@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.7.1
+
+- Update the main status bar after transferring text.
+
+Compatibility: novelyst v4.7 API
+
 ### v4.7.0
 
 - Go to the new scene after splitting.
