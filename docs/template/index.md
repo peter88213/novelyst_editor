@@ -29,11 +29,10 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program helps auth
 
 [Download the latest release (version 0.99.0)](https://github.com/peter88213/novelyst_editor/raw/main/dist/novelyst_editor_v0.99.0.zip)
 
-- Unzip the downloaded zipfile "novelyst_editor_v0.99.0.zip" into a new folder.
-- Move into this new folder and launch **setup.pyw**. This installs the application for the local user.
-- Open "README.md" for usage instructions.
+- Extract the "novelyst_editor_v0.99.0" folder from the downloaded zipfile "novelyst_editor_v0.99.0.zip".
+- Move into this new folder and launch **setup.pyw**. This installs the plugin for the local user.
 
-------------------------------------------------------------------
+---
 
 [Changelog](changelog)
 
