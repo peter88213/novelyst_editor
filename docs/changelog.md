@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.8.0
+
+- API update.
+
+Compatibility: novelyst v4.20 API
+
 ### v4.7.1
 
 - Update the main status bar after transferring text.

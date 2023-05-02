@@ -51,10 +51,11 @@ class Plugin:
     
     Public methods:
         on_close() -- Actions to be performed when a project is closed.       
-        on_quit() -- Actions to be performed when novelyst is closed.       
+        on_quit() -- Actions to be performed when novelyst is closed.
+        open_node() -- Create a scene editor window with a menu bar, a text box, and a status bar.     
     """
     VERSION = '@release'
-    NOVELYST_API = '4.13'
+    NOVELYST_API = '4.20'
     DESCRIPTION = 'A multi-scene "plain text" editor'
     URL = 'https://peter88213.github.io/novelyst_editor'
     _HELP_URL = 'https://peter88213.github.io/novelyst_editor/usage'
@@ -82,9 +83,7 @@ class Plugin:
 
         # Add the "Edit" command to novelyst's "Scene" menu.
         self._ui.sceneMenu.add_separator()
-        self._ui.sceneMenu.add_command(label=_('Edit'), underline=0, command=self._edit_scene)
-        self._ui.tv.tree.bind('<Double-1>', self._edit_scene)
-        self._ui.tv.tree.bind('<Return>', self._edit_scene)
+        self._ui.sceneMenu.add_command(label=_('Edit'), underline=0, command=self.open_node)
 
         # Add an entry to the Help menu.
         self._ui.helpMenu.add_command(label=_('Editor plugin Online help'), command=lambda: webbrowser.open(self._HELP_URL))
@@ -103,7 +102,7 @@ class Plugin:
         SceneEditor.colorMode = int(self.kwargs['color_mode'])
         SceneEditor.liveWordCount = self.kwargs['live_wordcount']
 
-    def _edit_scene(self, event=None):
+    def open_node(self, event=None):
         """Create a scene editor window with a menu bar, a text box, and a status bar."""
         try:
             nodeId = self._ui.tv.tree.selection()[0]
