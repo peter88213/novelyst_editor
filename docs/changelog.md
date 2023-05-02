@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.8.1
+
+- Do not open "not exported" scenes on double clicking or pressing Return.
+
+Compatibility: novelyst v4.20 API
+
 ### v4.8.0
 
 - API update.

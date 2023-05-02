@@ -113,6 +113,9 @@ class Plugin:
                     return
 
                 scId = nodeId[2:]
+                if self._ui.novel.scenes[scId].doNotExport:
+                    return
+
                 if scId in self.sceneEditors and self.sceneEditors[scId].isOpen:
                     self.sceneEditors[scId].lift()
                     return
