@@ -20,7 +20,7 @@ Compatibility: novelyst v4.20 API
 
 - Update the main status bar after transferring text.
 
-Compatibility: novelyst v4.7 API
+Compatibility: novelyst v4.13 API
 
 ### v4.7.0
 
@@ -28,7 +28,7 @@ Compatibility: novelyst v4.7 API
 - New command: Create scene.
 - Reposition navigation buttons.
 
-Compatibility: novelyst v4.7 API
+Compatibility: novelyst v4.13 API
 
 ### v4.6.1
 
