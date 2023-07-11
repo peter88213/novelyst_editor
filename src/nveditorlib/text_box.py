@@ -40,11 +40,11 @@ class TextBox(tk.Text):
         """
         self.frame = ttk.Frame(master)
         self.vbar = ttk.Scrollbar(self.frame)
-        self.vbar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.vbar.pack(side='right', fill='y')
 
         kw.update({'yscrollcommand': self.vbar.set})
         tk.Text.__init__(self, self.frame, **kw)
-        self.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.pack(side='left', fill='both', expand=True)
         self.vbar['command'] = self.yview
 
         # Copy geometry methods of self.frame without overriding Text
@@ -57,20 +57,20 @@ class TextBox(tk.Text):
             if m[0] != '_' and m != 'config' and m != 'configure':
                 setattr(self, m, getattr(self.frame, m))
 
-    def get_text(self, start='1.0', end=tk.END):
+    def get_text(self, start='1.0', end='end'):
         """Return the whole text from the editor box."""
         text = self.get(start, end).strip(' \n')
         return text
 
     def set_text(self, text):
         """Put text into the editor box and clear the undo/redo stack."""
-        self.insert(tk.END, text)
+        self.insert('end', text)
         self.edit_reset()
         # this is to prevent the user from clearing the box with Ctrl-Z
 
     def count_words(self):
         """Return the word count."""
-        text = ADDITIONAL_WORD_LIMITS.sub(' ', self.get('1.0', tk.END))
+        text = ADDITIONAL_WORD_LIMITS.sub(' ', self.get('1.0', 'end'))
         text = NO_WORD_LIMITS.sub('', text)
         return len(text.split())
 
@@ -90,7 +90,7 @@ class TextBox(tk.Text):
         """Insert an opening/closing pair of yWriter markup tags."""
         if tag:
             # Toggle format as specified by tag.
-            if self.tag_ranges(tk.SEL):
+            if self.tag_ranges('sel'):
                 text = self.get(tk.SEL_FIRST, tk.SEL_LAST)
                 if text.startswith(f'[{tag}]'):
                     if text.endswith(f'[/{tag}]'):
@@ -105,11 +105,11 @@ class TextBox(tk.Text):
                 self._replace_selected(f'[{tag}]{text}[/{tag}]')
             else:
                 # Add markup to the cursor position.
-                self.insert(tk.INSERT, f'[{tag}]')
+                self.insert('insert', f'[{tag}]')
                 endTag = f'[/{tag}]'
-                self.insert(tk.INSERT, endTag)
-                self.mark_set(tk.INSERT, f'{tk.INSERT}-{len(endTag)}c')
-        elif self.tag_ranges(tk.SEL):
+                self.insert('insert', endTag)
+                self.mark_set('insert', f'insert-{len(endTag)}c')
+        elif self.tag_ranges('sel'):
             # Remove all markup from the selection.
             text = self.get(tk.SEL_FIRST, tk.SEL_LAST)
             for tag in self._YW_TAGS:
@@ -118,12 +118,12 @@ class TextBox(tk.Text):
 
     def _replace_selected(self, text):
         """Replace the selected passage by text; keep the selection."""
-        self.mark_set(tk.INSERT, tk.SEL_FIRST)
+        self.mark_set('insert', tk.SEL_FIRST)
         self.delete(tk.SEL_FIRST, tk.SEL_LAST)
-        selFirst = self.index(tk.INSERT)
-        self.insert(tk.INSERT, text)
-        selLast = self.index(tk.INSERT)
-        self.tag_add(tk.SEL, selFirst, selLast)
+        selFirst = self.index('insert')
+        self.insert('insert', text)
+        selLast = self.index('insert')
+        self.tag_add('sel', selFirst, selLast)
 
     def _remove_format(self, text, tag):
         """Return text without opening/closing markup, if any."""
@@ -142,4 +142,4 @@ class TextBox(tk.Text):
             return text
 
     def clear(self):
-        self.delete('1.0', tk.END)
+        self.delete('1.0', 'end')
