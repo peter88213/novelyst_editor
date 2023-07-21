@@ -6,6 +6,12 @@ Edit multiple scenes, if the project is not locked.
 
 For more information, see the [project homepage](https://peter88213.github.io/novelyst_editor) with description and download instructions.
 
+## Feedback? Ideas? Feature requests?
+
+You can go to the [novelyst "discussions" forum](https://github.com/peter88213/novelyst/discussions) and start a thread.
+
+# Contributing
+
 ## How to provide translations
 
 First, you need to know your language code according to ISO 639-1.
