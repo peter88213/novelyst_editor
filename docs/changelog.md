@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.9.0
+
+- When opening a scene, place the cursor top left.
+
+Compatibility: novelyst v4.34 API
+
 ### v4.8.2
 
 - Refactor the code for performance improvement.

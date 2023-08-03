@@ -1,6 +1,6 @@
 """Provide a text editor widget for the novelyst editor plugin.
 
-Copyright (c) 2022 Peter Triesberger
+Copyright (c) 2023 Peter Triesberger
 For further information see https://github.com/peter88213/novelyst_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
@@ -67,6 +67,7 @@ class TextBox(tk.Text):
         self.insert('end', text)
         self.edit_reset()
         # this is to prevent the user from clearing the box with Ctrl-Z
+        self.mark_set('insert', '1.0')
 
     def count_words(self):
         """Return the word count."""

@@ -240,8 +240,7 @@ class SceneEditor(tk.Toplevel):
         thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
         nextNode = self._ui.tv.next_node(thisNode, '')
         if nextNode:
-            self._ui.tv.tree.see(nextNode)
-            self._ui.tv.tree.selection_set(nextNode)
+            self._ui.tv.go_to_node(nextNode)
             scId = nextNode[2:]
             self._scId = scId
             self._scene = self._ui.novel.scenes[scId]
@@ -255,8 +254,7 @@ class SceneEditor(tk.Toplevel):
         thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
         prevNode = self._ui.tv.prev_node(thisNode, '')
         if prevNode:
-            self._ui.tv.tree.see(prevNode)
-            self._ui.tv.tree.selection_set(prevNode)
+            self._ui.tv.go_to_node(prevNode)
             scId = prevNode[2:]
             self._scId = scId
             self._scene = self._ui.novel.scenes[scId]

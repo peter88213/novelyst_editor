@@ -55,7 +55,7 @@ class Plugin:
         open_node() -- Create a scene editor window with a menu bar, a text box, and a status bar.     
     """
     VERSION = '@release'
-    NOVELYST_API = '4.20'
+    NOVELYST_API = '4.34'
     DESCRIPTION = 'A multi-scene "plain text" editor'
     URL = 'https://peter88213.github.io/novelyst_editor'
     _HELP_URL = 'https://peter88213.github.io/novelyst_editor/usage'
