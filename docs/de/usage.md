@@ -78,9 +78,9 @@ When exporting to ODT format, *novelyst* replaces these formattings as follows:
 
 ## Split a scene
 
-Via **File > An der Cursorposition teilen** or **Ctrl-Alt-S** you can split the scene at the cursor position. 
+Via **Datei > An der Cursorposition teilen** or **Ctrl-Alt-S** you can split the scene at the cursor position. 
 
-- All the text from the cursor position is cut and pasted into a neuly created scene. 
+- Alle the text from the cursor position is cut and pasted into a neuly created scene. 
 - The neu scene is placed after the currently edited scene.
 - The neu scene is appended to the currently edited scene.
 - The neu scene has the same status as the currently edited scene.  
@@ -92,7 +92,7 @@ Via **File > An der Cursorposition teilen** or **Ctrl-Alt-S** you can split the 
 
 ## Create a scene
 
-Via **File > Abschnitt erzeugen** or **Ctrl-Alt-N** you can create a scene. 
+Via **Datei > Abschnitt erzeugen** or **Ctrl-Alt-N** you can create a scene. 
 
 - The neu scene is placed after the currently edited scene.
 - The neu scene is of the same type as the currently edited scene.  
@@ -122,7 +122,7 @@ Via **File > Abschnitt erzeugen** or **Ctrl-Alt-N** you can create a scene.
 
 ## Beenden 
 
-- You can exit via **File > Beenden**, or with **Ctrl-Q**.
+- You can exit via **Datei > Beenden**, or with **Ctrl-Q**.
 - When exiting the program, you will be asked for applying changes.
 
 ---
