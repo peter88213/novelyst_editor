@@ -1,4 +1,4 @@
-[Project homepage](https://peter88213.github.io/novelyst_editor)
+[Projekt-Homepage](https://peter88213.github.io/novelyst_editor) > Gebrauchsanleitung
 
 --- 
 
@@ -8,13 +8,13 @@ A simple [novelyst](https://peter88213.github.io/novelyst/) multi-scene editor p
 
 # Installation
 
-If [novelyst](https://peter88213.github.io/novelyst/) is installed, the setup script auto-installs the *novelyst_editor* plugin in the *novelyst* plugin directory.
+Wenn [novelyst](https://peter88213.github.io/novelyst/) installiert ist, installiert das Setup-Skript automatisch das*novelyst_editor*-Plugin im *novelyst* Plugin-Verzeichnis.
 
-The plugin adds an **Bearbeiten** entry to the *novelyst* **Abschnitt**-Menü, and an **Editor-Plugin Online-Hilfe** entry to the **Hilfe**-Menü.  
+Das Plugin hängt einen **Bearbeiten**-Eintrag an das *novelyst* **Abschnitt**-Menü, und einen **Editor-Plugin Online-Hilfe**-Eintrag an das **Hilfe**-Menü an.  
 
 ---
 
-# Operation
+# Benutzung
 
 ---
 
@@ -127,8 +127,6 @@ Via **Datei > Abschnitt erzeugen** or **Ctrl-Alt-N** you can create a scene.
 
 ---
 
-# License
+# Lizenz
 
-This is Open Source software, and the *novelyst_editor* plugin is licensed under GPLv3. See the
-[GNU General Public License website](https://www.gnu.org/licenses/gpl-3.0.en.html) for more
-details, or consult the [LICENSE](https://github.com/peter88213/novelyst_editor/blob/main/LICENSE) file.
+Dies ist quelloffene Software, und das *novelyst_editor*-Plugin steht unter der GPLv3-Lizenz. Für mehr Details besuchen Sie die[Website der GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.de.html), oder schauen Sie sich die [LICENSE](https://github.com/peter88213/novelyst_editor/blob/main/LICENSE)-Datei an.
