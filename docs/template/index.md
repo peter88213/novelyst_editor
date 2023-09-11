@@ -18,6 +18,7 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program helps auth
     - Copy/Cut/Paste to/from the clipboard.
     - Undo/Redo.
     - Key shortcuts for bold and italic formatting.
+    - Create a new scene after the current one.
     - Split the scene at the cursor position.
     - Navigation to the next or previous scene.
     
