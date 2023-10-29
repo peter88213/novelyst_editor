@@ -20,7 +20,7 @@ NO_WORD_LIMITS = re.compile('\[.+?\]|\/\*.+?\*\/|-|^\>', re.MULTILINE)
 
 
 class TextBox(tk.Text):
-    """A text editor widget for yWriter raw markup.
+    """A text editor widget for novelyst raw markup.
     
     Public methods:
     get_text -- Return the whole text from the editor box.
@@ -88,7 +88,7 @@ class TextBox(tk.Text):
         self._set_format()
 
     def _set_format(self, event=None, tag=''):
-        """Insert an opening/closing pair of yWriter markup tags."""
+        """Insert an opening/closing pair of novelyst markup tags."""
         if tag:
             # Toggle format as specified by tag.
             if self.tag_ranges('sel'):

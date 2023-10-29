@@ -55,7 +55,7 @@ class Plugin:
         open_node() -- Create a scene editor window with a menu bar, a text box, and a status bar.     
     """
     VERSION = '@release'
-    NOVELYST_API = '4.34'
+    NOVELYST_API = '5.0'
     DESCRIPTION = 'A multi-scene "plain text" editor'
     URL = 'https://peter88213.github.io/novelyst_editor'
     _HELP_URL = 'https://peter88213.github.io/novelyst_editor/usage'
@@ -71,7 +71,7 @@ class Plugin:
         #--- Load configuration.
         try:
             homeDir = str(Path.home()).replace('\\', '/')
-            configDir = f'{homeDir}/.pywriter/novelyst/config'
+            configDir = f'{homeDir}/.novelyst/config'
         except:
             configDir = '.'
         self.iniFile = f'{configDir}/editor.ini'
@@ -106,21 +106,20 @@ class Plugin:
         """Create a scene editor window with a menu bar, a text box, and a status bar."""
         try:
             nodeId = self._ui.tv.tree.selection()[0]
-            if nodeId.startswith(self._ui.tv.SCENE_PREFIX):
+            if nodeId.startswith(SCENE_PREFIX):
+                if self._ui.novel.scenes[nodeId].stageLevel is not None:
+                    return
+
                 # A scene is selected
                 if self._ui.isLocked:
                     messagebox.showinfo(APPLICATION, _('Cannot edit scenes, because the project is locked.'))
                     return
 
-                scId = nodeId[2:]
-                if self._ui.novel.scenes[scId].doNotExport:
+                if nodeId in self.sceneEditors and self.sceneEditors[nodeId].isOpen:
+                    self.sceneEditors[nodeId].lift()
                     return
 
-                if scId in self.sceneEditors and self.sceneEditors[scId].isOpen:
-                    self.sceneEditors[scId].lift()
-                    return
-
-                self.sceneEditors[scId] = SceneEditor(self, self._ui, scId, self.kwargs['window_geometry'], icon=self._icon)
+                self.sceneEditors[nodeId] = SceneEditor(self, self._ui, nodeId, self.kwargs['window_geometry'], icon=self._icon)
 
         except IndexError:
             # Nothing selected

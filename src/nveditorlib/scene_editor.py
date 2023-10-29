@@ -199,9 +199,10 @@ class SceneEditor(tk.Toplevel):
 
         self.lift()
         # Add a scene after the currently edited scene.
-        thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
+        thisNode = f'{SCENE_PREFIX}{self._scId}'
         newId = self._ui.tv.add_scene(selection=thisNode,
                                       scType=self._ui.novel.scenes[self._scId].scType,
+                                      scPacing=self._ui.novel.scenes[self._scId].scPacing,
                                       )
         # Go to the new scene.
         self._load_next()
@@ -237,13 +238,11 @@ class SceneEditor(tk.Toplevel):
     def _load_next(self, event=None):
         """Load the next scene in the tree."""
         self._apply_changes_after_asking()
-        thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
-        nextNode = self._ui.tv.next_node(thisNode, '')
+        nextNode = self._ui.tv.next_node(self._scId)
         if nextNode:
             self._ui.tv.go_to_node(nextNode)
-            scId = nextNode[2:]
-            self._scId = scId
-            self._scene = self._ui.novel.scenes[scId]
+            self._scId = nextNode
+            self._scene = self._ui.novel.scenes[nextNode]
             self._sceneEditor.clear()
             self._load_scene()
         self.lift()
@@ -251,13 +250,11 @@ class SceneEditor(tk.Toplevel):
     def _load_prev(self, event=None):
         """Load the previous scene in the tree."""
         self._apply_changes_after_asking()
-        thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
-        prevNode = self._ui.tv.prev_node(thisNode, '')
+        prevNode = self._ui.tv.prev_node(self._scId)
         if prevNode:
             self._ui.tv.go_to_node(prevNode)
-            scId = prevNode[2:]
-            self._scId = scId
-            self._scene = self._ui.novel.scenes[scId]
+            self._scId = prevNode
+            self._scene = self._ui.novel.scenes[prevNode]
             self._sceneEditor.clear()
             self._load_scene()
         self.lift()
@@ -292,10 +289,11 @@ class SceneEditor(tk.Toplevel):
 
         self.lift()
         # Add a new scene.
-        thisNode = f'{self._ui.tv.SCENE_PREFIX}{self._scId}'
+        thisNode = self._scId
         newId = self._ui.tv.add_scene(selection=thisNode,
                                       appendToPrev=True,
                                       scType=self._ui.novel.scenes[self._scId].scType,
+                                      scPacing=self._ui.novel.scenes[self._scId].scPacing,
                                       status=self._ui.novel.scenes[self._scId].status
                                       )
         if newId:
