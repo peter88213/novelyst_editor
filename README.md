@@ -64,7 +64,7 @@ Add a subdirectory tree to **novelyst/locale**, and place *novelyst_editor.mo* t
 
 ```
 <your home directory>
-└── .pywriter/
+└── .novxlib/
     └── novelyst/
         └── locale/
             └─ <language code>/
@@ -96,7 +96,7 @@ An easy way may be to put a posting in the [novelyst forum](https://github.com/p
 
 ### Conventions
 
-See https://github.com/peter88213/PyWriter/blob/main/docs/conventions.md
+See https://github.com/peter88213/novxlib/blob/main/docs/conventions.md
 
 ## Development tools
 

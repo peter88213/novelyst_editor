@@ -1,7 +1,7 @@
 """Generate German translation files for GNU gettext.
 
 - Update the project's 'de.po' translation file.
-- Generate the language specific 'pywriter.mo' dictionary.
+- Generate the language specific 'novxlib.mo' dictionary.
 
 Usage: 
 translate_de.py
@@ -13,18 +13,18 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 import os
 import sys
 from shutil import copyfile
-sys.path.insert(0, f'{os.getcwd()}/../../PyWriter/src')
+sys.path.insert(0, f'{os.getcwd()}/../../novxlib/src')
 import translations
 import msgfmt
 
 APP_NAME = 'novelyst_editor'
 PO_PATH = '../i18n/de.po'
 MO_PATH = '../i18n/locale/de/LC_MESSAGES/novelyst_editor.mo'
-MO_COPY = '../../novelyst/src/locale/de/LC_MESSAGES/novelyst_editor.mo'
+MO_COPY = '../../kalliope/src/locale/de/LC_MESSAGES/novelyst_editor.mo'
 
 
 def main(version='unknown'):
-    if translations.main('de', app=APP_NAME, appVersion=version):
+    if translations.main('de', app=APP_NAME, appVersion=version, json=True):
         print(f'Writing "{MO_PATH}" ...')
         msgfmt.make(PO_PATH, MO_PATH)
         copyfile(MO_PATH, MO_COPY)
