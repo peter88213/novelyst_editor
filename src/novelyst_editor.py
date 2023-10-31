@@ -106,7 +106,7 @@ class Plugin:
         """Create a section editor window with a menu bar, a text box, and a status bar."""
         try:
             nodeId = self._ui.tv.tree.selection()[0]
-            if nodeId.startswith(SCENE_PREFIX):
+            if nodeId.startswith(SECTION_PREFIX):
                 if self._ui.novel.sections[nodeId].stageLevel is not None:
                     return
 

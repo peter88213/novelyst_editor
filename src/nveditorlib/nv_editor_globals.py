@@ -27,6 +27,6 @@ except:
 APPLICATION = _('Section Editor')
 PLUGIN = f'{APPLICATION} plugin v@release'
 ICON = 'eLogo32'
-SCENE_PREFIX = 'sc'
+SECTION_PREFIX = 'sc'
 
-__all__ = ['APPLICATION', 'PLUGIN', 'ICON', '_', 'SCENE_PREFIX']
+__all__ = ['APPLICATION', 'PLUGIN', 'ICON', '_', 'SECTION_PREFIX']

@@ -199,7 +199,7 @@ class SectionEditor(tk.Toplevel):
 
         self.lift()
         # Add a section after the currently edited section.
-        thisNode = f'{SCENE_PREFIX}{self._scId}'
+        thisNode = f'{SECTION_PREFIX}{self._scId}'
         newId = self._ui.tv.add_section(selection=thisNode,
                                       scType=self._ui.novel.sections[self._scId].scType,
                                       scPacing=self._ui.novel.sections[self._scId].scPacing,
