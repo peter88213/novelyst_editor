@@ -2,7 +2,7 @@
 
 --- 
 
-A simple [novelyst](https://peter88213.github.io/novelyst/) multi-scene editor plugin based on the *tkinter.scrolledtext* widget.
+A simple [novelyst](https://peter88213.github.io/novelyst/) multi-section editor plugin based on the *tkinter.scrolledtext* widget.
 
 ---
 
@@ -10,7 +10,7 @@ A simple [novelyst](https://peter88213.github.io/novelyst/) multi-scene editor p
 
 If [novelyst](https://peter88213.github.io/novelyst/) is installed, the setup script auto-installs the *novelyst_editor* plugin in the *novelyst* plugin directory.
 
-The plugin adds an **Edit** entry to the *novelyst* **Scene** menu, and an **Editor plugin Online help** entry to the **Help** menu.  
+The plugin adds an **Edit** entry to the *novelyst* **Section** menu, and an **Editor plugin Online help** entry to the **Help** menu.  
 
 ---
 
@@ -18,11 +18,11 @@ The plugin adds an **Edit** entry to the *novelyst* **Scene** menu, and an **Edi
 
 ---
 
-## Launch the scene editor
+## Launch the section editor
 
-- Open a scene editor window by double-clicking on a scene or via the **Scene > Edit** menu entry when a scene is selected, or by hitting the *Enter* key.
+- Open a section editor window by double-clicking on a section or via the **Section > Edit** menu entry when a section is selected, or by hitting the *Enter* key.
 - If the project is locked, editor windows cannot be opened.
-- If you choose a scene already open, the window will be brought to the foreground.
+- If you choose a section already open, the window will be brought to the foreground.
 
 ---
 
@@ -76,46 +76,46 @@ When exporting to ODT format, *novelyst* replaces these formattings as follows:
 
 ---
 
-## Split a scene
+## Split a section
 
-Via **File > Split at cursor position** or **Ctrl-Alt-S** you can split the scene at the cursor position. 
+Via **File > Split at cursor position** or **Ctrl-Alt-S** you can split the section at the cursor position. 
 
-- All the text from the cursor position is cut and pasted into a newly created scene. 
-- The new scene is placed after the currently edited scene.
-- The new scene is appended to the currently edited scene.
-- The new scene has the same status as the currently edited scene.  
-- The new scene is of the same type as the currently edited scene.  
-- The new scene has the same viewpoint character as the currently edited scene.  
-- The editor loads the newly created scene.
+- All the text from the cursor position is cut and pasted into a newly created section. 
+- The new section is placed after the currently edited section.
+- The new section is appended to the currently edited section.
+- The new section has the same status as the currently edited section.  
+- The new section is of the same type as the currently edited section.  
+- The new section has the same viewpoint character as the currently edited section.  
+- The editor loads the newly created section.
 
 ---
 
-## Create a scene
+## Create a section
 
-Via **File > Create scene** or **Ctrl-Alt-N** you can create a scene. 
+Via **File > Create section** or **Ctrl-Alt-N** you can create a section. 
 
-- The new scene is placed after the currently edited scene.
-- The new scene is of the same type as the currently edited scene.  
-- The editor loads the newly created scene.
+- The new section is placed after the currently edited section.
+- The new section is of the same type as the currently edited section.  
+- The editor loads the newly created section.
 
 ---
 
 ## Word count
 
-- The scene word count is displayed at the status bar at the bottom of the window.
+- The section word count is displayed at the status bar at the bottom of the window.
 - By default, word count is updated manually, either by pressing the **F5** key, or via the **Word count > Update** menu entry.
 - The word count can be updated "live", i.e. just while entering text. This is enabled via the **Word count > Enable live update** menu entry. 
 - Live update is disabled by the **Word count > Disable live update** menu entry. 
 
 **Please note**
 
-*Live updating the word count is resource intensive and may slow down the program when editing big scenes. This is why it's disabled by default.*
+*Live updating the word count is resource intensive and may slow down the program when editing big sections. This is why it's disabled by default.*
 
 ---
 
 ## Apply changes
 
-- You can apply changes to the scene with **Ctrl-S**. Then "Modified" status is displayed in *novelyst*.
+- You can apply changes to the section with **Ctrl-S**. Then "Modified" status is displayed in *novelyst*.
 - If the project is locked in *novelyst*, you will be asked to unlock it before changes can be applied.
 
 ---

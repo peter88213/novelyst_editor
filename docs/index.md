@@ -2,7 +2,7 @@
 
 The [novelyst](https://peter88213.github.io/novelyst/) Python program helps authors organize novels.  
 
-*novelyst_editor* is a plugin providing a "plain text" scene editor. 
+*novelyst_editor* is a plugin providing a "plain text" section editor. 
 
 ![Screenshot](Screenshots/screen01.png)
 
@@ -10,7 +10,7 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program helps auth
 
 - A simple text editor box without rich text display and search capability.
 - Text is edited at the "raw markup" level. Markup tags are displayed as stored in the *yw7* file. Formatting tags are similar to those of HTML, but square brackets are used instead of pointed brackets.
-- Multiple scene editor windows.
+- Multiple section editor windows.
 - Word count is displayed and updated either live or on demand.
 - The application is ready for internationalization with GNU gettext. A German localization is provided. 
 - Editor features:
@@ -18,9 +18,9 @@ The [novelyst](https://peter88213.github.io/novelyst/) Python program helps auth
     - Copy/Cut/Paste to/from the clipboard.
     - Undo/Redo.
     - Key shortcuts for bold and italic formatting.
-    - Create a new scene after the current one.
-    - Split the scene at the cursor position.
-    - Navigation to the next or previous scene.
+    - Create a new section after the current one.
+    - Split the section at the cursor position.
+    - Navigation to the next or previous section.
     
 ## Requirements
 

@@ -1,4 +1,4 @@
-"""Provide a scene editor class for the novelyst plugin.
+"""Provide a section editor class for the novelyst plugin.
 
 Copyright (c) 2023 Peter Triesberger
 For further information see https://github.com/peter88213/novelyst_editor
@@ -29,8 +29,8 @@ COLOR_MODES = [
 # (name, foreground, background) tuples for color modes.
 
 
-class SceneEditor(tk.Toplevel):
-    """A separate scene editor window with a menu bar, a text box, and a status bar.
+class SectionEditor(tk.Toplevel):
+    """A separate section editor window with a menu bar, a text box, and a status bar.
     
     Public instance methods:
         lift() -- Bring window to the foreground and set the focus to the editor box.
@@ -44,7 +44,7 @@ class SceneEditor(tk.Toplevel):
     def __init__(self, plugin, ui, scId, size, icon=None):
         self._ui = ui
         self._plugin = plugin
-        self._scene = self._ui.novel.scenes[scId]
+        self._section = self._ui.novel.sections[scId]
         self._scId = scId
 
         # Create an independent editor window.
@@ -64,7 +64,7 @@ class SceneEditor(tk.Toplevel):
         '''
 
         # Add a text editor with scrollbar to the editor window.
-        self._sceneEditor = TextBox(self,
+        self._sectionEditor = TextBox(self,
                                     wrap='word',
                                     undo=True,
                                     autoseparators=True,
@@ -75,8 +75,8 @@ class SceneEditor(tk.Toplevel):
                                     pady=self._plugin.kwargs['margin_y'],
                                     font=(self._plugin.kwargs['font_family'], self._plugin.kwargs['font_size']),
                                     )
-        self._sceneEditor.pack(expand=True, fill='both')
-        self._sceneEditor.pack_propagate(0)
+        self._sectionEditor.pack(expand=True, fill='both')
+        self._sectionEditor.pack_propagate(0)
         self._set_editor_colors()
 
         # Add a status bar to the editor window.
@@ -88,22 +88,22 @@ class SceneEditor(tk.Toplevel):
         ttk.Button(self, text=_('Exit'), command=self.on_quit).pack(side='right')
         ttk.Button(self, text=_('Previous'), command=self._load_prev).pack(side='right')
 
-        # Load the scene content into the text editor.
-        self._load_scene()
+        # Load the section content into the text editor.
+        self._load_section()
 
         #--- Configure the user interface.
         '''
         # Add buttons to the button bar.
-        tk.Button(self._buttonBar, text=_('Copy'), command=lambda: self._sceneEditor.event_generate("<<Copy>>")).pack(side='left')
-        tk.Button(self._buttonBar, text=_('Cut'), command=lambda: self._sceneEditor.event_generate("<<Cut>>")).pack(side='left')
-        tk.Button(self._buttonBar, text=_('Paste'), command=lambda: self._sceneEditor.event_generate("<<Paste>>")).pack(side='left')
-        tk.Button(self._buttonBar, text=_('Italic'), command=self._sceneEditor.italic).pack(side='left')
-        tk.Button(self._buttonBar, text=_('Bold'), command=self._sceneEditor.bold).pack(side='left')
+        tk.Button(self._buttonBar, text=_('Copy'), command=lambda: self._sectionEditor.event_generate("<<Copy>>")).pack(side='left')
+        tk.Button(self._buttonBar, text=_('Cut'), command=lambda: self._sectionEditor.event_generate("<<Cut>>")).pack(side='left')
+        tk.Button(self._buttonBar, text=_('Paste'), command=lambda: self._sectionEditor.event_generate("<<Paste>>")).pack(side='left')
+        tk.Button(self._buttonBar, text=_('Italic'), command=self._sectionEditor.italic).pack(side='left')
+        tk.Button(self._buttonBar, text=_('Bold'), command=self._sectionEditor.bold).pack(side='left')
         '''
 
         # Add a "File" Submenu to the editor window.
         self._fileMenu = tk.Menu(self._mainMenu, tearoff=0)
-        self._mainMenu.add_cascade(label=_('Scene'), menu=self._fileMenu)
+        self._mainMenu.add_cascade(label=_('Section'), menu=self._fileMenu)
         self._fileMenu.add_command(label=_('Next'), command=self._load_next)
         self._fileMenu.add_command(label=_('Previous'), command=self._load_prev)
         self._fileMenu.add_command(label=_('Apply changes'), accelerator=KEY_APPLY_CHANGES[1], command=self._apply_changes)
@@ -120,19 +120,19 @@ class SceneEditor(tk.Toplevel):
         # Add an "Edit" Submenu to the editor window.
         self._editMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('Edit'), menu=self._editMenu)
-        self._editMenu.add_command(label=_('Copy'), accelerator='Ctrl-C', command=lambda: self._sceneEditor.event_generate("<<Copy>>"))
-        self._editMenu.add_command(label=_('Cut'), accelerator='Ctrl-X', command=lambda: self._sceneEditor.event_generate("<<Cut>>"))
-        self._editMenu.add_command(label=_('Paste'), accelerator='Ctrl-V', command=lambda: self._sceneEditor.event_generate("<<Paste>>"))
+        self._editMenu.add_command(label=_('Copy'), accelerator='Ctrl-C', command=lambda: self._sectionEditor.event_generate("<<Copy>>"))
+        self._editMenu.add_command(label=_('Cut'), accelerator='Ctrl-X', command=lambda: self._sectionEditor.event_generate("<<Cut>>"))
+        self._editMenu.add_command(label=_('Paste'), accelerator='Ctrl-V', command=lambda: self._sectionEditor.event_generate("<<Paste>>"))
         self._editMenu.add_separator()
-        self._editMenu.add_command(label=_('Split at cursor position'), accelerator=KEY_SPLIT_SCENE[1], command=self._split_scene)
-        self._editMenu.add_command(label=_('Create scene'), accelerator=KEY_CREATE_SCENE[1], command=self._create_scene)
+        self._editMenu.add_command(label=_('Split at cursor position'), accelerator=KEY_SPLIT_SCENE[1], command=self._split_section)
+        self._editMenu.add_command(label=_('Create section'), accelerator=KEY_CREATE_SCENE[1], command=self._create_section)
 
         # Add a "Format" Submenu to the editor window.
         self._formatMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('Format'), menu=self._formatMenu)
-        self._formatMenu.add_command(label=_('Italic'), accelerator=KEY_ITALIC[1], command=self._sceneEditor.italic)
-        self._formatMenu.add_command(label=_('Bold'), accelerator=KEY_BOLD[1], command=self._sceneEditor.bold)
-        self._formatMenu.add_command(label=_('Plain'), accelerator=KEY_PLAIN[1], command=self._sceneEditor.plain)
+        self._formatMenu.add_command(label=_('Italic'), accelerator=KEY_ITALIC[1], command=self._sectionEditor.italic)
+        self._formatMenu.add_command(label=_('Bold'), accelerator=KEY_BOLD[1], command=self._sectionEditor.bold)
+        self._formatMenu.add_command(label=_('Plain'), accelerator=KEY_PLAIN[1], command=self._sectionEditor.plain)
 
         # Add a "Word count" Submenu to the editor window.
         self._wcMenu = tk.Menu(self._mainMenu, tearoff=0)
@@ -150,14 +150,14 @@ class SceneEditor(tk.Toplevel):
         self.bind_class('Text', KEY_APPLY_CHANGES[0], self._apply_changes)
         self.bind_class('Text', KEY_QUIT_PROGRAM[0], self.on_quit)
         self.bind_class('Text', KEY_UPDATE_WORDCOUNT[0], self.show_wordcount)
-        self.bind_class('Text', KEY_SPLIT_SCENE[0], self._split_scene)
-        self.bind_class('Text', KEY_CREATE_SCENE[0], self._create_scene)
-        self.bind_class('Text', KEY_ITALIC[0], self._sceneEditor.italic)
-        self.bind_class('Text', KEY_BOLD[0], self._sceneEditor.bold)
-        self.bind_class('Text', KEY_PLAIN[0], self._sceneEditor.plain)
+        self.bind_class('Text', KEY_SPLIT_SCENE[0], self._split_section)
+        self.bind_class('Text', KEY_CREATE_SCENE[0], self._create_section)
+        self.bind_class('Text', KEY_ITALIC[0], self._sectionEditor.italic)
+        self.bind_class('Text', KEY_BOLD[0], self._sectionEditor.bold)
+        self.bind_class('Text', KEY_PLAIN[0], self._sectionEditor.plain)
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
 
-        if SceneEditor.liveWordCount:
+        if SectionEditor.liveWordCount:
             self._live_wc_on()
         else:
             self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
@@ -171,7 +171,7 @@ class SceneEditor(tk.Toplevel):
         Extends the superclass method.
         """
         super().lift()
-        self._sceneEditor.focus()
+        self._sectionEditor.focus()
 
     def on_quit(self, event=None):
         """Exit the editor. Apply changes, if possible."""
@@ -186,146 +186,146 @@ class SceneEditor(tk.Toplevel):
 
     def show_wordcount(self, event=None):
         """Display the word count on the status bar."""
-        wc = self._sceneEditor.count_words()
+        wc = self._sectionEditor.count_words()
         diff = wc - self._initialWc
         self._statusBar.config(text=f'{wc} {_("words")} ({diff} {_("new")})')
 
-    def _create_scene(self, event=None):
-        """Create a new scene after the currently edited scene."""
+    def _create_section(self, event=None):
+        """Create a new section after the currently edited section."""
         if self._ui.isLocked:
-            messagebox.showinfo(APPLICATION, _('Cannot create scenes, because the project is locked.'), parent=self)
+            messagebox.showinfo(APPLICATION, _('Cannot create sections, because the project is locked.'), parent=self)
             self.lift()
             return
 
         self.lift()
-        # Add a scene after the currently edited scene.
+        # Add a section after the currently edited section.
         thisNode = f'{SCENE_PREFIX}{self._scId}'
-        newId = self._ui.tv.add_scene(selection=thisNode,
-                                      scType=self._ui.novel.scenes[self._scId].scType,
-                                      scPacing=self._ui.novel.scenes[self._scId].scPacing,
+        newId = self._ui.tv.add_section(selection=thisNode,
+                                      scType=self._ui.novel.sections[self._scId].scType,
+                                      scPacing=self._ui.novel.sections[self._scId].scPacing,
                                       )
-        # Go to the new scene.
+        # Go to the new section.
         self._load_next()
 
     def _apply_changes(self, event=None):
         """Transfer the editor content to the project, if modified."""
-        sceneText = self._sceneEditor.get_text()
-        if sceneText or self._scene.sceneContent:
-            if self._scene.sceneContent != sceneText:
-                self._transfer_text(sceneText)
+        sectionText = self._sectionEditor.get_text()
+        if sectionText or self._section.sectionContent:
+            if self._section.sectionContent != sectionText:
+                self._transfer_text(sectionText)
 
     def _apply_changes_after_asking(self, event=None):
         """Transfer the editor content to the project, if modified. Ask first."""
-        sceneText = self._sceneEditor.get_text()
-        if sceneText or self._scene.sceneContent:
-            if self._scene.sceneContent != sceneText:
-                if messagebox.askyesno(APPLICATION, _('Apply scene changes?'), parent=self):
-                    self._transfer_text(sceneText)
+        sectionText = self._sectionEditor.get_text()
+        if sectionText or self._section.sectionContent:
+            if self._section.sectionContent != sectionText:
+                if messagebox.askyesno(APPLICATION, _('Apply section changes?'), parent=self):
+                    self._transfer_text(sectionText)
 
     def _live_wc_off(self, event=None):
         self.unbind('<KeyRelease>')
         self._wcMenu.entryconfig(_('Enable live update'), state='normal')
         self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
-        SceneEditor.liveWordCount = False
+        SectionEditor.liveWordCount = False
 
     def _live_wc_on(self, event=None):
         self.bind('<KeyRelease>', self.show_wordcount)
         self._wcMenu.entryconfig(_('Enable live update'), state='disabled')
         self._wcMenu.entryconfig(_('Disable live update'), state='normal')
         self.show_wordcount()
-        SceneEditor.liveWordCount = True
+        SectionEditor.liveWordCount = True
 
     def _load_next(self, event=None):
-        """Load the next scene in the tree."""
+        """Load the next section in the tree."""
         self._apply_changes_after_asking()
         nextNode = self._ui.tv.next_node(self._scId)
         if nextNode:
             self._ui.tv.go_to_node(nextNode)
             self._scId = nextNode
-            self._scene = self._ui.novel.scenes[nextNode]
-            self._sceneEditor.clear()
-            self._load_scene()
+            self._section = self._ui.novel.sections[nextNode]
+            self._sectionEditor.clear()
+            self._load_section()
         self.lift()
 
     def _load_prev(self, event=None):
-        """Load the previous scene in the tree."""
+        """Load the previous section in the tree."""
         self._apply_changes_after_asking()
         prevNode = self._ui.tv.prev_node(self._scId)
         if prevNode:
             self._ui.tv.go_to_node(prevNode)
             self._scId = prevNode
-            self._scene = self._ui.novel.scenes[prevNode]
-            self._sceneEditor.clear()
-            self._load_scene()
+            self._section = self._ui.novel.sections[prevNode]
+            self._sectionEditor.clear()
+            self._load_section()
         self.lift()
 
-    def _load_scene(self):
-        """Load the scene content into the text editor."""
-        self.title(f'{self._scene.title} - {self._ui.novel.title}, {_("Scene")} ID {self._scId}')
-        if self._scene.sceneContent:
-            self._sceneEditor.set_text(self._scene.sceneContent)
-        self._initialWc = self._sceneEditor.count_words()
+    def _load_section(self):
+        """Load the section content into the text editor."""
+        self.title(f'{self._section.title} - {self._ui.novel.title}, {_("Section")} ID {self._scId}')
+        if self._section.sectionContent:
+            self._sectionEditor.set_text(self._section.sectionContent)
+        self._initialWc = self._sectionEditor.count_words()
         self.show_wordcount()
 
     def _set_editor_colors(self):
-        self._sceneEditor['fg'] = COLOR_MODES[SceneEditor.colorMode][1]
-        self._sceneEditor['bg'] = COLOR_MODES[SceneEditor.colorMode][2]
-        self._sceneEditor['insertbackground'] = COLOR_MODES[SceneEditor.colorMode][1]
+        self._sectionEditor['fg'] = COLOR_MODES[SectionEditor.colorMode][1]
+        self._sectionEditor['bg'] = COLOR_MODES[SectionEditor.colorMode][2]
+        self._sectionEditor['insertbackground'] = COLOR_MODES[SectionEditor.colorMode][1]
 
     def _set_view_mode(self, event=None, mode=0):
-        SceneEditor.colorMode = mode
+        SectionEditor.colorMode = mode
         self._set_editor_colors()
 
-    def _split_scene(self, event=None):
-        """Split a scene at the cursor position."""
+    def _split_section(self, event=None):
+        """Split a section at the cursor position."""
         if self._ui.isLocked:
-            messagebox.showinfo(APPLICATION, _('Cannot split the scene, because the project is locked.'), parent=self)
+            messagebox.showinfo(APPLICATION, _('Cannot split the section, because the project is locked.'), parent=self)
             self.lift()
             return
 
-        if not messagebox.askyesno(APPLICATION, f'{_("Move the text from the cursor position to the end into a new scene")}?', parent=self):
+        if not messagebox.askyesno(APPLICATION, f'{_("Move the text from the cursor position to the end into a new section")}?', parent=self):
             self.lift()
             return
 
         self.lift()
-        # Add a new scene.
+        # Add a new section.
         thisNode = self._scId
-        newId = self._ui.tv.add_scene(selection=thisNode,
+        newId = self._ui.tv.add_section(selection=thisNode,
                                       appendToPrev=True,
-                                      scType=self._ui.novel.scenes[self._scId].scType,
-                                      scPacing=self._ui.novel.scenes[self._scId].scPacing,
-                                      status=self._ui.novel.scenes[self._scId].status
+                                      scType=self._ui.novel.sections[self._scId].scType,
+                                      scPacing=self._ui.novel.sections[self._scId].scPacing,
+                                      status=self._ui.novel.sections[self._scId].status
                                       )
         if newId:
-            # Cut the actual scene's content from the cursor position to the end.
-            newContent = self._sceneEditor.get_text('insert', 'end').strip(' \n')
-            self._sceneEditor.delete('insert', 'end')
+            # Cut the actual section's content from the cursor position to the end.
+            newContent = self._sectionEditor.get_text('insert', 'end').strip(' \n')
+            self._sectionEditor.delete('insert', 'end')
             self._apply_changes()
 
-            # Copy the scene content to the new scene.
-            self._ui.novel.scenes[newId].sceneContent = newContent
+            # Copy the section content to the new section.
+            self._ui.novel.sections[newId].sectionContent = newContent
 
             # Copy the viewpoint character.
-            if self._ui.novel.scenes[self._scId].characters:
-                viewpoint = self._ui.novel.scenes[self._scId].characters[0]
-                self._ui.novel.scenes[newId].characters = [viewpoint]
+            if self._ui.novel.sections[self._scId].characters:
+                viewpoint = self._ui.novel.sections[self._scId].characters[0]
+                self._ui.novel.sections[newId].characters = [viewpoint]
 
-            # Go to the new scene.
+            # Go to the new section.
             self._load_next()
 
-    def _transfer_text(self, sceneText):
-        """Transfer the changed editor content to the scene, if possible.
+    def _transfer_text(self, sectionText):
+        """Transfer the changed editor content to the section, if possible.
         
         On success, set the user interface's change flag. 
         """
         if self._ui.isLocked:
-            if messagebox.askyesno(APPLICATION, _('Cannot apply scene changes, because the project is locked.\nUnlock and apply changes?'), parent=self):
+            if messagebox.askyesno(APPLICATION, _('Cannot apply section changes, because the project is locked.\nUnlock and apply changes?'), parent=self):
                 self._ui.unlock()
-                self._scene.sceneContent = sceneText
+                self._section.sectionContent = sectionText
                 self._ui.isModified = True
             self.lift()
         else:
-            self._scene.sceneContent = sceneText
+            self._section.sectionContent = sectionText
             self._ui.isModified = True
         self._ui.show_status()
 

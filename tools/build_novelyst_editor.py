@@ -1,4 +1,4 @@
-"""Build a scene editor novelyst plugin.
+"""Build a section editor novelyst plugin.
         
 In order to distribute a single script without dependencies, 
 this script "inlines" all modules imported from the novxlib package.

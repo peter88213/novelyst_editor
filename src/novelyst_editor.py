@@ -1,4 +1,4 @@
-"""A multi-scene "plain text" editor plugin for novelyst.
+"""A multi-section "plain text" editor plugin for novelyst.
 
 Requires Python 3.6+
 Copyright (c) 2023 Peter Triesberger
@@ -22,7 +22,7 @@ from tkinter import messagebox
 from pathlib import Path
 import webbrowser
 from nveditorlib.nv_editor_globals import *
-from nveditorlib.scene_editor import SceneEditor
+from nveditorlib.section_editor import SectionEditor
 from nveditorlib.configuration import Configuration
 
 SETTINGS = dict(
@@ -47,16 +47,16 @@ OPTIONS = dict(
 
 
 class Plugin:
-    """novelyst multi-scene "plain text" editor plugin class.
+    """novelyst multi-section "plain text" editor plugin class.
     
     Public methods:
         on_close() -- Actions to be performed when a project is closed.       
         on_quit() -- Actions to be performed when novelyst is closed.
-        open_node() -- Create a scene editor window with a menu bar, a text box, and a status bar.     
+        open_node() -- Create a section editor window with a menu bar, a text box, and a status bar.     
     """
     VERSION = '@release'
     NOVELYST_API = '5.0'
-    DESCRIPTION = 'A multi-scene "plain text" editor'
+    DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://peter88213.github.io/novelyst_editor'
     _HELP_URL = 'https://peter88213.github.io/novelyst_editor/usage'
 
@@ -81,15 +81,15 @@ class Plugin:
         self.kwargs.update(self.configuration.settings)
         self.kwargs.update(self.configuration.options)
 
-        # Add the "Edit" command to novelyst's "Scene" menu.
-        self._ui.sceneMenu.add_separator()
-        self._ui.sceneMenu.add_command(label=_('Edit'), underline=0, command=self.open_node)
+        # Add the "Edit" command to novelyst's "Section" menu.
+        self._ui.sectionMenu.add_separator()
+        self._ui.sectionMenu.add_command(label=_('Edit'), underline=0, command=self.open_node)
 
         # Add an entry to the Help menu.
         self._ui.helpMenu.add_command(label=_('Editor plugin Online help'), command=lambda: webbrowser.open(self._HELP_URL))
 
         # Set window icon.
-        self.sceneEditors = {}
+        self.sectionEditors = {}
         try:
             path = os.path.dirname(sys.argv[0])
             if not path:
@@ -99,27 +99,27 @@ class Plugin:
             self._icon = None
 
         # Configure the editor box.
-        SceneEditor.colorMode = int(self.kwargs['color_mode'])
-        SceneEditor.liveWordCount = self.kwargs['live_wordcount']
+        SectionEditor.colorMode = int(self.kwargs['color_mode'])
+        SectionEditor.liveWordCount = self.kwargs['live_wordcount']
 
     def open_node(self, event=None):
-        """Create a scene editor window with a menu bar, a text box, and a status bar."""
+        """Create a section editor window with a menu bar, a text box, and a status bar."""
         try:
             nodeId = self._ui.tv.tree.selection()[0]
             if nodeId.startswith(SCENE_PREFIX):
-                if self._ui.novel.scenes[nodeId].stageLevel is not None:
+                if self._ui.novel.sections[nodeId].stageLevel is not None:
                     return
 
-                # A scene is selected
+                # A section is selected
                 if self._ui.isLocked:
-                    messagebox.showinfo(APPLICATION, _('Cannot edit scenes, because the project is locked.'))
+                    messagebox.showinfo(APPLICATION, _('Cannot edit sections, because the project is locked.'))
                     return
 
-                if nodeId in self.sceneEditors and self.sceneEditors[nodeId].isOpen:
-                    self.sceneEditors[nodeId].lift()
+                if nodeId in self.sectionEditors and self.sectionEditors[nodeId].isOpen:
+                    self.sectionEditors[nodeId].lift()
                     return
 
-                self.sceneEditors[nodeId] = SceneEditor(self, self._ui, nodeId, self.kwargs['window_geometry'], icon=self._icon)
+                self.sectionEditors[nodeId] = SectionEditor(self, self._ui, nodeId, self.kwargs['window_geometry'], icon=self._icon)
 
         except IndexError:
             # Nothing selected
@@ -128,19 +128,19 @@ class Plugin:
     def on_close(self, event=None):
         """Actions to be performed when a project is closed.
         
-        Close all open scene editor windows. 
+        Close all open section editor windows. 
         """
-        for scId in self.sceneEditors:
-            if self.sceneEditors[scId].isOpen:
-                self.sceneEditors[scId].on_quit()
+        for scId in self.sectionEditors:
+            if self.sectionEditors[scId].isOpen:
+                self.sectionEditors[scId].on_quit()
 
     def on_quit(self, event=None):
         """Actions to be performed when novelyst is closed."""
         self.on_close()
 
         #--- Save project specific configuration
-        self.kwargs['color_mode'] = SceneEditor.colorMode
-        self.kwargs['live_wordcount'] = SceneEditor.liveWordCount
+        self.kwargs['color_mode'] = SectionEditor.colorMode
+        self.kwargs['live_wordcount'] = SectionEditor.liveWordCount
         for keyword in self.kwargs:
             if keyword in self.configuration.options:
                 self.configuration.options[keyword] = self.kwargs[keyword]

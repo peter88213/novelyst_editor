@@ -17,7 +17,7 @@ msgstr ""
 msgid "Apply changes"
 msgstr ""
 
-msgid "Apply scene changes?"
+msgid "Apply section changes?"
 msgstr ""
 
 msgid "Bold"
@@ -26,22 +26,22 @@ msgstr ""
 msgid "Bright mode"
 msgstr ""
 
-msgid "Cannot apply scene changes, because the project is locked.\nUnlock and apply changes?"
+msgid "Cannot apply section changes, because the project is locked.\nUnlock and apply changes?"
 msgstr ""
 
-msgid "Cannot create scenes, because the project is locked."
+msgid "Cannot create sections, because the project is locked."
 msgstr ""
 
-msgid "Cannot edit scenes, because the project is locked."
+msgid "Cannot edit sections, because the project is locked."
 msgstr ""
 
-msgid "Cannot split the scene, because the project is locked."
+msgid "Cannot split the section, because the project is locked."
 msgstr ""
 
 msgid "Copy"
 msgstr ""
 
-msgid "Create scene"
+msgid "Create section"
 msgstr ""
 
 msgid "Cut"
@@ -77,7 +77,7 @@ msgstr ""
 msgid "Light mode"
 msgstr ""
 
-msgid "Move the text from the cursor position to the end into a new scene"
+msgid "Move the text from the cursor position to the end into a new section"
 msgstr ""
 
 msgid "Next"
@@ -95,10 +95,10 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-msgid "Scene"
+msgid "Section"
 msgstr ""
 
-msgid "Scene Editor"
+msgid "Section Editor"
 msgstr ""
 
 msgid "Split at cursor position"

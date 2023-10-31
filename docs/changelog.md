@@ -6,7 +6,7 @@
 
 ### v4.9.0
 
-- When opening a scene, place the cursor top left.
+- When opening a section, place the cursor top left.
 
 Compatibility: novelyst v4.34 API
 
@@ -18,7 +18,7 @@ Compatibility: novelyst v4.20 API
 
 ### v4.8.1
 
-- Do not open "not exported" scenes on double clicking or pressing Return.
+- Do not open "not exported" sections on double clicking or pressing Return.
 
 Compatibility: novelyst v4.20 API
 
@@ -36,8 +36,8 @@ Compatibility: novelyst v4.13 API
 
 ### v4.7.0
 
-- Go to the new scene after splitting.
-- New command: Create scene.
+- Go to the new section after splitting.
+- New command: Create section.
 - Reposition navigation buttons.
 
 Compatibility: novelyst v4.13 API
@@ -50,8 +50,8 @@ Compatibility: novelyst v4.7 API
 
 ### v4.6.0
 
-- Browse the whole tree for scene navigation. 
-- When loading a scene in a collapsed subtree, expand the subtree.
+- Browse the whole tree for section navigation. 
+- When loading a section in a collapsed subtree, expand the subtree.
 
 Compatibility: novelyst v4.7 API
 
@@ -75,7 +75,7 @@ Compatibility: novelyst v4.0 API
 
 ### v4.4.2
 
-- Give the focus to the editor after changing scenes or closing popups.
+- Give the focus to the editor after changing sections or closing popups.
 
 Compatibility: novelyst v4.0 API
 
@@ -87,32 +87,32 @@ Compatibility: novelyst v4.0 API
 
 ### v4.4.0
 
-- Ask before applying modifications when changing the scene.
+- Ask before applying modifications when changing the section.
 - Add an "Exit" button to the bottom line.
 
 Compatibility: novelyst v4.0 API
 
 ### v4.3.3
 
-- Fix a critical bug where text is lost when changing scenes without saving.
+- Fix a critical bug where text is lost when changing sections without saving.
 
 Compatibility: novelyst v4.0 API
 
 ### v4.3.2
 
-- Fix a regression from v4.3.0 where the scene content might be deleted on loading into the editor.
+- Fix a regression from v4.3.0 where the section content might be deleted on loading into the editor.
 
 Compatibility: novelyst v4.0 API
 
 ### v4.3.1
 
-- Enable scene navigation beyond chapter borders.
+- Enable section navigation beyond chapter borders.
 
 Compatibility: novelyst v4.0 API
 
 ### v4.3.0
 
-- Add scene navigation to the editor window.
+- Add section navigation to the editor window.
 
 Compatibility: novelyst v4.0 API
 
@@ -136,7 +136,7 @@ Compatibility: novelyst v4.0 API
 
 ### v3.0.3
 
-- Do not respond on double-clicking non-scene nodes.
+- Do not respond on double-clicking non-section nodes.
 
 Compatibility: novelyst v3.0 API
 
@@ -162,7 +162,7 @@ Compatibility: novelyst v3.0 API
 ### v2.0.2
 
 - Widen text box margins.
-- When opening a SceneEditor, set the focus to its text box.
+- When opening a SectionEditor, set the focus to its text box.
 - API upgrade.
 
 Compatibility: novelyst v2.0 API
@@ -206,7 +206,7 @@ Compatibility: novelyst v0.42 API
 
 ### v0.14.0 User interface enhancements
 
-- Change the hotkey for scene splitting to **Ctrl-Alt-S**
+- Change the hotkey for section splitting to **Ctrl-Alt-S**
 - Add an **Edit** menu.
 - Add a **Format** menu.
 
@@ -234,14 +234,14 @@ Compatibility: novelyst v0.42 API
 
 Compatibility: novelyst v0.42 API
 
-### v0.8.0 "Split scene" feature
+### v0.8.0 "Split section" feature
 
-- Add a "Split scene at cursor position" feature.
+- Add a "Split section at cursor position" feature.
 - Refactor the code for better maintainability.
 
 Compatibility: novelyst v0.42 API
 
-### v0.6.1 "Scene" icon
+### v0.6.1 "Section" icon
 
 - Assign the editor window its own icon.
 
@@ -250,7 +250,7 @@ Compatibility: novelyst v0.42 API
 - Show word count at the status bar.
 - Update word count via menu or key.
 - Activate/deactivate live word count.
-- Modify the window title: Scene title first.
+- Modify the window title: Section title first.
 - Give editor windows the focus on opening.
 - Clear the undo/redo stack on loading text.
 
@@ -272,7 +272,7 @@ Compatibility: novelyst v0.14.1 API
 
 ### v0.2.1 Alpha release
 
-Refactor in order to allow text conversion when editing scenes.
+Refactor in order to allow text conversion when editing sections.
 
 Compatibility: novelyst v0.14.1 API
 

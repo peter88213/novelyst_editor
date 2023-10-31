@@ -2,7 +2,7 @@
 
 Modules:
 nv_editor_globals -- Provide global variables and functions.
-scene_editor -- Provide a scene editor class for the novelyst plugin.
+section_editor -- Provide a section editor class for the novelyst plugin.
 text_box -- Provide a text editor widget for the novelyst editor plugin.
 
 Copyright (c) 2023 Peter Triesberger

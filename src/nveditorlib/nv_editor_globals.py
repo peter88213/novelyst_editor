@@ -24,7 +24,7 @@ except:
     def _(message):
         return message
 
-APPLICATION = _('Scene Editor')
+APPLICATION = _('Section Editor')
 PLUGIN = f'{APPLICATION} plugin v@release'
 ICON = 'eLogo32'
 SCENE_PREFIX = 'sc'
