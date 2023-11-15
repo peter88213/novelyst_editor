@@ -97,8 +97,8 @@ class SectionEditor(tk.Toplevel):
         tk.Button(self._buttonBar, text=_('Copy'), command=lambda: self._sectionEditor.event_generate("<<Copy>>")).pack(side='left')
         tk.Button(self._buttonBar, text=_('Cut'), command=lambda: self._sectionEditor.event_generate("<<Cut>>")).pack(side='left')
         tk.Button(self._buttonBar, text=_('Paste'), command=lambda: self._sectionEditor.event_generate("<<Paste>>")).pack(side='left')
-        tk.Button(self._buttonBar, text=_('Italic'), command=self._sectionEditor.italic).pack(side='left')
-        tk.Button(self._buttonBar, text=_('Bold'), command=self._sectionEditor.bold).pack(side='left')
+        tk.Button(self._buttonBar, text=_('Italic'), command=self._sectionEditor.emphasis).pack(side='left')
+        tk.Button(self._buttonBar, text=_('Bold'), command=self._sectionEditor.strong_emphasis).pack(side='left')
         '''
 
         # Add a "File" Submenu to the editor window.
@@ -130,8 +130,8 @@ class SectionEditor(tk.Toplevel):
         # Add a "Format" Submenu to the editor window.
         self._formatMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('Format'), menu=self._formatMenu)
-        self._formatMenu.add_command(label=_('Italic'), accelerator=KEY_ITALIC[1], command=self._sectionEditor.italic)
-        self._formatMenu.add_command(label=_('Bold'), accelerator=KEY_BOLD[1], command=self._sectionEditor.bold)
+        self._formatMenu.add_command(label=_('Emphasis'), accelerator=KEY_ITALIC[1], command=self._sectionEditor.emphasis)
+        self._formatMenu.add_command(label=_('Strong emphasis'), accelerator=KEY_BOLD[1], command=self._sectionEditor.strong_emphasis)
         self._formatMenu.add_command(label=_('Plain'), accelerator=KEY_PLAIN[1], command=self._sectionEditor.plain)
 
         # Add a "Word count" Submenu to the editor window.
@@ -152,8 +152,8 @@ class SectionEditor(tk.Toplevel):
         self.bind_class('Text', KEY_UPDATE_WORDCOUNT[0], self.show_wordcount)
         self.bind_class('Text', KEY_SPLIT_SCENE[0], self._split_section)
         self.bind_class('Text', KEY_CREATE_SCENE[0], self._create_section)
-        self.bind_class('Text', KEY_ITALIC[0], self._sectionEditor.italic)
-        self.bind_class('Text', KEY_BOLD[0], self._sectionEditor.bold)
+        self.bind_class('Text', KEY_ITALIC[0], self._sectionEditor.emphasis)
+        self.bind_class('Text', KEY_BOLD[0], self._sectionEditor.strong_emphasis)
         self.bind_class('Text', KEY_PLAIN[0], self._sectionEditor.plain)
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
 
@@ -322,10 +322,8 @@ class SectionEditor(tk.Toplevel):
             if messagebox.askyesno(APPLICATION, _('Cannot apply section changes, because the project is locked.\nUnlock and apply changes?'), parent=self):
                 self._ui.unlock()
                 self._section.sectionContent = sectionText
-                self._ui.isModified = True
             self.lift()
         else:
             self._section.sectionContent = sectionText
-            self._ui.isModified = True
         self._ui.show_status()
 

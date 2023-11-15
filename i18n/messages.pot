@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.0.1\n"
-"POT-Creation-Date: 2023-10-31 19:41:36\n"
+"Project-Id-Version: unknown\n"
+"POT-Creation-Date: 2023-11-15 21:08:52\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -59,6 +59,9 @@ msgstr ""
 msgid "Editor plugin Online help"
 msgstr ""
 
+msgid "Emphasis"
+msgstr ""
+
 msgid "Enable live update"
 msgstr ""
 
@@ -102,6 +105,9 @@ msgid "Section Editor"
 msgstr ""
 
 msgid "Split at cursor position"
+msgstr ""
+
+msgid "Strong emphasis"
 msgstr ""
 
 msgid "Update"

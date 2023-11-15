@@ -14,7 +14,7 @@ from tkinter import ttk
 ADDITIONAL_WORD_LIMITS = re.compile('--|—|–')
 # this is to be replaced by spaces, thus making dashes and dash replacements word limits
 
-NO_WORD_LIMITS = re.compile('\[.+?\]|\/\*.+?\*\/|-|^\>', re.MULTILINE)
+NO_WORD_LIMITS = re.compile('\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\<.+?\>')
 # this is to be replaced by empty strings, thus excluding markup and comments from
 # word counting, and making hyphens join words
 
@@ -26,11 +26,11 @@ class TextBox(tk.Text):
     get_text -- Return the whole text from the editor box.
     set_text(text) -- Put text into the editor box and clear the undo/redo stack.
     count_words -- Return the word count.
-    italic -- Make the selection italic, or begin with italic input.
-    bold -- Make the selection bold, or begin with bold input.
+    emphasis -- Make the selection emphasized, or begin with emphasized input.
+    strong_emphasis -- Make the selection strongly emphasized, or begin with strongly emphasized input.
     plain -- Remove formatting from the selection.
     """
-    _YW_TAGS = ('i', 'b')
+    _TAGS = ('em', 'strong')
     # Supported tags.
 
     def __init__(self, master=None, **kw):
@@ -60,10 +60,12 @@ class TextBox(tk.Text):
     def get_text(self, start='1.0', end='end'):
         """Return the whole text from the editor box."""
         text = self.get(start, end).strip(' \n')
+        text = text.replace('\n', '')
         return text
 
     def set_text(self, text):
         """Put text into the editor box and clear the undo/redo stack."""
+        text = text.replace('</p>', '</p>\n')
         self.insert('end', text)
         self.edit_reset()
         # this is to prevent the user from clearing the box with Ctrl-Z
@@ -71,17 +73,18 @@ class TextBox(tk.Text):
 
     def count_words(self):
         """Return the word count."""
-        text = ADDITIONAL_WORD_LIMITS.sub(' ', self.get('1.0', 'end'))
+        text = self.get('1.0', 'end').replace('\n', '')
+        text = ADDITIONAL_WORD_LIMITS.sub(' ', text)
         text = NO_WORD_LIMITS.sub('', text)
         return len(text.split())
 
-    def italic(self, event=None):
-        """Make the selection italic, or begin with italic input."""
-        self._set_format(tag='i')
+    def emphasis(self, event=None):
+        """Make the selection emphasized, or begin with emphasized input."""
+        self._set_format(tag='em')
 
-    def bold(self, event=None):
-        """Make the selection bold, or begin with bold input."""
-        self._set_format(tag='b')
+    def strong_emphasis(self, event=None):
+        """Make the selection strongly emphasized, or begin with strongly emphasized input."""
+        self._set_format(tag='strong')
 
     def plain(self, event=None):
         """Remove formatting from the selection."""
@@ -93,8 +96,8 @@ class TextBox(tk.Text):
             # Toggle format as specified by tag.
             if self.tag_ranges('sel'):
                 text = self.get(tk.SEL_FIRST, tk.SEL_LAST)
-                if text.startswith(f'[{tag}]'):
-                    if text.endswith(f'[/{tag}]'):
+                if text.startswith(f'<{tag}>'):
+                    if text.endswith(f'</{tag}>'):
                         # The selection is already formatted: Remove markup.
                         text = self._remove_format(text, tag)
                         self._replace_selected(text)
@@ -103,22 +106,22 @@ class TextBox(tk.Text):
                 # Format the selection: Add markup.
                 text = self._remove_format(text, tag)
                 # to make sure that there is no nested markup of the same type
-                self._replace_selected(f'[{tag}]{text}[/{tag}]')
+                self._replace_selected(f'<{tag}>{text}</{tag}>')
             else:
                 # Add markup to the cursor position.
-                self.insert('insert', f'[{tag}]')
-                endTag = f'[/{tag}]'
+                self.insert('insert', f'<{tag}>')
+                endTag = f'</{tag}>'
                 self.insert('insert', endTag)
                 self.mark_set('insert', f'insert-{len(endTag)}c')
         elif self.tag_ranges('sel'):
             # Remove all markup from the selection.
             text = self.get(tk.SEL_FIRST, tk.SEL_LAST)
-            for tag in self._YW_TAGS:
+            for tag in self._TAGS:
                 text = self._remove_format(text, tag)
             self._replace_selected(text)
 
     def _replace_selected(self, text):
-        """Replace the selected passage by text; keep the selection."""
+        """Replace the selected passage with text; keep the selection."""
         self.mark_set('insert', tk.SEL_FIRST)
         self.delete(tk.SEL_FIRST, tk.SEL_LAST)
         selFirst = self.index('insert')
@@ -128,14 +131,14 @@ class TextBox(tk.Text):
 
     def _remove_format(self, text, tag):
         """Return text without opening/closing markup, if any."""
-        if tag in self._YW_TAGS:
+        if tag in self._TAGS:
             finished = False
             while not finished:
-                start = text.find(f'[{tag}]')
+                start = text.find(f'<{tag}>')
                 if start >= 0:
-                    end = text.find(f'[/{tag}]')
+                    end = text.find(f'</{tag}>')
                     if  start < end:
-                        text = f'{text[:start]}{text[start + 3:end]}{text[end + 4:]}'
+                        text = f'{text[:start]}{text[start + len(tag) +2:end]}{text[end + len(tag) + 3:]}'
                     else:
                         finished = True
                 else:
