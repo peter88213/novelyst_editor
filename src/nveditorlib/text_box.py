@@ -11,8 +11,8 @@ from tkinter import ttk
 #--- Regular expressions for counting words and characters like in LibreOffice.
 # See: https://help.libreoffice.org/latest/en-GB/text/swriter/guide/words_count.html
 
-ADDITIONAL_WORD_LIMITS = re.compile('--|—|–')
-# this is to be replaced by spaces, thus making dashes and dash replacements word limits
+ADDITIONAL_WORD_LIMITS = re.compile('--|—|–|\<\/p\>')
+# this is to be replaced by spaces, thus making XML newlines, dashes, and dash replacements word limits
 
 NO_WORD_LIMITS = re.compile('\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\<.+?\>')
 # this is to be replaced by empty strings, thus excluding markup and comments from
