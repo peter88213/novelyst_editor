@@ -90,6 +90,11 @@ class TextBox(tk.Text):
         """Remove formatting from the selection."""
         self._set_format()
 
+    def new_paragraph(self, event=None):
+        """Insert an opening/closing pair of paragraph tags."""
+        self.insert('insert', '</p>\n<p>')
+        return 'break'
+
     def _set_format(self, event=None, tag=''):
         """Insert an opening/closing pair of novelyst markup tags."""
         if tag:

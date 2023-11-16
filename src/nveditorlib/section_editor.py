@@ -155,6 +155,7 @@ class SectionEditor(tk.Toplevel):
         self.bind_class('Text', KEY_ITALIC[0], self._sectionEditor.emphasis)
         self.bind_class('Text', KEY_BOLD[0], self._sectionEditor.strong_emphasis)
         self.bind_class('Text', KEY_PLAIN[0], self._sectionEditor.plain)
+        self.bind_class('Text', '<Return>', self._sectionEditor.new_paragraph)
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
 
         if SectionEditor.liveWordCount:
