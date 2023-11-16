@@ -176,7 +176,10 @@ class SectionEditor(tk.Toplevel):
 
     def on_quit(self, event=None):
         """Exit the editor. Apply changes, if possible."""
-        self._apply_changes_after_asking()
+        if not self._apply_changes_after_asking():
+            return 'break'
+            # keeping the editor window open due to an XML error to be fixed before saving
+
         self._plugin.kwargs['window_geometry'] = self.winfo_geometry()
         self.destroy()
         self.isOpen = False
@@ -210,6 +213,13 @@ class SectionEditor(tk.Toplevel):
 
     def _apply_changes(self, event=None):
         """Transfer the editor content to the project, if modified."""
+        try:
+            self._sectionEditor.check_validity()
+        except ValueError as ex:
+            self._ui.show_warning(str(ex))
+            self.lift()
+            return
+
         sectionText = self._sectionEditor.get_text()
         if sectionText or self._section.sectionContent:
             if self._section.sectionContent != sectionText:
@@ -221,7 +231,15 @@ class SectionEditor(tk.Toplevel):
         if sectionText or self._section.sectionContent:
             if self._section.sectionContent != sectionText:
                 if messagebox.askyesno(APPLICATION, _('Apply section changes?'), parent=self):
+                    try:
+                        self._sectionEditor.check_validity()
+                    except ValueError as ex:
+                        self._ui.show_warning(str(ex))
+                        self.lift()
+                        return False
+
                     self._transfer_text(sectionText)
+        return True
 
     def _live_wc_off(self, event=None):
         self.unbind('<KeyRelease>')
@@ -238,7 +256,9 @@ class SectionEditor(tk.Toplevel):
 
     def _load_next(self, event=None):
         """Load the next section in the tree."""
-        self._apply_changes_after_asking()
+        if not self._apply_changes_after_asking():
+            return
+
         nextNode = self._ui.tv.next_node(self._scId)
         if nextNode:
             self._ui.tv.go_to_node(nextNode)
@@ -250,7 +270,9 @@ class SectionEditor(tk.Toplevel):
 
     def _load_prev(self, event=None):
         """Load the previous section in the tree."""
-        self._apply_changes_after_asking()
+        if not self._apply_changes_after_asking():
+            return
+
         prevNode = self._ui.tv.prev_node(self._scId)
         if prevNode:
             self._ui.tv.go_to_node(prevNode)
@@ -278,6 +300,13 @@ class SectionEditor(tk.Toplevel):
 
     def _split_section(self, event=None):
         """Split a section at the cursor position."""
+        try:
+            self._sectionEditor.check_validity()
+        except ValueError as ex:
+            self._ui.show_warning(str(ex))
+            self.lift()
+            return
+
         if self._ui.isLocked:
             messagebox.showinfo(APPLICATION, _('Cannot split the section, because the project is locked.'), parent=self)
             self.lift()
@@ -316,8 +345,14 @@ class SectionEditor(tk.Toplevel):
     def _transfer_text(self, sectionText):
         """Transfer the changed editor content to the section, if possible.
         
-        On success, set the user interface's change flag. 
         """
+        try:
+            self._sectionEditor.check_validity()
+        except ValueError as ex:
+            self._ui.show_warning(str(ex))
+            self.lift()
+            return
+
         if self._ui.isLocked:
             if messagebox.askyesno(APPLICATION, _('Cannot apply section changes, because the project is locked.\nUnlock and apply changes?'), parent=self):
                 self._ui.unlock()

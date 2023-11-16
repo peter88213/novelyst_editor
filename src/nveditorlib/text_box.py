@@ -7,6 +7,7 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 import re
 import tkinter as tk
 from tkinter import ttk
+import xml.etree.ElementTree as ET
 
 #--- Regular expressions for counting words and characters like in LibreOffice.
 # See: https://help.libreoffice.org/latest/en-GB/text/swriter/guide/words_count.html
@@ -56,9 +57,25 @@ class TextBox(tk.Text):
             if m[0] != '_' and m != 'config' and m != 'configure':
                 setattr(self, m, getattr(self.frame, m))
 
+    def check_validity(self):
+        xmlText = f'<a>{self.get("1.0", "end")}</a>'
+        try:
+            ET.fromstring(xmlText)
+        except Exception as ex:
+            issue, location = str(ex).split(':')
+            lineStr = re.search('line ([0-9]+)', location).group(1)
+            columnStr = re.search('column ([0-9]+)', location).group(1)
+            column = int(columnStr) - 3
+            self.mark_set('insert', f'{lineStr}.{column}')
+            raise ValueError(f'{issue}: line {lineStr} column {column}')
+            return False
+
+        return True
+
     def get_text(self, start='1.0', end='end'):
         """Return the whole text from the editor box."""
-        text = self.get(start, end).strip(' \n')
+        text = self.get(start, end)
+        text = text.strip(' \n')
         text = text.replace('\n', '')
         if text == '<p></p>':
             text = ''
