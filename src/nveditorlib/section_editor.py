@@ -263,8 +263,7 @@ class SectionEditor(tk.Toplevel):
     def _load_section(self):
         """Load the section content into the text editor."""
         self.title(f'{self._section.title} - {self._ui.novel.title}, {_("Section")} ID {self._scId}')
-        if self._section.sectionContent:
-            self._sectionEditor.set_text(self._section.sectionContent)
+        self._sectionEditor.set_text(self._section.sectionContent)
         self._initialWc = self._sectionEditor.count_words()
         self.show_wordcount()
 

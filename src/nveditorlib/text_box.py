@@ -61,15 +61,20 @@ class TextBox(tk.Text):
         """Return the whole text from the editor box."""
         text = self.get(start, end).strip(' \n')
         text = text.replace('\n', '')
+        if text == '<p></p>':
+            text = ''
         return text
 
     def set_text(self, text):
         """Put text into the editor box and clear the undo/redo stack."""
+        startIndex = len("<p>")
+        if not text:
+            text = '<p></p>'
         text = text.replace('</p>', '</p>\n')
         self.insert('end', text)
         self.edit_reset()
         # this is to prevent the user from clearing the box with Ctrl-Z
-        self.mark_set('insert', '1.0')
+        self.mark_set('insert', f'1.{startIndex}')
 
     def count_words(self):
         """Return the word count."""
