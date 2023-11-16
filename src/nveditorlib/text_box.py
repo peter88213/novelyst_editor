@@ -12,11 +12,10 @@ from tkinter import ttk
 # See: https://help.libreoffice.org/latest/en-GB/text/swriter/guide/words_count.html
 
 ADDITIONAL_WORD_LIMITS = re.compile('--|—|–|\<\/p\>')
-# this is to be replaced by spaces, thus making XML newlines, dashes, and dash replacements word limits
+# this is to be replaced by spaces when counting words
 
 NO_WORD_LIMITS = re.compile('\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\<.+?\>')
-# this is to be replaced by empty strings, thus excluding markup and comments from
-# word counting, and making hyphens join words
+# this is to be replaced by empty strings when counting words
 
 
 class TextBox(tk.Text):
