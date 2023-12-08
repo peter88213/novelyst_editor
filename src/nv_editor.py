@@ -107,7 +107,7 @@ class Plugin:
         try:
             nodeId = self._ui.tv.tree.selection()[0]
             if nodeId.startswith(SECTION_PREFIX):
-                if self._ui.novel.sections[nodeId].stageLevel is not None:
+                if self._ui.novel.sections[nodeId].scType > 1:
                     return
 
                 # A section is selected
