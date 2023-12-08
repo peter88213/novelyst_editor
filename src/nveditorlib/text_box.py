@@ -77,8 +77,6 @@ class TextBox(tk.Text):
         text = self.get(start, end)
         text = text.strip(' \n')
         text = text.replace('\n', '')
-        if text == '<p></p>':
-            text = ''
         return text
 
     def set_text(self, text):
