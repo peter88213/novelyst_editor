@@ -9,11 +9,11 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 import os
 import sys
 sys.path.insert(0, f'{os.getcwd()}/../../novxlib-Alpha/src')
-from build_novelyst_editor import main
-from build_novelyst_editor import TARGET_FILE
+from build_nv_editor import main
+from build_nv_editor import TARGET_FILE
 import pgettext
 
-APP = 'novelyst_editor'
+APP = 'nv_editor'
 POT_FILE = f'../i18n/messages.pot'
 
 

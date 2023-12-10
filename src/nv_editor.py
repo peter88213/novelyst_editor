@@ -1,4 +1,4 @@
-"""A multi-section "plain text" editor plugin for novelyst.
+"""A multi-section "plain text" editor plugin for noveltree.
 
 Requires Python 3.6+
 Copyright (c) 2023 Peter Triesberger
@@ -47,18 +47,18 @@ OPTIONS = dict(
 
 
 class Plugin:
-    """novelyst multi-section "plain text" editor plugin class.
+    """noveltree multi-section "plain text" editor plugin class.
     
     Public methods:
         on_close() -- Actions to be performed when a project is closed.       
-        on_quit() -- Actions to be performed when novelyst is closed.
+        on_quit() -- Actions to be performed when noveltree is closed.
         open_node() -- Create a section editor window with a menu bar, a text box, and a status bar.     
     """
     VERSION = '@release'
     NOVELYST_API = '5.0'
     DESCRIPTION = 'A multi-section "plain text" editor'
-    URL = 'https://peter88213.github.io/novelyst_editor'
-    _HELP_URL = 'https://peter88213.github.io/novelyst_editor/usage'
+    URL = 'https://peter88213.github.io/noveltree_editor'
+    _HELP_URL = 'https://peter88213.github.io/noveltree_editor/usage'
 
     def install(self, ui):
         """Add a submenu to the main menu.
@@ -71,7 +71,7 @@ class Plugin:
         #--- Load configuration.
         try:
             homeDir = str(Path.home()).replace('\\', '/')
-            configDir = f'{homeDir}/.novelyst/config'
+            configDir = f'{homeDir}/.noveltree/config'
         except:
             configDir = '.'
         self.iniFile = f'{configDir}/editor.ini'
@@ -81,7 +81,7 @@ class Plugin:
         self.kwargs.update(self.configuration.settings)
         self.kwargs.update(self.configuration.options)
 
-        # Add the "Edit" command to novelyst's "Section" menu.
+        # Add the "Edit" command to noveltree's "Section" menu.
         self._ui.sectionMenu.add_separator()
         self._ui.sectionMenu.add_command(label=_('Edit'), underline=0, command=self.open_node)
 
@@ -135,7 +135,7 @@ class Plugin:
                 self.sectionEditors[scId].on_quit()
 
     def on_quit(self, event=None):
-        """Actions to be performed when novelyst is closed."""
+        """Actions to be performed when noveltree is closed."""
         self.on_close()
 
         #--- Save project specific configuration

@@ -17,10 +17,10 @@ sys.path.insert(0, f'{os.getcwd()}/../../novxlib-Alpha/src')
 import translations
 import msgfmt
 
-APP_NAME = 'novelyst_editor'
+APP_NAME = 'nv_editor'
 PO_PATH = '../i18n/de.po'
-MO_PATH = '../i18n/locale/de/LC_MESSAGES/novelyst_editor.mo'
-MO_COPY = '../../kalliope/src/locale/de/LC_MESSAGES/novelyst_editor.mo'
+MO_PATH = '../i18n/locale/de/LC_MESSAGES/noveltree_editor.mo'
+MO_COPY = '../../kalliope/src/locale/de/LC_MESSAGES/noveltree_editor.mo'
 
 
 def main(version='unknown'):

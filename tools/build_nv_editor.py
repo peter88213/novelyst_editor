@@ -1,10 +1,10 @@
-"""Build a section editor novelyst plugin.
+"""Build a section editor noveltree plugin.
         
 In order to distribute a single script without dependencies, 
 this script "inlines" all modules imported from the novxlib package.
 
 The novxlib project (see see https://github.com/peter88213/novxlib)
-must be located on the same directory level as the novelyst project. 
+must be located on the same directory level as the noveltree project. 
 
 Copyright (c) 2023 Peter Triesberger
 For further information see https://github.com/peter88213/noveltree_editor
@@ -17,8 +17,8 @@ import inliner
 
 SRC = '../src/'
 BUILD = '../test/'
-SOURCE_FILE = f'{SRC}novelyst_editor.py'
-TARGET_FILE = f'{BUILD}novelyst_editor.py'
+SOURCE_FILE = f'{SRC}nv_editor.py'
+TARGET_FILE = f'{BUILD}noveltree_editor.py'
 
 
 def main():

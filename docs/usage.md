@@ -1,16 +1,16 @@
-[Project homepage](https://peter88213.github.io/novelyst_editor) > Instructions for use
+[Project homepage](https://peter88213.github.io/noveltree_editor) > Instructions for use
 
 --- 
 
-A simple [novelyst](https://peter88213.github.io/novelyst/) multi-section editor plugin based on the *tkinter.scrolledtext* widget.
+A simple [noveltree](https://peter88213.github.io/noveltree/) multi-section editor plugin based on the *tkinter.scrolledtext* widget.
 
 ---
 
 # Installation
 
-If [novelyst](https://peter88213.github.io/novelyst/) is installed, the setup script auto-installs the *novelyst_editor* plugin in the *novelyst* plugin directory.
+If [noveltree](https://peter88213.github.io/noveltree/) is installed, the setup script auto-installs the *noveltree_editor* plugin in the *noveltree* plugin directory.
 
-The plugin adds an **Edit** entry to the *novelyst* **Section** menu, and an **Editor plugin Online help** entry to the **Help** menu.  
+The plugin adds an **Edit** entry to the *noveltree* **Section** menu, and an **Editor plugin Online help** entry to the **Help** menu.  
 
 ---
 
@@ -61,7 +61,7 @@ It is assumed that very few types of text markup are needed for a novel text:
 - *Strongly emphasized* (usually shown as capitalized).
 - *Citation* (paragraph visually distinguished from body text).
 
-When exporting to ODT format, *novelyst* replaces these formattings as follows: 
+When exporting to ODT format, *noveltree* replaces these formattings as follows: 
 
 - Text with `[i]Italic markup[/i]` is formatted as *Emphasized*.
 - Text with `[b]Bold markup[/b]` is formatted as *Strongly emphasized*. 
@@ -115,8 +115,8 @@ Via **File > Create section** or **Ctrl-Alt-N** you can create a section.
 
 ## Apply changes
 
-- You can apply changes to the section with **Ctrl-S**. Then "Modified" status is displayed in *novelyst*.
-- If the project is locked in *novelyst*, you will be asked to unlock it before changes can be applied.
+- You can apply changes to the section with **Ctrl-S**. Then "Modified" status is displayed in *noveltree*.
+- If the project is locked in *noveltree*, you will be asked to unlock it before changes can be applied.
 
 ---
 
@@ -129,6 +129,6 @@ Via **File > Create section** or **Ctrl-Alt-N** you can create a section.
 
 # License
 
-This is Open Source software, and the *novelyst_editor* plugin is licensed under GPLv3. See the
+This is Open Source software, and the *noveltree_editor* plugin is licensed under GPLv3. See the
 [GNU General Public License website](https://www.gnu.org/licenses/gpl-3.0.en.html) for more
 details, or consult the [LICENSE](https://github.com/peter88213/noveltree_editor/blob/main/LICENSE) file.

@@ -1,4 +1,4 @@
-"""Provide a section editor class for the novelyst plugin.
+"""Provide a section editor class for the noveltree plugin.
 
 Copyright (c) 2023 Peter Triesberger
 For further information see https://github.com/peter88213/noveltree_editor
@@ -11,7 +11,7 @@ from tkinter import messagebox
 from nveditorlib.nv_editor_globals import *
 from nveditorlib.text_box import TextBox
 
-HELP_URL = 'https://peter88213.github.io/novelyst_editor/usage'
+HELP_URL = 'https://peter88213.github.io/noveltree_editor/usage'
 KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
 KEY_APPLY_CHANGES = ('<Control-s>', 'Ctrl-S')
 KEY_UPDATE_WORDCOUNT = ('<F5>', 'F5')

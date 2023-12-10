@@ -1,16 +1,16 @@
-[Projekt-Homepage](https://peter88213.github.io/novelyst_editor) > Gebrauchsanleitung
+[Projekt-Homepage](https://peter88213.github.io/noveltree_editor) > Gebrauchsanleitung
 
 --- 
 
-A simple [novelyst](https://peter88213.github.io/novelyst/) multi-section editor plugin based on the *tkinter.scrolledtext* widget.
+A simple [noveltree](https://peter88213.github.io/noveltree/) multi-section editor plugin based on the *tkinter.scrolledtext* widget.
 
 ---
 
 # Installation
 
-Wenn [novelyst](https://peter88213.github.io/novelyst/) installiert ist, installiert das Setup-Skript automatisch das*novelyst_editor*-Plugin im *novelyst* Plugin-Verzeichnis.
+Wenn [noveltree](https://peter88213.github.io/noveltree/) installiert ist, installiert das Setup-Skript automatisch das*noveltree_editor*-Plugin im *noveltree* Plugin-Verzeichnis.
 
-Das Plugin hängt einen **Bearbeiten**-Eintrag an das *novelyst* **Abschnitt**-Menü, und einen **Editor-Plugin Online-Hilfe**-Eintrag an das **Hilfe**-Menü an.  
+Das Plugin hängt einen **Bearbeiten**-Eintrag an das *noveltree* **Abschnitt**-Menü, und einen **Editor-Plugin Online-Hilfe**-Eintrag an das **Hilfe**-Menü an.  
 
 ---
 
@@ -61,7 +61,7 @@ It is assumed that very few types of text markup are needed for a novel text:
 - *Strongly emphasized* (usually shown as capitalized).
 - *Citation* (paragraph visually distinguished from body text).
 
-When exporting to ODT format, *novelyst* replaces these formattings as follows: 
+When exporting to ODT format, *noveltree* replaces these formattings as follows: 
 
 - Text with `[i]Kursiv markup[/i]` is formatted as *Emphasized*.
 - Text with `[b]Fett markup[/b]` is formatted as *Strongly emphasized*. 
@@ -115,8 +115,8 @@ Via **Datei > Abschnitt erzeugen** or **Ctrl-Alt-N** you can create a section.
 
 ## Änderungen übernehmen
 
-- You can apply changes to the section with **Ctrl-S**. Then "Modified" status is displayed in *novelyst*.
-- If the project is locked in *novelyst*, you will be asked to unlock it before changes can be applied.
+- You can apply changes to the section with **Ctrl-S**. Then "Modified" status is displayed in *noveltree*.
+- If the project is locked in *noveltree*, you will be asked to unlock it before changes can be applied.
 
 ---
 
@@ -129,4 +129,4 @@ Via **Datei > Abschnitt erzeugen** or **Ctrl-Alt-N** you can create a section.
 
 # Lizenz
 
-Dies ist quelloffene Software, und das *novelyst_editor*-Plugin steht unter der GPLv3-Lizenz. Für mehr Details besuchen Sie die[Website der GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.de.html), oder schauen Sie sich die [LICENSE](https://github.com/peter88213/noveltree_editor/blob/main/LICENSE)-Datei an.
+Dies ist quelloffene Software, und das *noveltree_editor*-Plugin steht unter der GPLv3-Lizenz. Für mehr Details besuchen Sie die[Website der GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.de.html), oder schauen Sie sich die [LICENSE](https://github.com/peter88213/noveltree_editor/blob/main/LICENSE)-Datei an.
