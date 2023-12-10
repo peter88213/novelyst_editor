@@ -1,4 +1,4 @@
-[Projekt-Homepage](https://peter88213.github.io/noveltree_editor) > Gebrauchsanleitung
+[Projekt-Homepage](https://peter88213.github.io/nv_editor) > Gebrauchsanleitung
 
 --- 
 
@@ -8,7 +8,7 @@ A simple [noveltree](https://peter88213.github.io/noveltree/) multi-section edit
 
 # Installation
 
-Wenn [noveltree](https://peter88213.github.io/noveltree/) installiert ist, installiert das Setup-Skript automatisch das*noveltree_editor*-Plugin im *noveltree* Plugin-Verzeichnis.
+Wenn [noveltree](https://peter88213.github.io/noveltree/) installiert ist, installiert das Setup-Skript automatisch das*nv_editor*-Plugin im *noveltree* Plugin-Verzeichnis.
 
 Das Plugin hängt einen **Bearbeiten**-Eintrag an das *noveltree* **Abschnitt**-Menü, und einen **Editor-Plugin Online-Hilfe**-Eintrag an das **Hilfe**-Menü an.  
 
@@ -129,4 +129,4 @@ Via **Datei > Abschnitt erzeugen** or **Ctrl-Alt-N** you can create a section.
 
 # Lizenz
 
-Dies ist quelloffene Software, und das *noveltree_editor*-Plugin steht unter der GPLv3-Lizenz. Für mehr Details besuchen Sie die[Website der GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.de.html), oder schauen Sie sich die [LICENSE](https://github.com/peter88213/noveltree_editor/blob/main/LICENSE)-Datei an.
+Dies ist quelloffene Software, und das *nv_editor*-Plugin steht unter der GPLv3-Lizenz. Für mehr Details besuchen Sie die[Website der GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.de.html), oder schauen Sie sich die [LICENSE](https://github.com/peter88213/nv_editor/blob/main/LICENSE)-Datei an.

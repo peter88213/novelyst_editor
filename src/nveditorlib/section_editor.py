@@ -1,7 +1,7 @@
 """Provide a section editor class for the noveltree plugin.
 
 Copyright (c) 2023 Peter Triesberger
-For further information see https://github.com/peter88213/noveltree_editor
+For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import webbrowser
@@ -11,7 +11,7 @@ from tkinter import messagebox
 from nveditorlib.nv_editor_globals import *
 from nveditorlib.text_box import TextBox
 
-HELP_URL = 'https://peter88213.github.io/noveltree_editor/usage'
+HELP_URL = 'https://peter88213.github.io/nv_editor/usage'
 KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
 KEY_APPLY_CHANGES = ('<Control-s>', 'Ctrl-S')
 KEY_UPDATE_WORDCOUNT = ('<F5>', 'F5')

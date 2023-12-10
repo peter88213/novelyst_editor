@@ -1,4 +1,4 @@
 /build/
 *.pyc
 *.bak
-/test/noveltree_editor.py
+/test/nv_editor.py
