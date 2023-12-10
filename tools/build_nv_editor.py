@@ -18,7 +18,7 @@ import inliner
 SRC = '../src/'
 BUILD = '../test/'
 SOURCE_FILE = f'{SRC}nv_editor.py'
-TARGET_FILE = f'{BUILD}noveltree_editor.py'
+TARGET_FILE = f'{BUILD}nv_editor.py'
 
 
 def main():
