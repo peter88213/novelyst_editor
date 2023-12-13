@@ -22,10 +22,10 @@ KEY_BOLD = ('<Control-b>', 'Ctrl-B')
 KEY_PLAIN = ('<Control-m>', 'Ctrl-M')
 
 COLOR_MODES = [
-        (_('Bright mode'), 'black', 'white'),
-        (_('Light mode'), 'black', 'antique white'),
-        (_('Dark mode'), 'light grey', 'gray20'),
-        ]
+    (_('Bright mode'), 'black', 'white'),
+    (_('Light mode'), 'black', 'antique white'),
+    (_('Dark mode'), 'light grey', 'gray20'),
+    ]
 # (name, foreground, background) tuples for color modes.
 
 
@@ -64,17 +64,18 @@ class SectionEditor(tk.Toplevel):
         '''
 
         # Add a text editor with scrollbar to the editor window.
-        self._sectionEditor = TextBox(self,
-                                    wrap='word',
-                                    undo=True,
-                                    autoseparators=True,
-                                    spacing1=self._plugin.kwargs['paragraph_spacing'],
-                                    spacing2=self._plugin.kwargs['line_spacing'],
-                                    maxundo=-1,
-                                    padx=self._plugin.kwargs['margin_x'],
-                                    pady=self._plugin.kwargs['margin_y'],
-                                    font=(self._plugin.kwargs['font_family'], self._plugin.kwargs['font_size']),
-                                    )
+        self._sectionEditor = TextBox(
+            self,
+            wrap='word',
+            undo=True,
+            autoseparators=True,
+            spacing1=self._plugin.kwargs['paragraph_spacing'],
+            spacing2=self._plugin.kwargs['line_spacing'],
+            maxundo=-1,
+            padx=self._plugin.kwargs['margin_x'],
+            pady=self._plugin.kwargs['margin_y'],
+            font=(self._plugin.kwargs['font_family'], self._plugin.kwargs['font_size']),
+            )
         self._sectionEditor.pack(expand=True, fill='both')
         self._sectionEditor.pack_propagate(0)
         self._set_editor_colors()
@@ -204,10 +205,11 @@ class SectionEditor(tk.Toplevel):
         self.lift()
         # Add a section after the currently edited section.
         thisNode = self._scId
-        newId = self._ui.add_section(targetNode=thisNode,
-                                      scType=self._ui.novel.sections[self._scId].scType,
-                                      scPacing=self._ui.novel.sections[self._scId].scPacing,
-                                      )
+        newId = self._ui.c_add_section(
+            targetNode=thisNode,
+            scType=self._ui.novel.sections[self._scId].scType,
+            scPacing=self._ui.novel.sections[self._scId].scPacing,
+            )
         # Go to the new section.
         self._load_next()
 
@@ -319,12 +321,13 @@ class SectionEditor(tk.Toplevel):
         self.lift()
         # Add a new section.
         thisNode = self._scId
-        newId = self._ui.add_section(targetNode=thisNode,
-                                      appendToPrev=True,
-                                      scType=self._ui.novel.sections[self._scId].scType,
-                                      scPacing=self._ui.novel.sections[self._scId].scPacing,
-                                      status=self._ui.novel.sections[self._scId].status
-                                      )
+        newId = self._ui.c_add_section(
+            targetNode=thisNode,
+            appendToPrev=True,
+            scType=self._ui.novel.sections[self._scId].scType,
+            scPacing=self._ui.novel.sections[self._scId].scPacing,
+            status=self._ui.novel.sections[self._scId].status
+            )
         if newId:
             # Cut the actual section's content from the cursor position to the end.
             newContent = self._sectionEditor.get_text('insert', 'end').strip(' \n')
