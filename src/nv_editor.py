@@ -55,7 +55,7 @@ class Plugin:
         open_node() -- Create a section editor window with a menu bar, a text box, and a status bar.     
     """
     VERSION = '@release'
-    NOVELYST_API = '0.1'
+    NOVELYST_API = '0.2'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://peter88213.github.io/nv_editor'
     _HELP_URL = 'https://peter88213.github.io/nv_editor/usage'
