@@ -47,25 +47,21 @@ OPTIONS = dict(
 
 
 class Plugin:
-    """noveltree multi-section "plain text" editor plugin class.
-    
-    Public methods:
-        on_close() -- Actions to be performed when a project is closed.       
-        on_quit() -- Actions to be performed when noveltree is closed.
-        open_node() -- Create a section editor window with a menu bar, a text box, and a status bar.     
-    """
+    """noveltree multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    NOVELYST_API = '0.3'
+    NOVELYST_API = '0.6'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://peter88213.github.io/nv_editor'
     _HELP_URL = 'https://peter88213.github.io/nv_editor/usage'
 
-    def install(self, ui):
+    def install(self, controller, ui):
         """Add a submenu to the main menu.
         
         Positional arguments:
-            ui -- reference to the NoveltreeUi instance of the application.
+            controller -- reference to the main controller instance of the application.
+            ui -- reference to the main view instance of the application.
         """
+        self._controller = controller
         self._ui = ui
 
         #--- Load configuration.
@@ -107,11 +103,11 @@ class Plugin:
         try:
             nodeId = self._ui.tv.tree.selection()[0]
             if nodeId.startswith(SECTION_PREFIX):
-                if self._ui.novel.sections[nodeId].scType > 1:
+                if self._controller.novel.sections[nodeId].scType > 1:
                     return
 
                 # A section is selected
-                if self._ui.isLocked:
+                if self._controller.isLocked:
                     messagebox.showinfo(APPLICATION, _('Cannot edit sections, because the project is locked.'))
                     return
 
@@ -119,7 +115,7 @@ class Plugin:
                     self.sectionEditors[nodeId].lift()
                     return
 
-                self.sectionEditors[nodeId] = SectionEditor(self, self._ui, nodeId, self.kwargs['window_geometry'], icon=self._icon)
+                self.sectionEditors[nodeId] = SectionEditor(self, self._controller, self._ui, nodeId, self.kwargs['window_geometry'], icon=self._icon)
 
         except IndexError:
             # Nothing selected

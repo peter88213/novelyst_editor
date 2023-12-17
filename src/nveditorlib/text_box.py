@@ -20,16 +20,7 @@ NO_WORD_LIMITS = re.compile('\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\
 
 
 class TextBox(tk.Text):
-    """A text editor widget for noveltree raw markup.
-    
-    Public methods:
-    get_text -- Return the whole text from the editor box.
-    set_text(text) -- Put text into the editor box and clear the undo/redo stack.
-    count_words -- Return the word count.
-    emphasis -- Make the selection emphasized, or begin with emphasized input.
-    strong_emphasis -- Make the selection strongly emphasized, or begin with strongly emphasized input.
-    plain -- Remove formatting from the selection.
-    """
+    """A text editor widget for noveltree raw markup."""
     _TAGS = ('em', 'strong')
     # Supported tags.
 
