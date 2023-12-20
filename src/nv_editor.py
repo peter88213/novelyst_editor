@@ -22,10 +22,10 @@ from tkinter import messagebox
 import webbrowser
 
 from nveditorlib.configuration import Configuration
-from nveditorlib.nv_editor_globals import APPLICATION
-from nveditorlib.nv_editor_globals import ICON
-from nveditorlib.nv_editor_globals import SECTION_PREFIX
-from nveditorlib.nv_editor_globals import _
+from nveditorlib.nveditor_globals import APPLICATION
+from nveditorlib.nveditor_globals import ICON
+from nveditorlib.nveditor_globals import SECTION_PREFIX
+from nveditorlib.nveditor_globals import _
 from nveditorlib.section_editor import SectionEditor
 import tkinter as tk
 
@@ -65,8 +65,9 @@ class Plugin:
             controller -- reference to the main controller instance of the application.
             ui -- reference to the main view instance of the application.
         """
-        self._controller = controller
+        self._model = model
         self._ui = ui
+        self._controller = controller
 
         #--- Load configuration.
         try:
@@ -107,7 +108,7 @@ class Plugin:
         try:
             nodeId = self._ui.tv.tree.selection()[0]
             if nodeId.startswith(SECTION_PREFIX):
-                if self._controller.novel.sections[nodeId].scType > 1:
+                if self._model.novel.sections[nodeId].scType > 1:
                     return
 
                 # A section is selected
@@ -119,7 +120,7 @@ class Plugin:
                     self.sectionEditors[nodeId].lift()
                     return
 
-                self.sectionEditors[nodeId] = SectionEditor(self, self._controller, self._ui, nodeId, self.kwargs['window_geometry'], icon=self._icon)
+                self.sectionEditors[nodeId] = SectionEditor(self, self._model, self._ui, self._controller, nodeId, self.kwargs['window_geometry'], icon=self._icon)
 
         except IndexError:
             # Nothing selected

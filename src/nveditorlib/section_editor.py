@@ -8,8 +8,8 @@ from tkinter import messagebox
 from tkinter import ttk
 import webbrowser
 
-from nveditorlib.nv_editor_globals import APPLICATION
-from nveditorlib.nv_editor_globals import _
+from nveditorlib.nveditor_globals import APPLICATION
+from nveditorlib.nveditor_globals import _
 from nveditorlib.text_box import TextBox
 import tkinter as tk
 
