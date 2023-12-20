@@ -16,14 +16,18 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
 import os
-import sys
-import tkinter as tk
-from tkinter import messagebox
 from pathlib import Path
+import sys
+from tkinter import messagebox
 import webbrowser
-from nveditorlib.nv_editor_globals import *
-from nveditorlib.section_editor import SectionEditor
+
 from nveditorlib.configuration import Configuration
+from nveditorlib.nv_editor_globals import APPLICATION
+from nveditorlib.nv_editor_globals import ICON
+from nveditorlib.nv_editor_globals import SECTION_PREFIX
+from nveditorlib.nv_editor_globals import _
+from nveditorlib.section_editor import SectionEditor
+import tkinter as tk
 
 SETTINGS = dict(
         window_geometry='600x800',
@@ -54,7 +58,7 @@ class Plugin:
     URL = 'https://peter88213.github.io/nv_editor'
     _HELP_URL = 'https://peter88213.github.io/nv_editor/usage'
 
-    def install(self, controller, ui):
+    def install(self, model, ui, controller, prefs):
         """Add a submenu to the main menu.
         
         Positional arguments:
@@ -107,7 +111,7 @@ class Plugin:
                     return
 
                 # A section is selected
-                if self._controller.isLocked:
+                if self._model.isLocked:
                     messagebox.showinfo(APPLICATION, _('Cannot edit sections, because the project is locked.'))
                     return
 

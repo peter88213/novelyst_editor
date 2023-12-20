@@ -29,4 +29,3 @@ PLUGIN = f'{APPLICATION} plugin v@release'
 ICON = 'eLogo32'
 SECTION_PREFIX = 'sc'
 
-__all__ = ['APPLICATION', 'PLUGIN', 'ICON', '_', 'SECTION_PREFIX']

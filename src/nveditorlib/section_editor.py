@@ -4,12 +4,14 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-import webbrowser
-import tkinter as tk
-from tkinter import ttk
 from tkinter import messagebox
-from nveditorlib.nv_editor_globals import *
+from tkinter import ttk
+import webbrowser
+
+from nveditorlib.nv_editor_globals import APPLICATION
+from nveditorlib.nv_editor_globals import _
 from nveditorlib.text_box import TextBox
+import tkinter as tk
 
 HELP_URL = 'https://peter88213.github.io/nv_editor/usage'
 KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
@@ -41,11 +43,12 @@ class SectionEditor(tk.Toplevel):
     liveWordCount = False
     colorMode = 0
 
-    def __init__(self, plugin, controller, ui, scId, size, icon=None):
-        self._controller = controller
+    def __init__(self, plugin, model, ui, controller, scId, size, icon=None):
+        self._model = model
         self._ui = ui
+        self._controller = controller
         self._plugin = plugin
-        self._section = self._controller.novel.sections[scId]
+        self._section = self._model.novel.sections[scId]
         self._scId = scId
 
         # Create an independent editor window.
@@ -198,7 +201,7 @@ class SectionEditor(tk.Toplevel):
 
     def _create_section(self, event=None):
         """Create a new section after the currently edited section."""
-        if self._controller.isLocked:
+        if self._model.isLocked:
             messagebox.showinfo(APPLICATION, _('Cannot create sections, because the project is locked.'), parent=self)
             self.lift()
             return
@@ -208,8 +211,8 @@ class SectionEditor(tk.Toplevel):
         thisNode = self._scId
         newId = self._controller.c_add_section(
             targetNode=thisNode,
-            scType=self._controller.novel.sections[self._scId].scType,
-            scPacing=self._controller.novel.sections[self._scId].scPacing,
+            scType=self._model.novel.sections[self._scId].scType,
+            scPacing=self._model.novel.sections[self._scId].scPacing,
             )
         # Go to the new section.
         self._load_next()
@@ -266,7 +269,7 @@ class SectionEditor(tk.Toplevel):
         if nextNode:
             self._ui.tv.go_to_node(nextNode)
             self._scId = nextNode
-            self._section = self._controller.novel.sections[nextNode]
+            self._section = self._model.novel.sections[nextNode]
             self._sectionEditor.clear()
             self._load_section()
         self.lift()
@@ -280,14 +283,14 @@ class SectionEditor(tk.Toplevel):
         if prevNode:
             self._ui.tv.go_to_node(prevNode)
             self._scId = prevNode
-            self._section = self._controller.novel.sections[prevNode]
+            self._section = self._model.novel.sections[prevNode]
             self._sectionEditor.clear()
             self._load_section()
         self.lift()
 
     def _load_section(self):
         """Load the section content into the text editor."""
-        self.title(f'{self._section.title} - {self._controller.novel.title}, {_("Section")} ID {self._scId}')
+        self.title(f'{self._section.title} - {self._model.novel.title}, {_("Section")} ID {self._scId}')
         self._sectionEditor.set_text(self._section.sectionContent)
         self._initialWc = self._sectionEditor.count_words()
         self.show_wordcount()
@@ -310,7 +313,7 @@ class SectionEditor(tk.Toplevel):
             self.lift()
             return
 
-        if self._controller.isLocked:
+        if self._model.isLocked:
             messagebox.showinfo(APPLICATION, _('Cannot split the section, because the project is locked.'), parent=self)
             self.lift()
             return
@@ -325,9 +328,9 @@ class SectionEditor(tk.Toplevel):
         newId = self._controller.c_add_section(
             targetNode=thisNode,
             appendToPrev=True,
-            scType=self._controller.novel.sections[self._scId].scType,
-            scPacing=self._controller.novel.sections[self._scId].scPacing,
-            status=self._controller.novel.sections[self._scId].status
+            scType=self._model.novel.sections[self._scId].scType,
+            scPacing=self._model.novel.sections[self._scId].scPacing,
+            status=self._model.novel.sections[self._scId].status
             )
         if newId:
             # Cut the actual section's content from the cursor position to the end.
@@ -336,12 +339,12 @@ class SectionEditor(tk.Toplevel):
             self._apply_changes()
 
             # Copy the section content to the new section.
-            self._controller.novel.sections[newId].sectionContent = newContent
+            self._model.novel.sections[newId].sectionContent = newContent
 
             # Copy the viewpoint character.
-            if self._controller.novel.sections[self._scId].characters:
-                viewpoint = self._controller.novel.sections[self._scId].characters[0]
-                self._controller.novel.sections[newId].characters = [viewpoint]
+            if self._model.novel.sections[self._scId].characters:
+                viewpoint = self._model.novel.sections[self._scId].characters[0]
+                self._model.novel.sections[newId].characters = [viewpoint]
 
             # Go to the new section.
             self._load_next()
@@ -357,7 +360,7 @@ class SectionEditor(tk.Toplevel):
             self.lift()
             return
 
-        if self._controller.isLocked:
+        if self._model.isLocked:
             if messagebox.askyesno(APPLICATION, _('Cannot apply section changes, because the project is locked.\nUnlock and apply changes?'), parent=self):
                 self._controller.unlock()
                 self._section.sectionContent = sectionText
