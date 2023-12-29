@@ -53,7 +53,7 @@ OPTIONS = dict(
 class Plugin:
     """noveltree multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    NOVELYST_API = '0.6'
+    NOVELYST_API = '0.7'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://peter88213.github.io/nv_editor'
     _HELP_URL = 'https://peter88213.github.io/nv_editor/usage'
@@ -112,7 +112,7 @@ class Plugin:
                     return
 
                 # A section is selected
-                if self._model.isLocked:
+                if self._controller.isLocked:
                     messagebox.showinfo(APPLICATION, _('Cannot edit sections, because the project is locked.'))
                     return
 

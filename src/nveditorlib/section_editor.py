@@ -201,7 +201,7 @@ class SectionEditor(tk.Toplevel):
 
     def _create_section(self, event=None):
         """Create a new section after the currently edited section."""
-        if self._model.isLocked:
+        if self._controller.isLocked:
             messagebox.showinfo(APPLICATION, _('Cannot create sections, because the project is locked.'), parent=self)
             self.lift()
             return
@@ -313,7 +313,7 @@ class SectionEditor(tk.Toplevel):
             self.lift()
             return
 
-        if self._model.isLocked:
+        if self._controller.isLocked:
             messagebox.showinfo(APPLICATION, _('Cannot split the section, because the project is locked.'), parent=self)
             self.lift()
             return
@@ -360,7 +360,7 @@ class SectionEditor(tk.Toplevel):
             self.lift()
             return
 
-        if self._model.isLocked:
+        if self._controller.isLocked:
             if messagebox.askyesno(APPLICATION, _('Cannot apply section changes, because the project is locked.\nUnlock and apply changes?'), parent=self):
                 self._controller.unlock()
                 self._section.sectionContent = sectionText
