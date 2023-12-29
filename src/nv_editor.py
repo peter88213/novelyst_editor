@@ -65,9 +65,9 @@ class Plugin:
             controller -- reference to the main controller instance of the application.
             ui -- reference to the main view instance of the application.
         """
-        self._model = model
+        self._mdl = model
         self._ui = ui
-        self._controller = controller
+        self._ctrl = controller
 
         #--- Load configuration.
         try:
@@ -108,11 +108,11 @@ class Plugin:
         try:
             nodeId = self._ui.tv.tree.selection()[0]
             if nodeId.startswith(SECTION_PREFIX):
-                if self._model.novel.sections[nodeId].scType > 1:
+                if self._mdl.novel.sections[nodeId].scType > 1:
                     return
 
                 # A section is selected
-                if self._controller.isLocked:
+                if self._ctrl.isLocked:
                     messagebox.showinfo(APPLICATION, _('Cannot edit sections, because the project is locked.'))
                     return
 
@@ -120,7 +120,7 @@ class Plugin:
                     self.sectionEditors[nodeId].lift()
                     return
 
-                self.sectionEditors[nodeId] = SectionEditor(self, self._model, self._ui, self._controller, nodeId, self.kwargs['window_geometry'], icon=self._icon)
+                self.sectionEditors[nodeId] = SectionEditor(self, self._mdl, self._ui, self._ctrl, nodeId, self.kwargs['window_geometry'], icon=self._icon)
 
         except IndexError:
             # Nothing selected
