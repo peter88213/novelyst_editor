@@ -43,9 +43,9 @@ class SectionEditor(tk.Toplevel):
     liveWordCount = False
     colorMode = 0
 
-    def __init__(self, plugin, model, ui, controller, scId, size, icon=None):
+    def __init__(self, plugin, model, view, controller, scId, size, icon=None):
         self._mdl = model
-        self._ui = ui
+        self._ui = view
         self._ctrl = controller
         self._plugin = plugin
         self._section = self._mdl.novel.sections[scId]
