@@ -58,15 +58,15 @@ class Plugin:
     URL = 'https://peter88213.github.io/nv_editor'
     _HELP_URL = 'https://peter88213.github.io/nv_editor/usage'
 
-    def install(self, model, ui, controller, prefs):
+    def install(self, model, view, controller, prefs):
         """Add a submenu to the main menu.
         
         Positional arguments:
             controller -- reference to the main controller instance of the application.
-            ui -- reference to the main view instance of the application.
+            view -- reference to the main view instance of the application.
         """
         self._mdl = model
-        self._ui = ui
+        self._ui = view
         self._ctrl = controller
 
         #--- Load configuration.
