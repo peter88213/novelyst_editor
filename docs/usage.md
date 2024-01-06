@@ -1,4 +1,4 @@
-[Project homepage](https://peter88213.github.io/nv_editor) > Instructions for use
+[Project homepage](https://peter88213.github.io/noveltree_editor) > Instructions for use
 
 --- 
 
@@ -131,4 +131,4 @@ Via **File > Create section** or **Ctrl-Alt-N** you can create a section.
 
 This is Open Source software, and the *nv_editor* plugin is licensed under GPLv3. See the
 [GNU General Public License website](https://www.gnu.org/licenses/gpl-3.0.en.html) for more
-details, or consult the [LICENSE](https://github.com/peter88213/nv_editor/blob/main/LICENSE) file.
+details, or consult the [LICENSE](https://github.com/peter88213/noveltree_editor/blob/main/LICENSE) file.
