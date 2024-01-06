@@ -209,7 +209,7 @@ class SectionEditor(tk.Toplevel):
         self.lift()
         # Add a section after the currently edited section.
         thisNode = self._scId
-        newId = self._ctrl.c_add_section(
+        newId = self._ctrl.add_section(
             targetNode=thisNode,
             scType=self._mdl.novel.sections[self._scId].scType,
             scPacing=self._mdl.novel.sections[self._scId].scPacing,
@@ -325,7 +325,7 @@ class SectionEditor(tk.Toplevel):
         self.lift()
         # Add a new section.
         thisNode = self._scId
-        newId = self._ctrl.c_add_section(
+        newId = self._ctrl.add_section(
             targetNode=thisNode,
             appendToPrev=True,
             scType=self._mdl.novel.sections[self._scId].scType,
