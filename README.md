@@ -93,7 +93,7 @@ An easy way may be to put a posting in the [noveltree forum](https://github.com/
 
 ### Conventions
 
-See https://github.com/peter88213/novxlib-Alpha/blob/main/docs/conventions.md
+See https://github.com/peter88213/novxlib/blob/main/docs/conventions.md
 
 ## Development tools
 

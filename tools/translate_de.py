@@ -13,14 +13,14 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 import os
 import sys
 from shutil import copyfile
-sys.path.insert(0, f'{os.getcwd()}/../../novxlib-Alpha/src')
+sys.path.insert(0, f'{os.getcwd()}/../../novxlib/src')
 import translations
 import msgfmt
 
 APP_NAME = 'nv_editor'
 PO_PATH = '../i18n/de.po'
 MO_PATH = '../i18n/locale/de/LC_MESSAGES/nv_editor.mo'
-MO_COPY = '../../kalliope/src/locale/de/LC_MESSAGES/nv_editor.mo'
+MO_COPY = '../../noveltree/src/locale/de/LC_MESSAGES/nv_editor.mo'
 
 
 def main(version='unknown'):
